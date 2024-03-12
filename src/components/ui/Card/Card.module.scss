@@ -1,0 +1,54 @@
+@mixin onCardHover() { 
+    & {
+        transform: scale(1.05);
+    }
+    &::after, &::before {
+        opacity: 1;
+    }
+}
+
+
+$after-size: 300px;
+
+.card { 
+    position: relative;
+    border-radius: $border-radius;
+    transition: transform 1s cubic-bezier(.03,.98,.52,.99);
+    
+    &::after, &::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        -webkit-user-select: none;
+        user-select: none;
+        border-radius: inherit;
+        opacity: 0;
+        transition: opacity .4s ease;
+    }
+    
+    &::after{
+        background: radial-gradient($after-size circle at var(--data-light-x, 50%) var(--data-light-y, 50%), $secondary-color, transparent 70%);
+        z-index: -1;
+    }
+    &::before{
+        background: radial-gradient($after-size / 2 circle at var(--data-light-x, 50%) var(--data-light-y, 50%), rgb(255,255,255, .5), transparent 70%);
+        z-index: 1;
+    }
+
+    & > * {
+        position: relative;
+        margin: 1.5px;
+        overflow: hidden;
+        outline: none;
+    }
+
+    &:is(:hover, :focus-within) {
+        @include onCardHover();
+    }
+
+    @media screen and (pointer: coarse) {
+        @include onCardHover();
+    }
+}
+

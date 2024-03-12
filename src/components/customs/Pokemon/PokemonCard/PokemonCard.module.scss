@@ -1,0 +1,36 @@
+.pokemonCard {
+    display: grid;
+
+    .linkContainer {
+        padding: 1rem;
+        display: grid;
+        place-items: center;
+        gap: .25rem;
+        border-radius: inherit;
+        color: white;
+        overflow: visible;
+
+        & > * {
+            z-index: 100;
+        }
+
+        img {
+            width: 80%;
+            aspect-ratio: 1;
+            object-fit: cover;
+            transform-origin: bottom center;
+            transition: transform 1s cubic-bezier(.03,.98,.52,.99);
+        }
+    
+        ul {
+            display: flex;
+            gap: .5rem;
+        }
+    
+        &:is(:hover, :focus-within) {
+            img {
+                transform: scale(1.2) translateY(-5%);
+            }
+        }
+    }
+}
