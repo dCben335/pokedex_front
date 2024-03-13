@@ -3,12 +3,10 @@
 import styles from './Card.module.scss'
 import { CSSProperties, useRef, useState, MouseEvent, PropsWithChildren } from "react";
 
-type CardProps = React.HTMLAttributes<HTMLElement> & PropsWithChildren<{
-    scale: number
-}> 
+type CardProps = React.HTMLAttributes<HTMLElement> & PropsWithChildren; 
 
 
-export default function Card({ children, className }: CardProps) {
+export default function Card({ children, className, ...props }: CardProps) {
     const projectCard = useRef<HTMLElement>(null)
     const [cardMouseHoverStyle, setCardMouseHoverStyle] = useState<CSSProperties>({}) 
     
@@ -34,7 +32,8 @@ export default function Card({ children, className }: CardProps) {
             className={`${styles.card} ${className ? className : ""}`} 
             onMouseMove={(e) =>  mouseOnProject(e)}
             onMouseLeave={() => mouseLeaveProject()} 
-            style={{...cardMouseHoverStyle}} 
+            style={{...cardMouseHoverStyle}}
+            {...props} 
         >
             { children }   
         </article>

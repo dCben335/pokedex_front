@@ -1,6 +1,23 @@
 .pokemonCard {
     display: grid;
 
+    &.skeleton {
+        &:not(:is(:hover, :focus-within)) {
+            transform: scale(1);
+        }
+
+        &::after, &::before {
+            opacity: 1;
+        }
+
+        .h3 {
+            display: block;
+            height: 1.75rem;
+            width: 65%;
+            margin: 0 auto;
+        }
+    }
+
     .linkContainer {
         padding: 1rem;
         display: grid;
@@ -14,7 +31,7 @@
             z-index: 100;
         }
 
-        img {
+        .img {
             width: 80%;
             aspect-ratio: 1;
             object-fit: cover;
@@ -28,7 +45,7 @@
         }
     
         &:is(:hover, :focus-within) {
-            img {
+            .img {
                 transform: scale(1.2) translateY(-5%);
             }
         }

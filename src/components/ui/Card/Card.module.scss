@@ -1,14 +1,11 @@
 @mixin onCardHover() { 
-    & {
-        transform: scale(1.05);
-    }
     &::after, &::before {
         opacity: 1;
     }
 }
 
 
-$after-size: 300px;
+$after-size: 500px;
 
 .card { 
     position: relative;
@@ -44,6 +41,8 @@ $after-size: 300px;
     }
 
     &:is(:hover, :focus-within) {
+        transform: scale(1.05);
+        
         @include onCardHover();
     }
 
