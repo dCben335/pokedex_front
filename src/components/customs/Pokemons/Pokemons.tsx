@@ -1,7 +1,9 @@
 "use client"
 
-import useGetPokemons from "@/hooks/useGetPokemons";
+import useGetPokemons from "@/hooks/Pokemons/useGetPokemons";
 import PokemonWrapper from "./PokemonWrapper/PokemonWrapper";
+import useGetPokemonTypes from "@/hooks/Pokemons/useGetPokemonTypes";
+import PokemonSection from "./PokemonSection/PokemonSection";
 
 const pokemonData = [
     {
@@ -140,30 +142,24 @@ const pokemonData = [
 
 const Pokemon = () => {
     const {data, isLoading, isError} = useGetPokemons();
+    const {data: types} = useGetPokemonTypes();
+
 
     if (isLoading) {
         return (
-            <div>
-                <h1>Pokemon</h1>
-                <PokemonWrapper 
-                    skeleton={true}
-                />
-            </div>
+            <PokemonWrapper skeleton={true}/>
         )
     }
 
     if (isError) {
-        return <p>Error fetching pokemons</p>
+        return (
+            <p>Error fetching pokemons</p>
+        )
     }
 
 
     return (
-        <div>
-            <h1>Pokemon</h1>
-            <PokemonWrapper     
-                pokemons={pokemonData}
-            />
-        </div>
+        <PokemonWrapper pokemons={pokemonData}/>
     );
 }
 

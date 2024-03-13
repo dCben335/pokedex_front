@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query"
-import { getPokemons } from "../routes/pokemons"
+import { getPokemons } from "../../routes/pokemon"
 
 
 const useGetPokemons = () => {
