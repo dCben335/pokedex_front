@@ -9,8 +9,11 @@ export const pokemonTypeSchema = z.object({
 export type PokemonTypeRequest = z.infer<typeof pokemonTypeRequestSchema>;
 export const pokemonTypeRequestSchema = z.object({
     types: z.array(pokemonTypeSchema),
-    count: z.number(),
+    count: z.number()
 });
+
+
+
 
 export type Pokemon = z.infer<typeof pokemonSchema>;
 export const pokemonSchema = z.object({

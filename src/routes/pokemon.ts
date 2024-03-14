@@ -6,11 +6,11 @@ if (!NEXT_PUBLIC_BASE_API_URL) {
 }
 
 //GET /pkmn/search
-export const getPokemons = async () => {
+export const getPokemons = async (urlParams: string) => {
     try {
-        const response = await fetch(`${NEXT_PUBLIC_BASE_API_URL}/pkmn/search`);
-        // const response = await fetch("https://pokeapi.co/api/v2/pokemon?limit=1000");
-
+        const url = `${NEXT_PUBLIC_BASE_API_URL}/pkmn/search?${urlParams}`
+        const response = await fetch(url);
+        
         if (!response.ok) {
             throw new Error("Error fetching pokemons");
         }

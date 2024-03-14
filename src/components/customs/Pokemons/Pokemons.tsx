@@ -2,7 +2,6 @@
 
 import useGetPokemons from "@/hooks/Pokemons/useGetPokemons";
 import PokemonWrapper from "./PokemonWrapper/PokemonWrapper";
-import useGetPokemonTypes from "@/hooks/Pokemons/useGetPokemonTypes";
 import PokemonCategories from "./PokemonCategories/PokemonCategories";
 
 const pokemonData = [
@@ -297,14 +296,15 @@ const pokemonData = [
 ];
 
 
-
-
 const Pokemons = () => {
     const {data, isLoading, isError} = useGetPokemons();
 
     if (isLoading) {
         return (
-            <PokemonWrapper skeleton={true}/>
+            <>
+                <PokemonCategories />
+                <PokemonWrapper skeleton={true}/>
+            </>
         )
     }
 
@@ -313,7 +313,6 @@ const Pokemons = () => {
             <p>Error fetching pokemons</p>
         )
     }
-
 
     return (
         <>

@@ -1,4 +1,3 @@
-import { setUrlParams, urlParams } from "@/utils/fetchOptions";
 import { NEXT_PUBLIC_BASE_API_URL } from "./user"
 
 if (!NEXT_PUBLIC_BASE_API_URL) {
@@ -79,10 +78,9 @@ export const createTrainer = async (options: TrainerOptions) => {
 
 
 //PUT /trainer
-export const updateTrainer = async (options: TrainerOptions) => {
+export const updateTrainer = async (options: string) => {
     try {
-        const urlOptions = setUrlParams(options)
-        const response = await fetch(`${NEXT_PUBLIC_BASE_API_URL}/trainer?${urlOptions}`, {
+        const response = await fetch(`${NEXT_PUBLIC_BASE_API_URL}/trainer?${options}`, {
             method: "PUT",
         });
 
@@ -103,10 +101,9 @@ export const updateTrainer = async (options: TrainerOptions) => {
 
 
 //POST /trainer/mark
-export const createTrainerMark = async (options: TrainerMarkOptions) => {
+export const createTrainerMark = async (options: string) => {
     try {
-        const urlOptions = setUrlParams(options)
-        const response = await fetch(`${NEXT_PUBLIC_BASE_API_URL}/trainer/mark?${urlOptions}`, {
+        const response = await fetch(`${NEXT_PUBLIC_BASE_API_URL}/trainer/mark?${options}`, {
             method: "POST",
         });
 
