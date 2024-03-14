@@ -2,6 +2,7 @@ import Card from "@/components/ui/Card/Card";
 import styles from "./PokemonCard.module.scss";
 import Link from "next/link";
 import { accentsTidy } from "@/utils/reformat";
+import StyledImage from "@/components/ui/StyledImage/StyledImage";
 
 export type PokemonCard = {
     name: string;
@@ -35,9 +36,17 @@ const PokemonCard = ({ className, skeleton, ...props }: Props) => {
     }
 
     return (
-        <Card className={`${styles.pokemonCard} ${className ? className : ""}`} {...newProps}> 
-            <Link href={`/pokemon/${accentsTidy(name)}`} className={styles.linkContainer} style={{backgroundColor: backgroundColor}}>
-                <img className={styles.img} src={image} alt={name} />
+        <Card 
+            className={`${styles.pokemonCard} ${className ? className : ""}`} 
+            style={{"--_background-color": backgroundColor} as React.CSSProperties}
+        > 
+            <Link href={`/pokemons/${accentsTidy(name)}`} className={styles.linkContainer}>
+                <StyledImage 
+                    className={styles.img}
+                    src={image} 
+                    alt={name} 
+                    fill
+                />
                 <h3>{name}</h3>
             </Link>
         </Card>

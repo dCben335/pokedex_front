@@ -1,9 +1,9 @@
 import { getPokemons } from "@/routes/pokemon";
 import { useQuery } from "@tanstack/react-query";
 
-const useGetPokemon = () => {
+const useGetPokemon = (name: string) => {
     const pokemons = useQuery({
-        queryKey: ["pokemons"],
+        queryKey: ["pokemon", name],
         queryFn: getPokemons
     });
 

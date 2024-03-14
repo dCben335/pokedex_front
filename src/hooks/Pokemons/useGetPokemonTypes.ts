@@ -4,7 +4,7 @@ import { getPokemonTypes } from "../../routes/pokemon"
 
 const useGetPokemonTypes = () => {
     const pokemons = useQuery({
-        queryKey: ["pokemons"],
+        queryKey: ["pokemons", "types"],
         queryFn: getPokemonTypes
     });
 

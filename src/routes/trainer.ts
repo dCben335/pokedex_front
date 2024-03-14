@@ -20,7 +20,7 @@ type TrainerMarkOptions = {
 
 
 //GET /trainer 
-export const getTrainers = async () => {
+export const getTrainer = async () => {
     try {
         const response = await fetch(`${NEXT_PUBLIC_BASE_API_URL}/trainer`);
 

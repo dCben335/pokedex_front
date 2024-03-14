@@ -1,7 +1,8 @@
 .btn {
     padding: 10px 20px;
+    display: inline-flex;
     border-radius: $border-radius;
-    background-color: $e-global-color-4476459;
+    background-color: $secondary-color;
     color: $primary-color;
     transition: transform .3s ease-in-out;
 

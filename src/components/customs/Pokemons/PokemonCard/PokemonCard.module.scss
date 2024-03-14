@@ -1,11 +1,10 @@
 .pokemonCard {
-    display: grid;
+    aspect-ratio: 1;
+    --_after-color: var(--_background-color);
 
     &.skeleton {
-        &:not(:is(:hover, :focus-within)) {
-            transform: scale(1);
-        }
-
+        transform: scale(1);
+        
         &::after, &::before {
             opacity: 1;
         }
@@ -19,12 +18,14 @@
     }
 
     .linkContainer {
-        padding: 1rem;
+        aspect-ratio: inherit;
+        padding: min(5%, 1rem);
         display: grid;
         place-items: center;
         gap: .25rem;
         border-radius: inherit;
-        color: white;
+        color: #fff;
+        background-color: var(--_background-color);
         overflow: visible;
 
         & > * {
@@ -34,14 +35,8 @@
         .img {
             width: 80%;
             aspect-ratio: 1;
-            object-fit: cover;
             transform-origin: bottom center;
             transition: transform 1s cubic-bezier(.03,.98,.52,.99);
-        }
-    
-        ul {
-            display: flex;
-            gap: .5rem;
         }
     
         &:is(:hover, :focus-within) {
