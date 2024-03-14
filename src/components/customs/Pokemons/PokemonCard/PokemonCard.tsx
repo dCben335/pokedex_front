@@ -24,7 +24,6 @@ type Props =  React.HTMLAttributes<HTMLElement> & (PokemonCardProps | PokemonSke
 const PokemonCard = ({ className, skeleton, ...props }: Props) => {
     const { name, image, backgroundColor, ...newProps } = props as PokemonCardProps;
 
-    console.log(backgroundColor)
 
     if (skeleton) {
         return (

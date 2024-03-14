@@ -1,3 +1,4 @@
+import { pokemonTypeRequestSchema } from "@/types/pokemon";
 import { NEXT_PUBLIC_BASE_API_URL } from "./user"
 
 if (!NEXT_PUBLIC_BASE_API_URL) {
@@ -31,7 +32,9 @@ export const getPokemonTypes = async () => {
             throw new Error("Error fetching pokemon types");
         }
         
-        return response.json();
+        const data = await response.json();
+        
+        return pokemonTypeRequestSchema.parse(data);;
     }
     catch (error) {
         throw new Error("Error fetching pokemon types");
