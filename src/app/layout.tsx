@@ -2,6 +2,7 @@
 
 import { Inter } from "next/font/google";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { PokemonTypeProvider } from "@/components/providers/PokemonTypeContext";
 import "./globals.scss";
 
 
@@ -17,7 +18,9 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <QueryClientProvider client={queryClient}>
-          {children}
+          <PokemonTypeProvider>
+            {children}
+          </PokemonTypeProvider>
         </QueryClientProvider>
       </body>
     </html>

@@ -1,3 +1,4 @@
+import { usePokemonType } from "@/components/providers/PokemonTypeContext";
 import PokemonCard, { PokemonCard as PokemonCardProps } from "../PokemonCard/PokemonCard";
 import styles from "./PokemonWrapper.module.scss"
 
@@ -12,6 +13,8 @@ interface PokemonSkeletonWrapperProps extends React.HTMLAttributes<HTMLDivElemen
 
 const PokemonWrapper: React.FC<PokemonWrapperProps | PokemonSkeletonWrapperProps> = ({ className, skeleton, ...props }) => {
     const { pokemons, ...newProps } = props as PokemonWrapperProps;
+    const { getTypeColor } = usePokemonType();
+
     
     return (
         <div className={styles.pokemonWrapper} {...newProps}>
@@ -22,13 +25,13 @@ const PokemonWrapper: React.FC<PokemonWrapperProps | PokemonSkeletonWrapperProps
                         skeleton={true}
                     />
                 )) 
-                : pokemons.map(({ name, image, types, backgroundColor }, index) => (
+                : pokemons.map(({ name, image, types }, index) => (
                     <PokemonCard
                         key={index}
                         name={name}
                         image={image}
                         types={types}
-                        backgroundColor={backgroundColor}
+                        backgroundColor={getTypeColor(types[0])}
                     />
                 ))
             }
