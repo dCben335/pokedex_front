@@ -1,12 +1,19 @@
-interface PokemonSectionProps extends React.PropsWithChildren, React.HTMLAttributes<HTMLElement> {
+import PokemonCategories from "../PokemonCategories/PokemonCategories";
+import Pokemons from "../Pokemons";
 
+interface PokemonSectionProps extends React.HTMLAttributes<HTMLElement> {
+    title: string;
+    isPageTitle: boolean;
 }
-
-const PokemonSection = ({ children, ...props }: PokemonSectionProps) => {
+const PokemonSection = ({ title, isPageTitle , ...props }: PokemonSectionProps) => {
+    const Title = isPageTitle ? "h1" : "h2"
+    
     return (
         <section {...props}>
-            <h1>Listes des Pokémons</h1>
-            {children}
+            <Title>{title}</Title>
+            
+            <PokemonCategories />
+            <Pokemons />
         </section>
     );
 }

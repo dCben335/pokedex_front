@@ -2,7 +2,7 @@
 
 import useGetPokemonTypes from '@/hooks/Pokemons/useGetPokemonTypes';
 import { createContext, useContext } from 'react';
-import { PokemonTypeRequest } from '@/types/pokemon';
+import { PokemonTypeRequest } from '@/schemas/pokemon';
 import { toast } from 'sonner';
 
 interface PokemonTypeContextType extends PokemonTypeRequest {
@@ -31,10 +31,7 @@ export const PokemonTypeProvider = ({ children } : React.PropsWithChildren ) => 
                 { children }
             </>
         );
-    }
-
-    toast.success('Pokemon types fetched successfully')
-    
+    }    
 
     const getTypeColor = (typeName: string): string => {
         if (!typeName) return '';

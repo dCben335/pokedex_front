@@ -6,9 +6,10 @@ export default function Page() {
 
   return (
     <main className={styles.main}>
-      <PokemonSection>
-        <Pokemons />
-      </PokemonSection>
+      <PokemonSection 
+        title="Liste des Pokémons" 
+        isPageTitle={false}
+      />
     </main>
   );
 }

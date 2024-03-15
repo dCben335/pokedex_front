@@ -1,14 +1,15 @@
 .btn {
     padding: .75rem 1.5rem;
     display: inline-flex;
+    justify-content: center;
     border-radius: $border-radius / 2;
     background-color: $primary-color-variant;
     color: $secondary-color;
-    transition: transform .3s ease-in-out;
+    transition: filter .3s ease-in-out;
 
 
     &:is(:hover, :focus) {
-        transform: scale(1.1);
+        filter: brightness(1.3);
     }
 }
 

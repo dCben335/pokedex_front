@@ -18,7 +18,6 @@ const useGetPokemons = () => {
 
     }, [searchParams]);
 
-
     return pokemons;
 }
 

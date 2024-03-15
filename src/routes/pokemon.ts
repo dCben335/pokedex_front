@@ -1,4 +1,4 @@
-import { pokemonTypeRequestSchema } from "@/types/pokemon";
+import { pokemonSearchSchema, pokemonTypeRequestSchema } from "@/schemas/pokemon";
 import { NEXT_PUBLIC_BASE_API_URL } from "./user"
 
 if (!NEXT_PUBLIC_BASE_API_URL) {
@@ -15,7 +15,8 @@ export const getPokemons = async (urlParams: string) => {
             throw new Error("Error fetching pokemons");
         }
 
-        return response.json();
+        const data = await response.json();
+        return pokemonSearchSchema.parse(data);
     }
     catch (error) {
         throw new Error("Error fetching pokemons");

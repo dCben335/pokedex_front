@@ -2,7 +2,7 @@
 
 import useGetPokemons from "@/hooks/Pokemons/useGetPokemons";
 import PokemonWrapper from "./PokemonWrapper/PokemonWrapper";
-import PokemonCategories from "./PokemonCategories/PokemonCategories";
+import { toast } from "sonner";
 
 const pokemonData = [
     {
@@ -302,21 +302,20 @@ const Pokemons = () => {
     if (isLoading) {
         return (
             <>
-                <PokemonCategories />
                 <PokemonWrapper skeleton={true}/>
             </>
         )
     }
 
     if (isError) {
+        toast.error("Error fetching pokemons");
         return (
-            <p>Error fetching pokemons</p>
+            <></>
         )
     }
 
     return (
         <>
-            <PokemonCategories />
             <PokemonWrapper pokemons={pokemonData}/>
         </>
     );

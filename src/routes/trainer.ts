@@ -1,20 +1,10 @@
+import { TrainerOptions } from "@/schemas/trainer";
 import { NEXT_PUBLIC_BASE_API_URL } from "./user"
 
 if (!NEXT_PUBLIC_BASE_API_URL) {
     throw new Error("NEXT_PUBLIC_BASE_API_URL is not set");
 }
 
-
-
-type TrainerOptions = {
-    trainerName?: string;
-    imgUrl?: string;
-}
-
-type TrainerMarkOptions = {
-    pkmnId: string;
-    isCaught: boolean;
-}
 
 
 
@@ -78,7 +68,7 @@ export const createTrainer = async (options: TrainerOptions) => {
 
 
 //PUT /trainer
-export const updateTrainer = async (options: string) => {
+export const updateTrainer = async (options: TrainerOptions) => {
     try {
         const response = await fetch(`${NEXT_PUBLIC_BASE_API_URL}/trainer?${options}`, {
             method: "PUT",

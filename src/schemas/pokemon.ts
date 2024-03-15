@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { PageableSchema, SortSchema } from "./pageable";
 
 export type PokemonType = z.infer<typeof pokemonTypeSchema>;
 export const pokemonTypeSchema = z.object({
@@ -9,9 +10,8 @@ export const pokemonTypeSchema = z.object({
 export type PokemonTypeRequest = z.infer<typeof pokemonTypeRequestSchema>;
 export const pokemonTypeRequestSchema = z.object({
     types: z.array(pokemonTypeSchema),
-    count: z.number()
+    count: z.number(),
 });
-
 
 
 
@@ -24,5 +24,17 @@ export const pokemonSchema = z.object({
 });
 
 
-
-
+export type PokemonSearch = z.infer<typeof pokemonSearchSchema>;
+export const pokemonSearchSchema = z.object({
+    content: z.array(pokemonSchema),
+    pageable: PageableSchema,
+    last: z.boolean(),
+    totalPages: z.number(),
+    totalElements: z.number(),
+    numberOfElements: z.number(),
+    size: z.number(),
+    number: z.number(),
+    sort: SortSchema,
+    first: z.boolean(),
+    empty: z.boolean(),
+});
