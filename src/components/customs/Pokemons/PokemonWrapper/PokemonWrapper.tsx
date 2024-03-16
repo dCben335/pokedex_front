@@ -1,24 +1,28 @@
-import { usePokemonType } from "@/components/providers/PokemonTypeContext";
-import PokemonCard, { PokemonCard as PokemonCardProps } from "../PokemonCard/PokemonCard";
+"use client"
+
+import { usePokemonTypes } from "@/components/providers/PokemonTypesContext";
+import { toast } from "sonner";
+import PokemonCard from "../PokemonCard/PokemonCard";
 import styles from "./PokemonWrapper.module.scss"
+import useGetPokemons from "@/hooks/Pokemons/useGetPokemons";
+import pokemons from "@/contents/pokemons.json";
 
-interface PokemonWrapperProps extends React.HTMLAttributes<HTMLDivElement> {
-    pokemons: PokemonCardProps[]
-    skeleton?: false
-}
+type PokemonWrapperProps = React.HTMLAttributes<HTMLDivElement> 
 
-interface PokemonSkeletonWrapperProps extends React.HTMLAttributes<HTMLDivElement> {
-    skeleton: true
-}
+const PokemonWrapper = ({ className, ...props }: PokemonWrapperProps) => {
+    const {data, isLoading, isError} = useGetPokemons();
+    const { getTypeColor } = usePokemonTypes();
 
-const PokemonWrapper: React.FC<PokemonWrapperProps | PokemonSkeletonWrapperProps> = ({ className, skeleton, ...props }) => {
-    const { pokemons, ...newProps } = props as PokemonWrapperProps;
-    const { getTypeColor } = usePokemonType();
-
+    if (isError || (!isLoading && !data)) {
+        toast.error("Error fetching pokemons");
+        return (
+            <></>
+        )
+    }
     
     return (
-        <div className={styles.pokemonWrapper} {...newProps}>
-            {skeleton
+        <div className={styles.pokemonWrapper} {...props}>
+            {isLoading
                 ? Array(20).fill(0).map((_, index) => (
                     <PokemonCard 
                         key={index} 

@@ -32,3 +32,13 @@ export const removeQueryString = (searchParams: ReadonlyURLSearchParams, name: s
 
     return params.toString()
 }
+
+export const getUrlTypes = (searchParams: URLSearchParams) => {
+    const typeOne = searchParams.get('typeOne')
+    const typeTwo = searchParams.get('typeTwo')
+
+    return {
+        typeOne,
+        typeTwo
+    }
+}

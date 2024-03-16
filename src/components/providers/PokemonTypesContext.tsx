@@ -5,21 +5,21 @@ import { createContext, useContext } from 'react';
 import { PokemonTypeRequest } from '@/schemas/pokemon';
 import { toast } from 'sonner';
 
-interface PokemonTypeContextType extends PokemonTypeRequest {
+interface PokemonTypesContextType extends PokemonTypeRequest {
     getTypeColor: (type: string) => string; 
 }
 
-const PokemonTypeContext = createContext<PokemonTypeContextType>({
+const PokemonTypesContext = createContext<PokemonTypesContextType>({
     types: [],
     count: 0,
     getTypeColor: () => '',
 });
 
-export const usePokemonType = () => {
-    return useContext(PokemonTypeContext);
+export const usePokemonTypes = () => {
+    return useContext(PokemonTypesContext);
 };
 
-export const PokemonTypeProvider = ({ children } : React.PropsWithChildren ) => {
+export const PokemonTypesProvider = ({ children } : React.PropsWithChildren ) => {
     const { data, isLoading, error } = useGetPokemonTypes(); // Assuming this hook fetches Pokemon types
 
     if (isLoading || error || !data) {
@@ -44,9 +44,9 @@ export const PokemonTypeProvider = ({ children } : React.PropsWithChildren ) => 
     };
 
     return (
-        <PokemonTypeContext.Provider value={{ types: data.types, count: data.count, getTypeColor }}>
+        <PokemonTypesContext.Provider value={{ types: data.types, count: data.count, getTypeColor }}>
             {children}
-        </PokemonTypeContext.Provider>
+        </PokemonTypesContext.Provider>
     );
 };
 

@@ -48,21 +48,6 @@
             overflow: hidden;
             height: 100%;
             overflow-y: auto;
-
-            ul {
-                display: grid;
-                grid-template-columns: repeat(2, 1fr);
-                gap: 1rem;
-
-                button {
-                    width: 100%;
-                    text-align: center;
-                }
-
-                &  > .allBtnLi {
-                    grid-column: 1 / -1;
-                }
-            }
         }
     }
 
