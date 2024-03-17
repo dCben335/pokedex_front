@@ -23,7 +23,6 @@ const GroupForm = ({ onFieldChange, className, ...props } : Props) => {
             <input 
                 onChange={onFieldChange && onFieldChange}
                 required
-                onCopy={undefined} 
                 {...newGroupForm} // Use the renamed variable here
             /> 
         </label>

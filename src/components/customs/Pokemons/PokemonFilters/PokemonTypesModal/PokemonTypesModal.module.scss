@@ -1,8 +1,12 @@
 .list {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(auto-fill, minmax(min(100px,50%),1fr));
     gap: 1rem;
 
+    @media screen and (min-width: 800px) {
+        grid-template-columns: repeat(auto-fill, minmax(250px,1fr));
+        
+    }
     button {
         width: 100%;
         text-align: center;

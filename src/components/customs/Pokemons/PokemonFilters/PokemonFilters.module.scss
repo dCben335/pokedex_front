@@ -1,11 +1,13 @@
 $icon-height: 3.5rem;
 
 .nav {
-    position: relative;
+    position: sticky;
+    top: 0;
     padding: 1rem 0;
     max-width: 100vw;
     display: grid;
     place-items: center;
+    z-index: 1000;
 
     &::after {
         z-index: -1;
