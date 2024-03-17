@@ -5,20 +5,21 @@ import { z, ZodType } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 // Define types for input field types
-type InputType = "text" | "number" | "email" | "textarea" | "checkbox"; // Add checkbox type
+type InputType = "text" | "number" | "email" | "textarea" | "checkbox" | "select";
 
 // Define types for form field configuration
 interface FormField {
     label: string;
-    placeholder: string;
+    placeholder?: string;
     type: InputType;
-    schema: ZodType<any>;
-    defaultValue: string | number | boolean; // Update defaultValue type
+    options?: { value: string | number; label: string }[];
+    schema?: ZodType<any>; // Add schema for validation
+    defaultValue?: string | number | boolean;
 }
 
 // Define type for form data
 interface FormData {
-    [fieldName: string]: string | number | boolean; // Update type to allow boolean for checkbox
+    [fieldName: string]: string | number | boolean;
 }
 
 // Define a function to generate the Zod schema from form field configuration
@@ -26,7 +27,9 @@ const generateSchema = (fields: Record<string, FormField>) => {
     const schemaObject: Record<string, ZodType<any>> = {};
 
     for (const fieldName in fields) {
-        schemaObject[fieldName] = fields[fieldName].schema;
+        if (fields[fieldName].schema) {
+            schemaObject[fieldName] = fields[fieldName].schema;
+        }
     }
 
     return z.object(schemaObject);
@@ -40,7 +43,7 @@ const generateForm = (
     // Generate default values for form fields
     const defaultValues: FormData = {};
     for (const fieldName in fields) {
-        defaultValues[fieldName] = fields[fieldName].defaultValue;
+        defaultValues[fieldName] = fields[fieldName].defaultValue ?? "";
     }
 
     // Generate Zod schema for form validation
@@ -50,9 +53,11 @@ const generateForm = (
     const customResolver = async (values: FormData, context: any, options: any) => {
         const parsedData: FormData = {};
         for (const key in values) {
-            // Convert value to number if input type is "number"
-            parsedData[key] =
-                fields[key].type === "number" ? parseFloat(values[key] as string) : values[key];
+            parsedData[key] = fields[key].type === "number"
+                ? parseFloat(values[key] as string)
+                : fields[key].type === "checkbox"
+                    ? Boolean(values[key])
+                    : values[key];
         }
         return await zodResolver(schema)(parsedData, context, options);
     };
@@ -72,23 +77,31 @@ const generateForm = (
                 {Object.entries(fields).map(([fieldName, field]) => (
                     <div key={fieldName}>
                         <label>{field.label}</label>
-                        {field.type === "checkbox" ? ( // Render checkbox for checkbox type
-                            <input
-                                {...register(fieldName)}
-                                type="checkbox"
-                                defaultChecked={field.defaultValue as boolean} // Set defaultChecked for checkbox
-                            />
-                        ) : field.type === "textarea" ? ( // Render textarea for textarea type
+                        {field.type === "textarea" ? (
                             <textarea
                                 {...register(fieldName)}
-                                defaultValue={field.defaultValue as string} // Set defaultValue for textarea
+                                defaultValue={field.defaultValue}
                                 placeholder={field.placeholder}
                             />
-                        ) : ( // Render input for other types
+                        ) : field.type === "select" ? (
+                            <select {...register(fieldName)} defaultValue={field.defaultValue}>
+                                {field.options?.map((option) => (
+                                    <option key={option.value} value={option.value}>
+                                        {option.label}
+                                    </option>
+                                ))}
+                            </select>
+                        ) : field.type === "checkbox" ? (
+                            <input
+                                type="checkbox"
+                                {...register(fieldName)}
+                                defaultChecked={Boolean(field.defaultValue)}
+                            />
+                        ) : (
                             <input
                                 {...register(fieldName)}
-                                type={field.type === "number" ? "number" : "text"} // Ensure correct type for number input
-                                defaultValue={field.defaultValue as string} // Set defaultValue for text and number inputs
+                                type={field.type === "number" ? "number" : "text"}
+                                defaultValue={field.defaultValue}
                                 placeholder={field.placeholder}
                             />
                         )}
@@ -108,38 +121,42 @@ const MyForm = generateForm(
     {
         name: {
             label: "Name",
-            placeholder: "Enter your name",
             type: "text",
             schema: z.string().min(3),
             defaultValue: "John Doe"
         },
         age: {
             label: "Age",
-            placeholder: "Enter your age",
             type: "number",
             schema: z.number().min(18),
             defaultValue: 18
         },
         email: {
             label: "Email",
-            placeholder: "Enter your email",
             type: "email",
             schema: z.string().email(),
             defaultValue: "john@example.com"
         },
-        message: { // Example textarea field
+        message: {
             label: "Message",
-            placeholder: "Enter your message",
             type: "textarea",
-            schema: z.string(),
             defaultValue: ""
         },
-        agree: { // Example checkbox field
-            label: "Agree to terms",
-            placeholder: "",
-            type: "checkbox", // Set type as "checkbox"
-            schema: z.boolean(),
-            defaultValue: false // Set default value for checkbox
+        acceptTerms: {
+            label: "Accept Terms",
+            type: "checkbox",
+            defaultValue: false
+        },
+        gender: {
+            label: "Gender",
+            type: "select",
+            options: [
+                { value: "male", label: "Male" },
+                { value: "female", label: "Female" },
+                { value: "other", label: "Other" }
+            ],
+            schema: z.string(),
+            defaultValue: ""
         }
     },
     async (data) => {
@@ -154,8 +171,6 @@ const MyForm = generateForm(
 );
 
 const Test = () => {
-   
-
     return (
         <div>
             <h1>My Form</h1>

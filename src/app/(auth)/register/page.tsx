@@ -1,11 +1,9 @@
-"use client"
-
-import Test from "../_components/Form";
+import AuthForm from "../_components/AuthForm";
 
 const Page = () => {
     return (
         <main>
-            <Test />
+            <AuthForm />
         </main>
     );
 }
