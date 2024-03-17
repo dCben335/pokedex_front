@@ -21,7 +21,7 @@ const PokemonWrapper = ({ className, ...props }: PokemonWrapperProps) => {
     }
     
     return (
-        <div className={styles.pokemonWrapper} {...props}>
+        <div className={`${styles.pokemonWrapper} ${className ? className : ""}`} {...props}>
             {isLoading
                 ? Array(20).fill(0).map((_, index) => (
                     <PokemonCard 

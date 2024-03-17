@@ -12,7 +12,8 @@ const PokemonCategoryButton = ({ name, color, isActive, handleClick }: PokemonCa
         <Button 
             style={{
                 background: isActive ? color : '',
-                border: `1px solid ${color}`
+                border: `1px solid ${color}`,
+                filter: isActive ? 'brightness(1.1)' : 'brightness(0.75)'
             }}
             onClick={() => handleClick(name)}
         >

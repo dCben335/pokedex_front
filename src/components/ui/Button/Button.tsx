@@ -14,7 +14,7 @@ type Props = (LinkProps | ButtonProps) & {
 }
 
 const Button = ({ children, className, active, ...props} : Props ) => {  
-    const classes = `${styles.btn} ${className ? className : ""}`
+    const classes = `${styles.btn} ${active ? styles.active : ""} ${className ? className : ""}`
     
     if (props.renderAs === 'link') {
         const { renderAs, ...newProps } = props

@@ -5,11 +5,11 @@
     border-radius: $border-radius / 2;
     background-color: $primary-color-variant;
     color: $secondary-color;
+    box-shadow: $basic-shadow;
     transition: filter .3s ease-in-out;
-
-
-    &:is(:hover, :focus) {
-        filter: brightness(1.3);
+    
+    &:is(:hover, :focus-within, .active) {
+        filter: brightness(1.15);
     }
 }
 

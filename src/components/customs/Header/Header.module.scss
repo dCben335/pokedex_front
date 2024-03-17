@@ -1,0 +1,51 @@
+$header-height: 5rem;
+$header-padding-y: .5rem;
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    background-color: $accent-color;
+    padding: $header-padding-y 1rem;
+    height: $header-height;
+    color: $primary-color;
+
+    & > * {
+        height: 100%;
+        flex: 1;
+    }
+
+    & > div:first-child {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+    }
+    
+    .burgerButton {
+        height: 50%;
+        aspect-ratio: 1/1;
+        width: auto;
+    }
+
+    .logoContainer {
+        flex: 3;
+        display: grid;
+        place-content: center;
+        margin: 0 auto;
+        
+        
+        .logo {
+            transition: transform 1s cubic-bezier(.03,.98,.52,.99);
+
+            svg {
+                height: $header-height - $header-padding-y * 2;
+            }
+    
+            &:is(:hover, :focus-within) {
+                transform: scale(1.05);
+            }  
+        }
+    }
+
+}

@@ -7,6 +7,7 @@
     aspect-ratio: 1/1;
     position: relative;
     border-radius: 50%;
+    color: currentColor;
     
     span {
         position: absolute;
@@ -16,13 +17,19 @@
         border-radius: 100vmax;
         transform: translateY(calc(300% * var(--i)));
         transition: transform .3s ease-in-out, opacity .2s ease-in-out ;
-        background-color: $secondary-color;
+        background-color: currentColor;
 
         &:first-child {
             --i: 1
         }
         &:last-child {
             --i: -1
+        }
+
+        &:nth-child(2) {
+            width: 45%;
+            justify-self: flex-start;
+            left: 15%;
         }
     }
 

@@ -5,6 +5,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { PokemonTypesProvider } from "@/components/providers/PokemonTypesContext";
 import { Toaster } from "sonner";
 import "./globals.scss";
+import Header from "@/components/customs/Header/Header";
 
 
 const inter = Inter({ subsets: ["latin"] });
@@ -21,6 +22,7 @@ export default function RootLayout({
         <QueryClientProvider client={queryClient}>
           <PokemonTypesProvider>
             <Toaster richColors closeButton duration={3000} theme='dark' visibleToasts={1}/>
+            <Header />
             {children}
           </PokemonTypesProvider>
         </QueryClientProvider>

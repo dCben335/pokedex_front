@@ -1,0 +1,42 @@
+$icon-height: 3.5rem;
+
+.nav {
+    position: relative;
+    padding: 1rem 0;
+    max-width: 100vw;
+    display: grid;
+    place-items: center;
+
+    &::after {
+        z-index: -1;
+        content: "";
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 50%;
+        background-color: $accent-color;
+    }
+
+    .container {
+        display: grid;
+        grid-template-columns: 1fr $icon-height;
+        gap: 1rem;
+        width: clamp(min(200px, 80%), 85vw, 85vw);
+        max-width: 100%;
+        height: $icon-height;
+
+        & > * {
+            height: 100%;
+        }
+
+        .showFilterBtn {
+            padding: 1rem;
+    
+            svg {
+                height: 100%;
+                stroke: $secondary-color;
+            }
+        }
+    }
+
+}

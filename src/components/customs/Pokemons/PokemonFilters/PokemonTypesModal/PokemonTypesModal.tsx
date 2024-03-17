@@ -2,7 +2,7 @@
 
 import { usePokemonTypes } from "@/components/providers/PokemonTypesContext"
 import Modal, { ModalProps } from "@/components/ui/Modal/Modal"
-import PokemonCategoryButton from "./PokemonCategoryButton"
+import PokemonTypesButton from "./PokemonTypesButton"
 import styles from "./PokemonTypesModal.module.scss"
 import { useRouter, usePathname, useSearchParams } from "next/navigation"
 import { createQueryString, getUrlTypes, removeQueryString } from "@/utils/queryParams"
@@ -52,16 +52,16 @@ const PokemonTypesModal = ({ isOpen, closeModal }: PokemonTypesModalProps) => {
         <Modal isOpen={isOpen} closeModal={closeModal}>
             <ul className={styles.list}>
                 <li className={styles.allBtnLi}>
-                    <PokemonCategoryButton 
+                    <PokemonTypesButton 
                         name="All" 
-                        color="radial-gradient(circle at 50%, #151818 15%, #101010 35%, #ffffff 100%)" 
+                        color="radial-gradient(circle at 50%, #eee 15%, #ffffff 35%, #101010 100%)" 
                         isActive={isAll()}
                         handleClick={() => router.push(pathname)}
                     />
                 </li>
                 {(types ?? []).map(({name, color}) => (
                     <li key={name}>
-                        <PokemonCategoryButton 
+                        <PokemonTypesButton 
                             name={name} 
                             color={color} 
                             isActive={isActive(name)}

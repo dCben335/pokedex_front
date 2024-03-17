@@ -10,7 +10,7 @@ html {
 
 body {
   background-color: $primary-color;
-  color: $text-color;
+  color: $secondary-color
 }
 
 a {
@@ -49,27 +49,35 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 h1 {
-  font-size: 2.5rem;
-}
-
-h2 {
   font-size: 2rem;
 }
-
-h3 {
+h2 {
   font-size: 1.5rem;
 }
-
+h3 {
+  font-size: .85rem;
+}
 h4 {
-  font-size: 1.25rem;
+  font-size: .75rem;
 }
 
-h5 {
-  font-size: 1rem;
+@media screen and (min-width: 700px) {
+  h1 {
+    font-size: 3rem;
+  }
+  h2 {
+    font-size: 2rem;
+  }
+  h3 {
+    font-size: 1.25rem;
+  }
+  h4 {
+    font-size: 1rem;
+  }
 }
 
-h6 {
-  font-size: 0.875rem;
+.container {
+  padding: 0 $website-padding;
 }
 
 .skeleton {
@@ -79,11 +87,7 @@ h6 {
   background-repeat: no-repeat;
   background-size: 200% auto;
   background-position-x: -50%;
-
   animation: skeleton 1.5s ease-in-out infinite;
 }
 
-main {
-  padding: 0 5vw;
-  background-color: $primary-color;
-}
+

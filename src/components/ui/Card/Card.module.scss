@@ -13,6 +13,7 @@ $after-size: 400px;
     position: relative;
     padding: 1.5px;
     border-radius: $border-radius;
+    box-shadow: $basic-shadow;
     transition: transform 1s cubic-bezier(.03,.98,.52,.99);
     
     &::after, &::before {
