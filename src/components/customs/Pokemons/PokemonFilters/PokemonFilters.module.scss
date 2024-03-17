@@ -1,4 +1,5 @@
 $icon-height: 3.5rem;
+$gap: 1rem;
 
 .nav {
     position: sticky;
@@ -19,10 +20,21 @@ $icon-height: 3.5rem;
         background-color: $accent-color;
     }
 
+    &::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        right: 0;
+        box-shadow: 0 0 10px 10px rgba(0, 0, 0, 0.25);
+        top: 50%;
+        z-index: -1;
+        background-color: $primary-color;
+    }
+
     .container {
         display: grid;
-        grid-template-columns: 1fr $icon-height;
-        gap: 1rem;
+        grid-template-columns: calc(100% - $icon-height - $gap) $icon-height;
+        gap: $gap;
         width: clamp(min(200px, 80%), 85vw, 85vw);
         max-width: 100%;
         height: $icon-height;

@@ -40,6 +40,7 @@ $header-padding-y: .5rem;
 
             svg {
                 height: $header-height - $header-padding-y * 2;
+                max-width: 45vw;
             }
     
             &:is(:hover, :focus-within) {
