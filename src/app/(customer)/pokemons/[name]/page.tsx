@@ -1,6 +1,6 @@
 import styles from './page.module.scss';
 
-export default function Page() {
+const Page = () => {
 
     return (
         <main className={styles.main}>
@@ -8,3 +8,5 @@ export default function Page() {
         </main>
     );
 }
+
+export default Page;
