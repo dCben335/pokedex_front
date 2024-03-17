@@ -15,7 +15,6 @@ const useGetPokemons = () => {
 
     useEffect(() => {
         setUrlParams(Object.fromEntries(searchParams.entries()))
-
     }, [searchParams]);
 
     return pokemons;

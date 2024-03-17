@@ -3,7 +3,7 @@
 import GroupForm from "@/components/ui/GroupForm/GroupForm"
 import { createQueryString } from "@/utils/queryParams"
 import { usePathname, useRouter, useSearchParams } from "next/navigation"
-import { ChangeEvent, HTMLAttributes, use, useEffect, useState } from "react"
+import { ChangeEvent, HTMLAttributes, Suspense, use, useEffect, useState } from "react"
 
 type PokemonSearchFormProps = HTMLAttributes<HTMLFormElement>
 

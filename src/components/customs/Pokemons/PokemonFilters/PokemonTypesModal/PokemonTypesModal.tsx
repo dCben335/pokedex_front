@@ -6,6 +6,7 @@ import PokemonTypesButton from "./PokemonTypesButton"
 import styles from "./PokemonTypesModal.module.scss"
 import { useRouter, usePathname, useSearchParams } from "next/navigation"
 import { createQueryString, getUrlTypes, removeQueryString } from "@/utils/queryParams"
+import { Suspense } from "react"
 
 type PokemonTypesModalProps = ModalProps & {
     

@@ -4,8 +4,8 @@
     display: grid;
     align-items: flex-end;
     justify-content: center;
-    transition: opacity .5s cubic-bezier(.03,.98,.52,.99);
-    z-index: -1000;
+    transition: opacity .5s cubic-bezier(.03,.98,.52,.99), z-index .35s cubic-bezier(.03,.98,.52,.99);
+
 
 
     .overlay {
@@ -23,6 +23,8 @@
         border-top: 2px solid $accent-color;
         background-color: $primary-color;
         overflow: hidden;      
+        transform-origin: bottom;
+        transition: transform .5s cubic-bezier(.03,.98,.52,.99);
         
         
         .inner {
@@ -41,21 +43,19 @@
 
     &.closed {
         opacity: 0;
+        z-index: -1000;
 
         & > .container {
-            transform: scaleY(0);
-            opacity: 0;
+            transform: translateY(65%);
         }
     }
 
     &.opened {
         z-index: 100000;
-
         opacity: 1;
 
         & > .container {
-            transform: scaleY(1);
-            opacity: 1;
+            transform: translateY(0);
         }
     }
 }
