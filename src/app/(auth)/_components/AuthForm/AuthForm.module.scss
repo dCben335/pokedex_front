@@ -1,0 +1,13 @@
+.authForm {
+    padding: 2rem 2.5vw;
+    background-color: $primary-color;
+    width: clamp(min(300px, 100%), 50%, 600px);
+    border-radius: $border-radius;
+    box-shadow: $basic-shadow;
+    border: 1px solid $primary-color;
+    
+
+    .title {
+        text-align: center;
+    }
+}

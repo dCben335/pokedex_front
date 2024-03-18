@@ -1,0 +1,11 @@
+.label {
+    width: 100%;
+    display: grid;
+    gap: .65rem;
+
+    .name {
+        font-size: .85rem;
+        font-weight: 500;
+        margin-left: .5rem;
+    }
+}

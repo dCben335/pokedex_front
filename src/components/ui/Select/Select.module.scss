@@ -1,0 +1,30 @@
+.select {
+    appearance: none;
+    border: 0;
+    cursor: pointer; 
+
+    
+    background-color: $primary-color-variant;
+    min-height: 100%;
+    color: $secondary-color;
+    
+    padding: 1rem;
+    border-radius: $border-radius / 2;
+    box-shadow: $basic-shadow;
+    outline: 1px solid transparent;
+
+    transition: 
+        background-color .3s ease-in-out,
+        outline-color .3s ease-in-out;
+
+}
+
+.select:is(:focus-within) {
+    background-color: $primary-color;
+    outline-color: $accent-color;
+}
+
+
+.select:is(:focus-within) {
+    outline-color: $accent-color;
+}

@@ -18,5 +18,6 @@ const BurgerButton = ({ cross, className, ...props }:  BurgerButtonProps) => {
     )
 }
 
+BurgerButton.displayName = "BurgerButton";
 
 export default BurgerButton;

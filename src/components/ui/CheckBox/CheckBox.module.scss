@@ -1,0 +1,34 @@
+.checkBox {
+    appearance: none;
+    
+    position: relative;
+    width: 1.5rem;
+    aspect-ratio: 1;
+    padding: 0.15rem; 
+
+    background-color: $primary-color-variant;
+    box-shadow: $basic-shadow;
+    border-radius: 5px;
+}
+
+.checkBox::before {
+    content: "";
+    position: absolute;
+    inset: 3px;
+    clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
+    background-color: $accent-color;
+    
+    transform: scale(0);
+    transition: .3s transform ease-in-out;
+}
+
+.checkBox:checked::before {
+    transform: scale(1);
+}
+
+.checkBox:disabled {
+    --form-control-color: #959495;
+
+    color: var(--form-control-disabled);
+    cursor: not-allowed;
+}

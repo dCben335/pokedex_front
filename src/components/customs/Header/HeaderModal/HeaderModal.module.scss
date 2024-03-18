@@ -1,0 +1,16 @@
+.headerModal {
+    max-height: 90vh !important;
+
+    .modalList {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        li {
+            width: 100%;
+        }
+    
+        .navButton {
+            width: 100%;
+        }
+    }
+}

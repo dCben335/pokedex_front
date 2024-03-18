@@ -28,7 +28,7 @@ const PokemonSearchForm = ({className, ...props}: PokemonSearchFormProps) => {
         }, 1000);
 
         return () => clearTimeout(timeout);
-    }, [inputValue]);
+    }, [inputValue, router, pathname, searchParams]);
 
 
     return (

@@ -24,6 +24,8 @@ const StyledImage = ({ className, src, alt, fill, ...props }: StyledImageProps) 
     );
 }
 
+StyledImage.displayName = "StyledImage";
+
 export default StyledImage;
 
 

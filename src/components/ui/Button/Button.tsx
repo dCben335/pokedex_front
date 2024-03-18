@@ -20,14 +20,14 @@ const Button = ({ children, className, active, ...props} : Props ) => {
         const { renderAs, ...newProps } = props
 
         return (
-            <Link {...newProps} className={classes}>
+            <Link className={classes} {...newProps}>
                 {children}
             </Link>
         )
     }
 
     return (    
-        <button {...props} className={classes}>
+        <button className={classes} {...props}>
             {children}
         </button>
     )

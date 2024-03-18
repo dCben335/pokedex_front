@@ -16,10 +16,10 @@ const Modal = ({ closeModal, isOpen, children, className, ...props }: Props) => 
     }, [isOpen])
 
     return (
-        <aside className={`${styles.filters} ${isOpen ? styles.opened : styles.closed} ${className ? className : ""}`} {...props}>
+        <aside className={`${styles.filters} ${isOpen ? styles.opened : styles.closed}`} {...props}>
             <span className={styles.overlay} onClick={() => closeModal()}></span>
             <div className={styles.container}>
-                <div className={styles.inner}>
+                <div className={`${styles.inner} ${className ? className : ""}`}>
                     {/* <BurgerButton cross={true} className={styles.burger} onClick={() => closeModal()} /> */}
                     {children}
                 </div>
@@ -27,5 +27,7 @@ const Modal = ({ closeModal, isOpen, children, className, ...props }: Props) => 
         </aside>
     )
 }
+
+Modal.displayName = "Modal"
 
 export default Modal;

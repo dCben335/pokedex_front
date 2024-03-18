@@ -6,7 +6,7 @@ import { CSSProperties, useRef, useState, MouseEvent, PropsWithChildren } from "
 type CardProps = React.HTMLAttributes<HTMLElement> & PropsWithChildren; 
 
 
-export default function Card({ children, className, style, ...props }: CardProps) {
+const Card = ({ children, className, style, ...props }: CardProps) => {
     const projectCard = useRef<HTMLElement>(null)
     const [cardMouseHoverStyle, setCardMouseHoverStyle] = useState<CSSProperties>({}) 
     
@@ -28,14 +28,18 @@ export default function Card({ children, className, style, ...props }: CardProps
 
     return (
         <article 
-            {...props} 
             ref={projectCard}
             className={`${styles.card} ${className ? className : ""}`} 
             onMouseMove={(e) =>  mouseOnProject(e)}
             onMouseLeave={() => mouseLeaveProject()} 
             style={{...cardMouseHoverStyle, ...style}}
+            {...props} 
         >
             { children }   
         </article>
     )
 }
+
+Card.displayName = "Card"
+
+export default Card;

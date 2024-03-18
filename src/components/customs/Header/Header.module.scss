@@ -1,5 +1,5 @@
-$header-height: 5rem;
-$header-padding-y: .5rem;
+$header-height: 5.5rem;
+$header-padding-y: 1rem;
 
 .header {
     display: flex;
@@ -10,6 +10,7 @@ $header-padding-y: .5rem;
     padding: $header-padding-y 1rem;
     height: $header-height;
     color: $primary-color;
+    box-shadow: $header-shadow;
 
     & > * {
         height: 100%;

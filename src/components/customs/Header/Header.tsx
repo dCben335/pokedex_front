@@ -2,8 +2,10 @@ import Logo from '@/components/Icons/Logo';
 import styles from './Header.module.scss';
 import BurgerButton from '@/components/ui/BurgerButton/BurgerButton';
 import { useState } from 'react';
-import Modal from '@/components/ui/Modal/Modal';
 import Link from 'next/link';
+import HeaderModal from './HeaderModal/HeaderModal';
+
+
 
 const Header = () => {
     const [isOpen, setIsOpen] = useState(false)
@@ -31,9 +33,7 @@ const Header = () => {
 
                 <div></div>
             </header>
-            <Modal isOpen={isOpen} closeModal={handleClick} >
-
-            </Modal>
+            <HeaderModal isOpen={isOpen} closeModal={handleClick} />
         </>
     );
 }

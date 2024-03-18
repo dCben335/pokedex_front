@@ -1,15 +1,8 @@
 "use client";
 
-import { ZodType, z } from "zod";
-import GenerateForm, { GenerateFormProps } from "./GenerateForm";
+import Form, { GenerateFormProps } from "@/components/customs/Form/Form";
+import { z } from "zod";
 
-interface FormData {
-    name: string;
-    email: string;
-    age: number;
-}
-
-// Define the field configurations
 const fields: GenerateFormProps['fields'] = {
     name: {
         label: "Name",
@@ -47,13 +40,29 @@ const fields: GenerateFormProps['fields'] = {
             { value: "grass", label: "Grass" }
         ],
         defaultValue: "fire",
+    },
+    description: {
+        label: "Description",
+        schema: z.string().nonempty(),
+        type: "textarea",
+        defaultValue: "This is a description"
+    },
+    isLegendary: {
+        label: "Is Legendary",
+        schema: z.boolean(),
+        type: "checkbox",
+        defaultValue: false
+    },
+    image: {
+        label: "Image",
+        schema: z.unknown(),
+        type: "file",
     }
 }
 
 
-// Define the component where you want to use the GenerateForm component
-const MyFormComponent = () => {
-    
+const TestForm = ({}) => {
+
     const onSubmit: GenerateFormProps['onSubmit'] = async (data) => {
         try {
             await new Promise((resolve, reject) => {
@@ -69,11 +78,12 @@ const MyFormComponent = () => {
 
     return (
         <div>
-            <h1>My Form</h1>
-            {/* Render the GenerateForm component and pass the required props */}
-            <GenerateForm fields={fields} onSubmit={onSubmit} />
+            <Form 
+                fields={fields} 
+                onSubmit={onSubmit} 
+            />
         </div>
     );
 };
 
-export default MyFormComponent;
+export default TestForm;

@@ -1,9 +1,10 @@
-import AuthForm from "../_components/AuthForm";
+import RegisterForm from "../_components/RegisterForm";
+import styles from "../page.module.scss";
 
 const Page = () => {
     return (
-        <main>
-            <AuthForm />
+        <main className={styles.page}>
+            <RegisterForm />
         </main>
     );
 }
