@@ -2,8 +2,8 @@ import { z } from "zod";
 
 export const SortSchema = z.object({
     empty: z.boolean(),
-    unsorted: z.boolean(),
     sorted: z.boolean(),
+    unsorted: z.boolean(),
 });
 
 
@@ -12,6 +12,7 @@ export const PageableSchema = z.object({
     pageSize: z.number(),
     sort: SortSchema,
     offset: z.number(),
-    paged: z.boolean(),
     unpaged: z.boolean(),
+    paged: z.boolean(),
 });
+

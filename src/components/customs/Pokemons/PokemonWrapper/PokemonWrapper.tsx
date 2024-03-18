@@ -10,10 +10,10 @@ import pokemons from "@/contents/pokemons.json";
 type PokemonWrapperProps = React.HTMLAttributes<HTMLDivElement> 
 
 const PokemonWrapper = ({ className, ...props }: PokemonWrapperProps) => {
-    const {data, isLoading, isError} = useGetPokemons();
+    const {data, isLoading, error} = useGetPokemons();
     const { getTypeColor } = usePokemonTypes();
 
-    if (isError || (!isLoading && !data)) {
+    if (error || (!isLoading && !data)) {
         toast.error("Error fetching pokemons");
         return (
             <></>
@@ -29,11 +29,11 @@ const PokemonWrapper = ({ className, ...props }: PokemonWrapperProps) => {
                         skeleton={true}
                     />
                 )) 
-                : pokemons.map(({ name, image, types }, index) => (
+                : data?.content.map(({ name, imgUrl, types }, index) => (
                     <PokemonCard
                         key={index}
                         name={name}
-                        image={image}
+                        image={imgUrl}
                         types={types}
                         backgroundColor={getTypeColor(types[0])}
                     />
