@@ -10,7 +10,7 @@ const Card = ({ children, className, style, ...props }: CardProps) => {
     const projectCard = useRef<HTMLElement>(null)
     const [cardMouseHoverStyle, setCardMouseHoverStyle] = useState<CSSProperties>({}) 
     
-    const mouseOnProject = (event: MouseEvent) => {
+    const onMouseMove = (event: MouseEvent) => {
         if (!projectCard.current) return;
 
         const mouseX = event.pageX - projectCard.current.offsetLeft;
@@ -22,7 +22,7 @@ const Card = ({ children, className, style, ...props }: CardProps) => {
         } as CSSProperties)
     }
 
-    const mouseLeaveProject = () =>  {
+    const onMouseLeave = () =>  {
         setCardMouseHoverStyle({...cardMouseHoverStyle})
     }
 
@@ -30,8 +30,8 @@ const Card = ({ children, className, style, ...props }: CardProps) => {
         <article 
             ref={projectCard}
             className={`${styles.card} ${className ? className : ""}`} 
-            onMouseMove={(e) =>  mouseOnProject(e)}
-            onMouseLeave={() => mouseLeaveProject()} 
+            onMouseMove={(e) => onMouseMove(e)}
+            onMouseLeave={() => onMouseLeave()} 
             style={{...cardMouseHoverStyle, ...style}}
             {...props} 
         >

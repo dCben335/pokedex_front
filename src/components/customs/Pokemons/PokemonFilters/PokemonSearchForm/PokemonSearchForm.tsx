@@ -1,7 +1,7 @@
 "use client";
 
 import GroupForm from "@/components/ui/GroupForm/GroupForm"
-import { createQueryString } from "@/utils/queryParams"
+import { createQueryString, removeQueryString } from "@/utils/queryParams"
 import { usePathname, useRouter, useSearchParams } from "next/navigation"
 import { ChangeEvent, HTMLAttributes, Suspense, use, useEffect, useState } from "react"
 
@@ -22,9 +22,11 @@ const PokemonSearchForm = ({className, ...props}: PokemonSearchFormProps) => {
 
     useEffect(() => {
         if (inputValue === undefined) return;
-
+        
         const timeout = setTimeout(() => {
-            router.push(`${pathname}?${createQueryString(searchParams, 'partialName', inputValue)}`);
+            if (searchParams.get('partialName') === inputValue) return
+            const updatedSearchParams = removeQueryString(searchParams, 'page');
+            router.push(`${pathname}?${createQueryString(updatedSearchParams, 'partialName', inputValue)}`);
         }, 1000);
 
         return () => clearTimeout(timeout);
@@ -39,7 +41,7 @@ const PokemonSearchForm = ({className, ...props}: PokemonSearchFormProps) => {
                     defaultValue: defaultValue, 
                     placeholder: 'Search Pokemon by partial name', 
                     type: "text", 
-                    name: "search",
+                    name: "partialName",
                 }}
                 onFieldChange={(e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => handleInputChange(e)}
             />

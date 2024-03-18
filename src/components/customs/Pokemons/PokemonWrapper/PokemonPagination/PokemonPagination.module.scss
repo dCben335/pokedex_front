@@ -1,0 +1,29 @@
+.nav {
+    display: flex;
+    justify-content: center;
+    max-width: 100%;
+
+    .list {
+        display: flex;
+        gap: 1rem;    
+        flex-wrap: wrap;
+
+        .btn {
+            aspect-ratio: 1;
+            display: flex;
+            padding: 1rem;
+            
+            &.firstOrLast {
+                // filter: brightness(.85);
+                // background-color: $secondary-color;
+                // color: $primary-color;
+            }
+
+            &.active {
+                filter: brightness(1);
+                background-color: $accent-color;
+                color: $primary-color;
+            }
+        }
+    }
+}

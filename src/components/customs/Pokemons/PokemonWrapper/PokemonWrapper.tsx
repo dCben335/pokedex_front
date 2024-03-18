@@ -6,6 +6,7 @@ import PokemonCard from "../PokemonCard/PokemonCard";
 import styles from "./PokemonWrapper.module.scss"
 import useGetPokemons from "@/hooks/Pokemons/useGetPokemons";
 import pokemons from "@/contents/pokemons.json";
+import PokemonPagination from "./PokemonPagination/PokemonPagination";
 
 type PokemonWrapperProps = React.HTMLAttributes<HTMLDivElement> 
 
@@ -19,17 +20,27 @@ const PokemonWrapper = ({ className, ...props }: PokemonWrapperProps) => {
             <></>
         )
     }
+
+    if (isLoading) {
+        return (
+            <div className={`${className ? className : ""}`} {...props}>
+                <div className={`${styles.pokemonWrapper}`} >
+                    {Array(20).fill(0).map((_, index) => 
+                        <PokemonCard 
+                            key={index} 
+                            skeleton={true}
+                        />
+                    )}
+                </div>
+            </div>
+        )
+    }
     
+
     return (
-        <div className={`${styles.pokemonWrapper} ${className ? className : ""}`} {...props}>
-            {isLoading
-                ? Array(20).fill(0).map((_, index) => (
-                    <PokemonCard 
-                        key={index} 
-                        skeleton={true}
-                    />
-                )) 
-                : data?.content.map(({ name, imgUrl, types }, index) => (
+        <div className={`${className ? className : ""}`} {...props}>
+            <div className={`${styles.pokemonWrapper}`}>
+                {data?.content.map(({ name, imgUrl, types }, index) => 
                     <PokemonCard
                         key={index}
                         name={name}
@@ -37,8 +48,12 @@ const PokemonWrapper = ({ className, ...props }: PokemonWrapperProps) => {
                         types={types}
                         backgroundColor={getTypeColor(types[0])}
                     />
-                ))
-            }
+                )}
+            </div>
+                <PokemonPagination 
+                    currentPage={data?.pageable.pageNumber || 0}
+                    total={data?.totalPages || 0}
+                />
         </div>
     );
 };

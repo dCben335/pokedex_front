@@ -4,6 +4,7 @@ export type urlParams = {
     [key: string]: string | number | boolean | undefined;
 }
 
+type SearchParams = ReadonlyURLSearchParams | string;
 
 export const getUrlParams = (urlParams: urlParams) => {
     const params = new URLSearchParams();
@@ -18,7 +19,7 @@ export const getUrlParams = (urlParams: urlParams) => {
 }
 
 
-export const createQueryString = (searchParams: ReadonlyURLSearchParams, name: string, value: string) => {
+export const createQueryString = (searchParams: SearchParams, name: string, value: string) => {
     const params = new URLSearchParams(searchParams.toString())
     params.set(name, value)
 
@@ -26,7 +27,7 @@ export const createQueryString = (searchParams: ReadonlyURLSearchParams, name: s
 }
 
 
-export const removeQueryString = (searchParams: ReadonlyURLSearchParams, name: string) => {
+export const removeQueryString = (searchParams: SearchParams, name: string) => {
     const params = new URLSearchParams(searchParams.toString())
     params.delete(name)
 

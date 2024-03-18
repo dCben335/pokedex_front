@@ -8,7 +8,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import FormGroup, { FormFieldProps } from "./FormGroup/FormGroup";
 import styles from "./Form.module.scss";
 
-
 export interface FormData {
     [fieldName: string]: string | number | boolean | any;
 }
@@ -17,7 +16,6 @@ export interface GenerateFormProps {
     fields: Record<string, FormFieldProps>;
     onSubmit: SubmitHandler<FormData>;
 }
-
 
 
 const extractSchema = (fields: Record<string, FormFieldProps>): ZodType<FormData> => {
@@ -31,7 +29,6 @@ const extractSchema = (fields: Record<string, FormFieldProps>): ZodType<FormData
 
     return z.object(schemaObject) as ZodType<FormData>;
 };
-
 
 
 const Form = ({ fields, onSubmit }: GenerateFormProps) => {
@@ -65,7 +62,6 @@ const Form = ({ fields, onSubmit }: GenerateFormProps) => {
 
     return (
         <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
-            
             {Object.entries(fields).map(([fieldName, field]) => (
                 <FormGroup
                     key={fieldName}

@@ -29,25 +29,30 @@ const PokemonTypesModal = ({ isOpen, closeModal }: PokemonTypesModalProps) => {
         return !typeOne && !typeTwo
     }
 
+    const routerPush = (params: any) => {
+        router.push(`${pathname}?${params}`)
+    }
+
     const handleCategoryClick = (type: string) => {    
-        const { typeOne, typeTwo } = getUrlTypes(searchParams)
-
+        const { typeOne, typeTwo } = getUrlTypes(searchParams);
+        const updatedSearchParams = removeQueryString(searchParams, 'page');
+    
         if (type === typeOne) {  
-            return router.push(`${pathname}?${removeQueryString(searchParams, 'typeOne')}`)
+            return routerPush(removeQueryString(updatedSearchParams, 'typeOne'));
         }
-
         if (type === typeTwo) {
-            return router.push(`${pathname}?${removeQueryString(searchParams, 'typeTwo')}`)
+            return routerPush(removeQueryString(updatedSearchParams, 'typeTwo'));
         }
 
         if (!typeOne) {
-            return router.push(`${pathname}?${createQueryString(searchParams, 'typeOne', type)}`)
-        }
-
+            return routerPush(createQueryString(updatedSearchParams, 'typeOne', type));
+        } 
         if (!typeTwo) {
-            return router.push(`${pathname}?${createQueryString(searchParams, 'typeTwo', type)}`)
+            return  routerPush(createQueryString(updatedSearchParams, 'typeTwo', type));
         }
     }
+
+    
 
     return (
         <Modal isOpen={isOpen} closeModal={closeModal}>
