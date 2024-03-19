@@ -20,7 +20,7 @@ export const usePokemonTypes = () => {
 };
 
 export const PokemonTypesProvider = ({ children } : React.PropsWithChildren ) => {
-    const { data, isLoading, error } = useGetPokemonTypes(); // Assuming this hook fetches Pokemon types
+    const { data, isLoading, error } = useGetPokemonTypes();
 
     if (isLoading || error || !data) {
         if (error) toast.error(error.message);

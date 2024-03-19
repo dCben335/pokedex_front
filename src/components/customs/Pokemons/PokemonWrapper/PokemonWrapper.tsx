@@ -35,12 +35,11 @@ const PokemonWrapper = ({ className, ...props }: PokemonWrapperProps) => {
             </div>
         )
     }
-    
 
     return (
         <div className={`${className ? className : ""}`} {...props}>
             <div className={`${styles.pokemonWrapper}`}>
-                {data?.content.map(({ name, imgUrl, types }, index) => 
+                {(data?.content ?? []).map(({ name, imgUrl, types }, index) => 
                     <PokemonCard
                         key={index}
                         name={name}
