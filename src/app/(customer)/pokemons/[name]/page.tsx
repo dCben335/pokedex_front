@@ -1,6 +1,57 @@
-import styles from './page.module.scss';
+"use client";
 
-const Page = () => {
+import useGetPokemon from '@/hooks/Pokemons/useGetPokemon';
+import styles from './page.module.scss';
+import { toast } from 'sonner';
+import { useRouter } from 'next/navigation';
+import { firstLetterUppercase } from '@/utils/reformat';
+import { usePokemonTypes } from '@/components/providers/PokemonTypesContext';
+import { useTheme } from '@/components/providers/ThemeContext';
+import { useEffect } from 'react';
+
+interface PagePops {
+    params: {
+        name: string;
+    };
+}
+
+const Page = ({ params }: PagePops) => {
+    
+    const router = useRouter();
+
+    const { changeColor, color } = useTheme();
+    const { findType } = usePokemonTypes();
+    const { data, isLoading, error } = useGetPokemon(
+        firstLetterUppercase(params.name)
+    );
+
+    
+    useEffect(() => {
+        if (!data?.types || data.types.length === 0) return;
+    
+        const firstType = findType(data.types[0]);
+
+        if (firstType && color !== firstType?.color) {
+            changeColor(firstType.color);
+        }
+    }, [data]);
+    
+
+    if (isLoading) {
+        return <p>Loading...</p>;
+    }
+
+    if (error) {
+        toast.error(error.message);
+        router.push('/');
+    }
+
+    if (!data) {
+        return <p>No data</p>;
+    }
+
+
+    
 
     return (
         <main className={styles.main}>

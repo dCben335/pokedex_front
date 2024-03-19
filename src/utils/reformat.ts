@@ -25,3 +25,8 @@ export const accentsTidy = (expression: string) => {
     return lower;
 };
 
+
+export const firstLetterUppercase = (expression: string) => {
+    return expression.charAt(0).toUpperCase() + expression.slice(1);
+}
+

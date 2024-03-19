@@ -6,7 +6,7 @@ import { PokemonTypesProvider } from "@/components/providers/PokemonTypesContext
 import { Toaster } from "sonner";
 import "./globals.scss";
 import Header from "@/components/customs/Header/Header";
-
+import { ThemeProvider } from "@/components/providers/ThemeContext";
 
 const inter = Inter({ subsets: ["latin"] });
 const queryClient = new QueryClient();
@@ -16,19 +16,20 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body className={`${inter.className}`}>
         <QueryClientProvider client={queryClient}>
-          <PokemonTypesProvider>
-            <Toaster richColors closeButton duration={3000} theme='dark' visibleToasts={1}/>
-            <Header />
-            {children}
-          </PokemonTypesProvider>
+          <ThemeProvider>
+            <PokemonTypesProvider>
+              <Toaster richColors closeButton duration={3000} theme='dark' visibleToasts={1}/>
+              <Header />
+              {children}
+            </PokemonTypesProvider>
+          </ThemeProvider>
         </QueryClientProvider>
       </body>
     </html>
   );
 }
-
-

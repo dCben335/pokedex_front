@@ -17,8 +17,8 @@ const Card = ({ children, className, style, ...props }: CardProps) => {
         const mouseY = event.pageY - projectCard.current.offsetTop;
 
         setCardMouseHoverStyle({ 
-            "--data-light-x" : ` ${mouseX}px`,
-            "--data-light-y" : ` ${mouseY}px`,
+            "--data-light-x" : `${mouseX}px`,
+            "--data-light-y" : `${mouseY}px`,
         } as CSSProperties)
     }
 

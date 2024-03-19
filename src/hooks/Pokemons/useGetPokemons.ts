@@ -5,8 +5,8 @@ import { useSearchParams } from "next/navigation";
 import { getUrlParams, urlParams } from "@/utils/queryParams";
 
 const useGetPokemons = () => {
-    const [urlParams, setUrlParams] = useState<urlParams>({})
     const searchParams = useSearchParams()
+    const [urlParams, setUrlParams] = useState<urlParams>({})
 
     const pokemons = useQuery({
         queryKey: ["pokemons", urlParams],

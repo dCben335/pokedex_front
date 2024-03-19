@@ -1,4 +1,4 @@
-import { pokemonSearchSchema, pokemonTypeRequestSchema } from "@/schemas/pokemon";
+import { pokemonSchema, pokemonSearchSchema, pokemonTypeRequestSchema } from "@/schemas/pokemon";
 import { NEXT_PUBLIC_BASE_API_URL } from "./user"
 
 if (!NEXT_PUBLIC_BASE_API_URL) {
@@ -21,6 +21,24 @@ export const getPokemons = async (urlParams: string) => {
     catch (error) {
         console.error(error);
         throw new Error("Error fetching pokemons");
+    }
+}
+
+
+//GET /pkmn
+export const getPokemon = async (name: string) => {
+    try {
+        const response = await fetch(`${NEXT_PUBLIC_BASE_API_URL}/pkmn?name=${name}`);
+
+        if (!response.ok) {
+            throw new Error("Error fetching pokemon");
+        }
+
+        const data = await response.json();
+        return pokemonSchema.parse(data);
+    }
+    catch (error) {
+        throw new Error("Error fetching pokemon");
     }
 }
 

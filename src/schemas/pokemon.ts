@@ -14,6 +14,12 @@ export const pokemonTypeRequestSchema = z.object({
 });
 
 
+export type PokemonRegion = z.infer<typeof pokemonRegion>;
+export const pokemonRegion = z.object({
+    regionName: z.string(),
+    regionPokedexNumber: z.string(),
+}); 
+
 
 export type Pokemon = z.infer<typeof pokemonSchema>;
 export const pokemonSchema = z.object({
@@ -21,6 +27,7 @@ export const pokemonSchema = z.object({
     name: z.string(),
     imgUrl: z.string(),
     types: z.array(z.string()).min(0).max(2),
+    regions: z.array(pokemonRegion).min(0),
 });
 
 

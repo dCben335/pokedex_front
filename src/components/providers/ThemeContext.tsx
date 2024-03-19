@@ -1,41 +1,44 @@
-// contexts/ColorContext.tsx
+import { usePathname } from 'next/navigation';
+import React, { createContext, useState, useContext, PropsWithChildren, useEffect, use } from 'react';
 
-import React, { createContext, useState, useContext, useEffect, PropsWithChildren } from 'react';
-
-// Define context type
-interface ColorContextType {
-    color: string;
+const defaultColor = "#F86868";
+type defaultColor = typeof defaultColor;
+interface ThemeContextType {
+    color: string | defaultColor;
     changeColor: (newColor: string) => void;
 }
 
-// Create context with default values
-const ColorContext = createContext<ColorContextType>({
-    color: 'blue',
+const ThemeContext = createContext<ThemeContextType>({
+    color: defaultColor,
     changeColor: () => {},
 });
 
-// Custom hook to use the color context
-export const useColor = ({}): ColorContextType => {
-    return useContext(ColorContext);
+export const useTheme = (): ThemeContextType => {
+    return useContext(ThemeContext);
 };
 
-// Context Provider component
-export const ColorProvider = ({ children } : PropsWithChildren) => {
-    const [color, setColor] = useState<string>('blue');
+export const ThemeProvider = ({ children }: PropsWithChildren<{}>) => {
+    const [color, setColor] = useState<string>(defaultColor);
+
+    const pathname = usePathname()
 
     useEffect(() => {
-        document.documentElement.style.setProperty('--global-color', color);
+        document.body.style.setProperty('--accent-color', color);
     }, [color]);
+
+    useEffect(() => {
+        setColor(defaultColor);
+    }, [pathname]);
 
     const changeColor = (newColor: string) => {
         setColor(newColor);
     };
 
     return (
-        <ColorContext.Provider value={{ color, changeColor }}>
+        <ThemeContext.Provider value={{ changeColor, color }}>
             {children}
-        </ColorContext.Provider>
+        </ThemeContext.Provider>
     );
 };
 
-export default ColorContext;
+export default ThemeContext;

@@ -6,7 +6,7 @@ $header-padding-y: 1rem;
     justify-content: space-between;
     align-items: center;
     top: 0;
-    background-color: $accent-color;
+    background-color: var(--accent-color, $accent-color);
     padding: $header-padding-y 1rem;
     height: $header-height;
     color: $primary-color;

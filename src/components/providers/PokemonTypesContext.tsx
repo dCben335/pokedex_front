@@ -2,17 +2,19 @@
 
 import useGetPokemonTypes from '@/hooks/Pokemons/useGetPokemonTypes';
 import { createContext, useContext } from 'react';
-import { PokemonTypeRequest } from '@/schemas/pokemon';
+import { PokemonType, PokemonTypeRequest } from '@/schemas/pokemon';
 import { toast } from 'sonner';
 
 interface PokemonTypesContextType extends PokemonTypeRequest {
     getTypeColor: (type: string) => string; 
+    findType: (typeName: string) => PokemonType | undefined;
 }
 
 const PokemonTypesContext = createContext<PokemonTypesContextType>({
     types: [],
     count: 0,
     getTypeColor: () => '',
+    findType: () => undefined,
 });
 
 export const usePokemonTypes = () => {
@@ -33,18 +35,20 @@ export const PokemonTypesProvider = ({ children } : React.PropsWithChildren ) =>
         );
     }    
 
+    const findType = (typeName: string) => {
+        return data.types.find(({name}) => name === typeName.toUpperCase());
+    };
+
     const getTypeColor = (typeName: string): string => {
         if (!typeName) return '';
 
-        const correspondingType = data.types.find(
-            ({name}) => name === typeName.toUpperCase()
-        );
+        const correspondingType = findType(typeName);
         
         return correspondingType?.color || '';
     };
 
     return (
-        <PokemonTypesContext.Provider value={{ types: data.types, count: data.count, getTypeColor }}>
+        <PokemonTypesContext.Provider value={{ types: data.types, count: data.count, getTypeColor, findType }}>
             {children}
         </PokemonTypesContext.Provider>
     );
