@@ -5,17 +5,6 @@
 }
 
 :root {
-  --primary-color: $primary-color;
-  --primary-color-variant: $primary-color-variant;
-
-  --secondary-color: $secondary-color;
-  --secondary-color-variant: $secondary-color-variant;
-
-  --accent-color: $accent-color;
-
-  --blur-color: $blur-color;
-  --blur-size: $blur-size;
-
   --border-radius: $border-radius;
   --basic-shadow: $basic-shadow;
   --header-shadow: $header-shadow;
@@ -23,6 +12,30 @@
   --logo-height: $logo-height;
   --main-top-padding: calc($logo-height + 2.5rem);
   --website-padding: $website-padding;
+
+  --blur-color: $blur-color;
+  --blur-size: $blur-size;
+}
+
+.light:root {
+  --primary-color: $primary-color;
+  --primary-color-variant: $primary-color-variant;
+
+  --secondary-color: $secondary-color;
+  --secondary-color-variant: $secondary-color-variant;
+
+  --accent-color: $accent-color;
+} 
+
+
+.dark:root {
+  --primary-color: $secondary-color;
+  --primary-color-variant: $secondary-color-variant;
+
+  --secondary-color: $primary-color;
+  --secondary-color-variant: $primary-color-variant;
+
+  --accent-color: $accent-color;
 }
 
 html {
