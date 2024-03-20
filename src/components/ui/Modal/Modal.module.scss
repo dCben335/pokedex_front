@@ -6,8 +6,6 @@
     justify-content: center;
     transition: opacity .5s cubic-bezier(.03,.98,.52,.99), z-index .35s cubic-bezier(.03,.98,.52,.99);
 
-
-
     .overlay {
         position: absolute;
         z-index: -1;
@@ -21,7 +19,7 @@
         border-top-right-radius: $border-radius;
         box-shadow: 0 0 10000px 10px $primary-color-variant;
         border-top: 2px solid $accent-color;
-        background-color: $primary-color;
+        background-color: var(--primary-color, $primary-color);
         overflow: hidden;      
         transform-origin: bottom;
         transition: transform .5s cubic-bezier(.03,.98,.52,.99);

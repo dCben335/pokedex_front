@@ -22,7 +22,6 @@ const PokemonPagination = ({ currentPage, total }: PokemonPaginationProps) => {
         return false;
     }
 
-
     const isFirstOrLast = (index: number) => {
         if (index === 0) return true;
         if (index === total - 1) return true;
@@ -32,8 +31,6 @@ const PokemonPagination = ({ currentPage, total }: PokemonPaginationProps) => {
     const router = useRouter()
     const pathname = usePathname()
     const searchParams = useSearchParams()
-    
-
 
     const handleClick = (pageNumber: number) => {    
         return router.push(`${pathname}?${createQueryString(searchParams, 'page', pageNumber.toString())}`)

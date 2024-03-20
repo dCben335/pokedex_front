@@ -1,7 +1,7 @@
 import Card from "@/components/ui/Card/Card";
 import styles from "./PokemonCard.module.scss";
 import Link from "next/link";
-import { accentsTidy } from "@/utils/reformat";
+import { accentsTidy, slugify } from "@/utils/reformat";
 import StyledImage from "@/components/ui/StyledImage/StyledImage";
 
 export type PokemonCard = {
@@ -9,20 +9,23 @@ export type PokemonCard = {
     image: string;
     types: string[];
     backgroundColor?: string;
+    baseUrl?: string;
 }
 
 interface PokemonCardProps extends PokemonCard {
     skeleton?: false
+    baseUrl: string;
 }
 
 interface PokemonSkeletonWrapperProps  {
     skeleton: true
+    baseUrl?: string;
 }
 
-type Props =  React.HTMLAttributes<HTMLElement> & (PokemonCardProps | PokemonSkeletonWrapperProps)
+type Props =  React.HTMLAttributes<HTMLElement> & (PokemonCardProps | PokemonSkeletonWrapperProps) 
 
-const PokemonCard = ({ className, skeleton, ...props }: Props) => {
-    const { name, image, backgroundColor, ...newProps } = props as PokemonCardProps;
+const PokemonCard = ({className, skeleton, ...props }: Props) => {
+    const { name, image, backgroundColor, baseUrl, ...newProps } = props as PokemonCardProps;
 
     if (skeleton) {
         return (
@@ -40,7 +43,7 @@ const PokemonCard = ({ className, skeleton, ...props }: Props) => {
             className={`${styles.pokemonCard} ${className ? className : ""}`} 
             style={{"--_background-color": backgroundColor} as React.CSSProperties}
         > 
-            <Link href={`/pokemons/${accentsTidy(name)}`} className={styles.linkContainer}>
+            <Link href={`${baseUrl}/${slugify(name)}`} className={styles.linkContainer}>
                 <StyledImage 
                     className={styles.img}
                     src={image} 

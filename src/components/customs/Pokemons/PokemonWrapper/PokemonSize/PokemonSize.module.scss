@@ -1,0 +1,19 @@
+.container {
+    display: flex;
+    gap: .5rem;
+    align-items: center;
+    margin: 0 1.5rem;
+    justify-content: space-between;
+
+
+    .size {
+        display: flex;
+        align-items: center;
+        gap: .5rem;
+    }
+    
+    .info {
+        font-size: .75rem;
+        order: 1;
+    }
+}

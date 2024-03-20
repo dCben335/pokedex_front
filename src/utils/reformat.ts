@@ -25,8 +25,19 @@ export const accentsTidy = (expression: string) => {
     return lower;
 };
 
+export const slugify = (expression: string) => {
+    return accentsTidy(expression).replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+}
+
+export const unslugify = (expression: string) => {
+    return expression.replace(/-/g, ' ');
+}
 
 export const firstLetterUppercase = (expression: string) => {
     return expression.charAt(0).toUpperCase() + expression.slice(1);
+}
+
+export const firstLetterOfEachWordUppercase = (expression: string) => {
+    return expression.split(' ').map((word) => firstLetterUppercase(word)).join(' ');
 }
 

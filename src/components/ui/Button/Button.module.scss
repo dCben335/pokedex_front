@@ -3,13 +3,20 @@
     display: inline-flex;
     justify-content: center;
     border-radius: $border-radius / 2;
-    background-color: $primary-color-variant;
-    color: $secondary-color;
-    box-shadow: $basic-shadow;
-    transition: filter .3s ease-in-out;
+    background-color: var(--primary-color-variant, $primary-color-variant);
+    color: var(--secondary-color, $secondary-color);
+    box-shadow: var(--basic-shadow, $basic-shadow);
+    transition: 
+        background-color .3s ease-in-out,
+        filter .3s ease-in-out;
     
     &:is(:hover, :focus-within, .active) {
+        background-color: var(--primary-color, $primary-color);
         filter: brightness(1.15);
+    }
+
+    &.active {
+        background-color: var(--accent-color, $accent-color);
     }
 }
 

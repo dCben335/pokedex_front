@@ -1,10 +1,10 @@
 .authForm {
     padding: 2rem 2.5vw;
-    background-color: $primary-color;
+    background-color: var(--accent-color, $accent-color);
     width: clamp(min(300px, 100%), 50%, 600px);
     border-radius: $border-radius;
-    box-shadow: $basic-shadow;
-    border: 1px solid $primary-color;
+    box-shadow: var(--basic-shadow, $basic-shadow);
+    border: 1px solid var(--primary-color, $primary-color);
     
 
     .title {

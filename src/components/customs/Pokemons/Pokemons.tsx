@@ -2,6 +2,7 @@ import { Suspense } from "react";
 import PokemonCategories from "./PokemonFilters/PokemonFilters";
 import PokemonWrapper from "./PokemonWrapper/PokemonWrapper";
 import styles from "./Pokemons.module.scss";
+import PokemonSize from "./PokemonWrapper/PokemonSize/PokemonSize";
 
 interface PokemonSectionProps extends React.HTMLAttributes<HTMLElement> {
     title: string;
@@ -16,7 +17,7 @@ const Pokemons = ({ title, isPageTitle, className, ...props }: PokemonSectionPro
         <section className={`${styles.pokemons} ${className ? className : ""}`} {...props}>
             <Suspense fallback={<></>}>
                 <PokemonCategories />
-                <PokemonWrapper className={"cont"} />
+                <PokemonWrapper baseUrl={"/pokemons"} className={"cont"} />
             </Suspense>
         </section>
     );

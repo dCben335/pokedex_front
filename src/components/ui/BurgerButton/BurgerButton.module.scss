@@ -16,8 +16,10 @@
         display: block;
         border-radius: 100vmax;
         transform: translateY(calc(300% * var(--i)));
-        transition: transform .3s ease-in-out, opacity .2s ease-in-out ;
+        transition: transform .3s ease-in-out, opacity .2s ease-in-out, width .3s ease-in-out; ;
         background-color: currentColor;
+        left: 15%;
+
 
         &:first-child {
             --i: 1
@@ -27,8 +29,9 @@
         }
 
         &:nth-child(2) {
-            width: 45%;
+            transform-origin: left;
             justify-self: flex-start;
+            width: 45%;
             left: 15%;
         }
     }
@@ -41,6 +44,15 @@
 
         span {
             transform: rotate(calc(135deg * var(--i)));
+        }
+    }
+
+    &:is(:hover, :focus-within) {
+        span {
+            width: 55%;
+        }
+        span:nth-child(2) {
+            width: 25%;
         }
     }
     

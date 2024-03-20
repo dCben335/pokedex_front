@@ -1,3 +1,5 @@
+"use client"
+
 import { usePathname } from 'next/navigation';
 import React, { createContext, useState, useContext, PropsWithChildren, useEffect, use } from 'react';
 
@@ -25,11 +27,16 @@ export const useTheme = (): ThemeContextType => {
     return useContext(ThemeContext);
 };
 
+
 export const ThemeProvider = ({ children }: PropsWithChildren<{}>) => {
     const [theme, setTheme] = useState<Theme>(defaultTheme);
     const [color, setColor] = useState<string>(defaultColor);
-    const pathname = usePathname()
+    const pathname = usePathname();
 
+    useEffect(() => {
+        console.log(localStorage);
+        setTheme(localStorage.getItem('theme') as Theme ?? defaultTheme);
+    }, []);
 
     useEffect(() => {
         document.documentElement.style.setProperty('--accent-color', color);
@@ -46,7 +53,11 @@ export const ThemeProvider = ({ children }: PropsWithChildren<{}>) => {
     
 
     const swichTheme = () => {
-        setTheme(theme === "light" ? "dark" : "light");
+        const newTheme = theme === "light" ? "dark" : "light";
+        localStorage.setItem('theme', newTheme);
+        setTheme(newTheme);
+
+        console.log(localStorage);
     }
 
     const changeColor = (newColor: string) => {

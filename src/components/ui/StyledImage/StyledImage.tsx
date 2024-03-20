@@ -17,7 +17,6 @@ const StyledImage = ({ className, src, alt, fill, ...props }: StyledImageProps) 
                 src={src} 
                 alt={alt} 
                 fill={fill}
-                priority
                 sizes="(min-width: 640px) 50vw, 100vw"
             />
         </div>

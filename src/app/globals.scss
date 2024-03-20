@@ -4,38 +4,25 @@
   margin: 0;
 }
 
-:root {
-  --border-radius: $border-radius;
-  --basic-shadow: $basic-shadow;
-  --header-shadow: $header-shadow;
-
-  --logo-height: $logo-height;
-  --main-top-padding: calc($logo-height + 2.5rem);
-  --website-padding: $website-padding;
-
-  --blur-color: $blur-color;
-  --blur-size: $blur-size;
-}
 
 .light:root {
-  --primary-color: $primary-color;
-  --primary-color-variant: $primary-color-variant;
+  --primary-color: #ffffff;
+  --primary-color-variant: #eee;
+  --secondary-color: #151818;
+  --secondary-color-variant: #101010;
 
-  --secondary-color: $secondary-color;
-  --secondary-color-variant: $secondary-color-variant;
-
-  --accent-color: $accent-color;
+  --basic-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+  --header-shadow: 0 0 10px 10px rgba(0, 0, 0, 0.25);
 } 
 
-
 .dark:root {
-  --primary-color: $secondary-color;
-  --primary-color-variant: $secondary-color-variant;
-
-  --secondary-color: $primary-color;
-  --secondary-color-variant: $primary-color-variant;
-
-  --accent-color: $accent-color;
+  --secondary-color: #ffffff;
+  --secondary-color-variant: #eee;
+  --primary-color: #151818;
+  --primary-color-variant: #101010;
+  
+  --basic-shadow: 0 0 10px rgba(255, 255, 255, 0.05);
+  --header-shadow: 0 0 10px 10px rgba(255, 255, 255, 0.10);
 }
 
 html {
@@ -43,8 +30,8 @@ html {
 }
 
 body {
-  background-color: $primary-color;
-  color: $secondary-color
+  background-color: var(--primary-color, $primary-color);
+  color: var(--secondary-color, $secondary-color);
 }
 
 body.noScroll {
@@ -61,13 +48,13 @@ body.noScroll {
 
 
 ::-webkit-scrollbar {
-  border-radius: 100vmax;
   width: 15px;
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: $accent-color;
+  background-color: var(--accent-color, $accent-color);
   border-radius: 100vmax;
+  background-color: var(--secondary-color-variant, $secondary-color-variant);
 }
 
 main {
@@ -84,6 +71,7 @@ button {
   border: none;
   outline: none;
   background-color: transparent;
+  color: inherit;
 }
 
 ul, ol {

@@ -1,14 +1,20 @@
-import Logo from '@/components/Icons/Logo';
-import styles from './Header.module.scss';
-import BurgerButton from '@/components/ui/BurgerButton/BurgerButton';
 import { useState } from 'react';
+import { useTheme } from '@/components/providers/ThemeContext';
+import styles from './Header.module.scss';
+
 import Link from 'next/link';
+import Button from '@/components/ui/Button/Button';
+import ThemeIcon from '@/components/Icons/ThemeLogo';
+import Logo from '@/components/Icons/Logo';
+import BurgerButton from '@/components/ui/BurgerButton/BurgerButton';
 import HeaderModal from './HeaderModal/HeaderModal';
 
 
 
 const Header = () => {
     const [isOpen, setIsOpen] = useState(false)
+
+    const { swichTheme } = useTheme()
 
     const handleClick = () => {
         setIsOpen(!isOpen)
@@ -31,7 +37,11 @@ const Header = () => {
                 </div>
 
 
-                <div></div>
+                <div className={styles.themeContainer}>
+                    <button title='swhich theme button' onClick={swichTheme} className={styles.themeButton}>
+                        <ThemeIcon />
+                    </button>
+                </div>
             </header>
             <HeaderModal isOpen={isOpen} closeModal={handleClick} />
         </>
