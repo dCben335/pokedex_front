@@ -41,3 +41,38 @@ export const firstLetterOfEachWordUppercase = (expression: string) => {
     return expression.split(' ').map((word) => firstLetterUppercase(word)).join(' ');
 }
 
+
+export interface DynamicObject {
+    [key: string]: any;
+}
+
+
+export function createArrayOfObjects(data: DynamicObject) {
+    const results: DynamicObject = {};
+
+    for (const key in data) {
+        const [prefix, indexStr, propertyType] = key.split('-');
+
+        if (prefix && indexStr && propertyType) {
+            const index = parseInt(indexStr); 
+            if (isNaN(index)) continue;
+            if (!results[prefix]) results[prefix] = [];
+            if (!results[prefix][index]) results[prefix][index] = {};
+            
+
+            if (!results[prefix][index].hasOwnProperty(propertyType)) {
+                results[prefix][index][propertyType] = data[key];
+                continue;
+            }  
+
+            if (!Array.isArray(results[prefix][index][propertyType])) {
+                results[prefix][index][propertyType] = [results[prefix][index][propertyType]];
+            }
+            results[prefix][index][propertyType].push(data[key]);
+        } else {
+            results[key] = data[key];
+        }
+    }
+
+    return results;
+}

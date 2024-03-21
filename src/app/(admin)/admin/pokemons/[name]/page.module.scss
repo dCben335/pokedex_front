@@ -1,0 +1,34 @@
+
+$image-height: 25rem;
+$gap: 1.5rem;
+
+.main {
+    background-color: var(--accent-color);
+    padding: 0 .5rem .5rem .5rem;
+    padding-top: $image-height / 2;
+    
+
+    .container {
+        display: grid;
+        gap: $gap;
+        background-color: var(--primary-color);
+        border-radius: $border-radius;
+        padding: ($image-height / 2 + $gap) 1rem 1rem 1rem;
+        position: relative;
+        z-index: 10;
+        box-shadow: .5rem .5rem 1rem rgba(0, 0, 0, .25);
+
+
+        .imageContainer {
+            position: absolute;
+            left: 50%;
+            top: 0;
+            height: $image-height;
+            width: 100%;
+            display: grid;
+            place-items: center;
+            transform: translateY(-50%) translateX(-50%);
+        }
+    }
+
+}

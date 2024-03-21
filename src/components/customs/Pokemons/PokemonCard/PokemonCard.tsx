@@ -4,35 +4,39 @@ import Link from "next/link";
 import { accentsTidy, slugify } from "@/utils/reformat";
 import StyledImage from "@/components/ui/StyledImage/StyledImage";
 
-export type PokemonCard = {
+
+interface PokemonCardProps {
     name: string;
     image: string;
     types: string[];
     backgroundColor?: string;
-    baseUrl?: string;
-}
-
-interface PokemonCardProps extends PokemonCard {
-    skeleton?: false
     baseUrl: string;
+    skeleton?: false
 }
 
-interface PokemonSkeletonWrapperProps  {
+interface PokemonSkeletonCardProps  {
     skeleton: true
-    baseUrl?: string;
 }
 
-type Props =  React.HTMLAttributes<HTMLElement> & (PokemonCardProps | PokemonSkeletonWrapperProps) 
+type Props =  React.HTMLAttributes<HTMLElement> & (PokemonCardProps | PokemonSkeletonCardProps) & {
+    isList?: boolean;
+}
 
-const PokemonCard = ({className, skeleton, ...props }: Props) => {
-    const { name, image, backgroundColor, baseUrl, ...newProps } = props as PokemonCardProps;
+const PokemonCard = ({className, skeleton, isList, ...props }: Props) => {
+    const { name, image, backgroundColor, baseUrl, types, ...newProps } = props as PokemonCardProps;
 
     if (skeleton) {
         return (
             <Card className={`${styles.pokemonCard} skeleton ${styles.skeleton}`} {...newProps}> 
-                <div className={`${styles.linkContainer} skeleton`} >
+                <div className={`${styles.linkContainer} ${isList ? styles.list :  ""} skeleton`} >
                     <div className={`${styles.img} skeleton`}></div>
                     <div className={`${styles.h3} skeleton`}></div>
+                    {isList && 
+                        <div className={`${styles.types}`}>
+                            <span className={`${styles.type} skeleton`}></span>
+                            <span className={`${styles.type} skeleton`}></span>
+                        </div>
+                    }
                 </div>
             </Card>
         );
@@ -42,8 +46,9 @@ const PokemonCard = ({className, skeleton, ...props }: Props) => {
         <Card 
             className={`${styles.pokemonCard} ${className ? className : ""}`} 
             style={{"--_background-color": backgroundColor} as React.CSSProperties}
+            scale={isList ? 1.015 : 1.05}
         > 
-            <Link href={`${baseUrl}/${slugify(name)}`} className={styles.linkContainer}>
+            <Link href={`${baseUrl}/${slugify(name)}`} className={`${styles.linkContainer} ${isList ? styles.list :  ""}`}>
                 <StyledImage 
                     className={styles.img}
                     src={image} 
@@ -51,6 +56,14 @@ const PokemonCard = ({className, skeleton, ...props }: Props) => {
                     fill
                 />
                 <h3>{name}</h3>
+
+                {isList && 
+                    <div className={styles.types}>
+                        {types.map((type, index) => 
+                            <span key={index} className="h5">{type}</span>
+                        )}
+                    </div>
+                }
             </Link>
         </Card>
     );

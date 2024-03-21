@@ -16,10 +16,10 @@
 } 
 
 .dark:root {
-  --secondary-color: #ffffff;
-  --secondary-color-variant: #eee;
   --primary-color: #151818;
   --primary-color-variant: #101010;
+  --secondary-color: #ffffff;
+  --secondary-color-variant: #eee;
   
   --basic-shadow: 0 0 10px rgba(255, 255, 255, 0.05);
   --header-shadow: 0 0 10px 10px rgba(255, 255, 255, 0.10);
@@ -109,6 +109,9 @@ h3, .h3 {
 h4, .h4 {
   font-size: .75rem;
 }
+h5, .h5 {
+  font-size: .65rem;
+}
 
 @media screen and (min-width: 700px) {
   h1, .h1 {
@@ -122,6 +125,9 @@ h4, .h4 {
   }
   h4, .h4 {
     font-size: 1rem;
+  }
+  h5, .h5 {
+    font-size: .75rem;
   }
 }
 

@@ -1,9 +1,9 @@
 .pokemonCard {
-    aspect-ratio: 1;
     --_after-color: var(--_background-color);
 
     &.skeleton {
         transform: scale(1);
+        background-color: $secondary-color-variant;
         
         &::after, &::before {
             opacity: 1;
@@ -15,13 +15,15 @@
             width: 65%;
             margin: 0 auto;
         }
+
+        .type {
+            height: 1.25rem;
+            width: 4rem;
+        }
+        
     }
 
     .linkContainer {
-        aspect-ratio: inherit;
-        padding: min(5%, 1rem);
-        display: grid;
-        place-items: center;
         gap: .25rem;
         border-radius: inherit;
         color: #fff;
@@ -33,10 +35,17 @@
         }
 
         .img {
-            width: 80%;
-            aspect-ratio: 1;
             transform-origin: bottom center;
             transition: transform 1s cubic-bezier(.03,.98,.52,.99);
+            aspect-ratio: 1;
+        }
+
+        .types {
+            margin-left: auto;
+            display: flex;
+            gap: .25rem;
+            padding: .25rem;
+            font-weight: 700;
         }
     
         &:is(:hover, :focus-within) {
@@ -44,5 +53,29 @@
                 transform: scale(1.2) translateY(-5%);
             }
         }
+
+        &:not(.list) {
+            display: grid;
+            place-items: center;
+            aspect-ratio: 1;
+            padding: min(5%, 1rem);
+
+            .img {
+                width: 80%;
+                aspect-ratio: 1;
+            }
+        }
+
+        &.list {
+            display: flex;
+            align-items: center;
+            padding: .5rem min(5%, 1.25rem);
+
+            .img {
+                height: 3rem;
+            }
+        }
+
+
     }
 }

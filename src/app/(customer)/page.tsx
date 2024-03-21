@@ -6,8 +6,7 @@ export default function Page() {
   return (
     <main className={styles.main}>
       <Pokemons
-        title="Liste des Pokémons" 
-        isPageTitle={true}
+        baseUrl={"pokemons/"}
       />
     </main>
   );

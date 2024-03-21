@@ -37,6 +37,7 @@ const Form = ({ fields, onSubmit }: GenerateFormProps) => {
     const customResolver = async (values: FormData, context: any, options: any) => {
         const parsedData: FormData = {};
         for (const key in values) {
+            if (!fields[key]?.type) continue;
             parsedData[key] = fields[key].type === "number"
                 ? parseFloat(values[key] as string)
                 : fields[key].type === "checkbox"
