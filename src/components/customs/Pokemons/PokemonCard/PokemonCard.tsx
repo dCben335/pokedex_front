@@ -1,7 +1,7 @@
 import Card from "@/components/ui/Card/Card";
 import styles from "./PokemonCard.module.scss";
 import Link from "next/link";
-import { accentsTidy, slugify } from "@/utils/reformat";
+import { slugify } from "@/utils/reformat";
 import StyledImage from "@/components/ui/StyledImage/StyledImage";
 
 

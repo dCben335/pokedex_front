@@ -26,6 +26,7 @@ export const pokemonSchema = z.object({
     id: z.string(),
     name: z.string(),
     imgUrl: z.string(),
+    description: z.string(),
     types: z.array(z.string()).min(0).max(2),
     regions: z.array(pokemonRegion).min(0),
 });

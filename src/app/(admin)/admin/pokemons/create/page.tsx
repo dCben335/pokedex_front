@@ -14,18 +14,8 @@ const fields: GenerateFormProps['fields'] = {
     },
     "regions-0-name": {
         label: "Regions",
-        type: "select",
+        type: "text",
         schema: z.string().min(1),
-        options: [
-            { label: "Kanto", value: "kanto" },
-            { label: "Johto", value: "johto" },
-            { label: "Hoenn", value: "hoenn" },
-            { label: "Sinnoh", value: "sinnoh" },
-            { label: "Unova", value: "unova" },
-            { label: "Kalos", value: "kalos" },
-            { label: "Alola", value: "alola" },
-            { label: "Galar", value: "galar" },
-        ],
         defaultValue: "kanto",
     },
     "regions-0-number": {
@@ -33,18 +23,6 @@ const fields: GenerateFormProps['fields'] = {
         type: "number",
         schema: z.number().min(1),
         defaultValue: 1,
-    },
-    "regions-0-description": {
-        label: "Description",
-        type: "textarea",
-        schema: z.string().min(1),
-        defaultValue: "mamaadou",
-    },
-    "regions-0-legendary": {
-        label: "Legendary",
-        type: "checkbox",
-        schema: z.boolean(),
-        defaultValue: true,
     },
 }
 
@@ -75,13 +53,7 @@ const Page = () => {
             },
             [`regions-${newCounter}-number`]: {
                 ...fields["regions-0-number"]
-            },
-            [`regions-${newCounter}-description`]: {
-                ...fields["regions-0-description"]
-            },
-            [`regions-${newCounter}-legendary`]: {
-                ...fields["regions-0-legendary"]
-            },
+            }
         });
     }
 

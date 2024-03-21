@@ -16,7 +16,7 @@ export const getPokemons = async (urlParams: string) => {
         }
 
         const data = await response.json();
-        return pokemonSearchSchema.parse(data);;
+        return pokemonSearchSchema.parse(data);
     }
     catch (error) {
         console.error(error);

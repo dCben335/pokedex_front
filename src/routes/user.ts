@@ -30,3 +30,5 @@ export const register = async (body: Register) => {
         console.error("Error registering user");
     }
 }
+
+

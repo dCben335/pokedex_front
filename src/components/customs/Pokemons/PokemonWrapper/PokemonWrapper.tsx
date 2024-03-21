@@ -25,38 +25,31 @@ const PokemonWrapper = ({ baseUrl, className, isList, ...props }: PokemonWrapper
         )
     }
 
-    if (isLoading) {
-        return (
-            <div className={`${className ? className : ""}`} {...props}>
-                <div className={`${styles.pokemonWrapper} ${isList ? styles.list : ""}`}>
-                    {Array(12).fill(0).map((_, index) => 
-                        <PokemonCard 
-                            key={index} 
-                            skeleton={true}
-                            isList={isList}
-                        />
-                    )}
-                </div>
-            </div>
-        )
-    }
 
     return (
         <div className={`${className ? className : ""}`} {...props}>
             <PokemonSize total={data?.totalElements ?? 0}/>
 
             <div  className={`${styles.pokemonWrapper} ${isList ? styles.list : ""}`}>
-                {(data?.content ?? []).map(({ name, imgUrl, types }, index) => 
-                    <PokemonCard
-                        key={index}
-                        baseUrl={baseUrl}
-                        name={name}
-                        image={imgUrl}
-                        types={types}
-                        backgroundColor={getTypeColor(types[0])}
-                        isList={isList}
-                    />
-                )}
+                {isLoading 
+                    ? Array(12).fill(0).map((_, index) =>
+                        <PokemonCard 
+                            key={index} 
+                            skeleton={true}
+                            isList={isList}
+                        />
+                    ) : (data?.content ?? []).map(({ name, imgUrl, types }, index) => 
+                        <PokemonCard
+                            key={index}
+                            baseUrl={baseUrl}
+                            name={name}
+                            image={imgUrl}
+                            types={types}
+                            backgroundColor={getTypeColor(types[0])}
+                            isList={isList}
+                        />
+                    )
+                }
             </div>
 
             <PokemonPagination 
