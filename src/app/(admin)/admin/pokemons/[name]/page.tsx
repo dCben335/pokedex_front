@@ -1,11 +1,11 @@
 "use client";
 
-import useGetPokemon from '@/hooks/Pokemons/useGetPokemon';
+import usePokemon from '@/hooks/Pokemons/usePokemon';
 import styles from './page.module.scss';
 import { toast } from 'sonner';
 import { useRouter } from 'next/navigation';
 import { firstLetterOfEachWordUppercase, firstLetterUppercase, unslugify } from '@/utils/reformat';
-import { usePokemonTypes } from '@/components/providers/PokemonTypesContext';
+import { usePokemonTypesContext } from '@/components/providers/PokemonTypesContext';
 import { useTheme } from '@/components/providers/ThemeContext';
 import { useEffect } from 'react';
 import StyledImage from '@/components/ui/StyledImage/StyledImage';
@@ -21,8 +21,8 @@ const Page = ({ params }: PagePops) => {
     const router = useRouter();
 
     const { changeColor, color } = useTheme();
-    const { findType } = usePokemonTypes();
-    const { data, isLoading, error } = useGetPokemon(
+    const { findType } = usePokemonTypesContext();
+    const { data, isLoading, error } = usePokemon(
         firstLetterOfEachWordUppercase(unslugify(params.name))
     );
     

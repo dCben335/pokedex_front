@@ -1,8 +1,8 @@
 "use client"
 
-import useGetPokemonTypes from '@/hooks/Pokemons/useGetPokemonTypes';
+import usePokemonTypes from '@/hooks/Pokemons/usePokemonTypes';
 import { createContext, useContext } from 'react';
-import { PokemonType, PokemonTypeRequest } from '@/schemas/pokemon';
+import { PokemonType, PokemonTypeRequest } from '@/libs/zod/pokemon';
 import { toast } from 'sonner';
 
 interface PokemonTypesContextType extends PokemonTypeRequest {
@@ -17,12 +17,12 @@ const PokemonTypesContext = createContext<PokemonTypesContextType>({
     findType: () => undefined,
 });
 
-export const usePokemonTypes = () => {
+export const usePokemonTypesContext = () => {
     return useContext(PokemonTypesContext);
 };
 
 export const PokemonTypesProvider = ({ children } : React.PropsWithChildren ) => {
-    const { data, isLoading, error } = useGetPokemonTypes();
+    const { data, isLoading, error } = usePokemonTypes();
 
     if (isLoading || error || !data) {
         if (error) toast.error(error.message);

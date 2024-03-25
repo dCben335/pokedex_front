@@ -1,6 +1,6 @@
 "use client"
 
-import { usePokemonTypes } from "@/components/providers/PokemonTypesContext"
+import { usePokemonTypesContext } from "@/components/providers/PokemonTypesContext"
 import Modal, { ModalProps } from "@/components/ui/Modal/Modal"
 import PokemonTypesButton from "./PokemonTypesButton"
 import styles from "./PokemonTypesModal.module.scss"
@@ -13,7 +13,7 @@ type PokemonTypesModalProps = ModalProps & {
 }
 
 const PokemonTypesModal = ({ isOpen, closeModal }: PokemonTypesModalProps) => {
-    const { types } = usePokemonTypes()
+    const { types } = usePokemonTypesContext()
 
     const router = useRouter()
     const pathname = usePathname()

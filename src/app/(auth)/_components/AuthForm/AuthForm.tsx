@@ -7,7 +7,7 @@ const fields: GenerateFormProps['fields'] = {
     login: {
         label: "Name",
         placeholder: "Enter your name",
-        schema: z.string().min(3).max(50),
+        schema: z.string().min(1),
         type: "text",
     },
     password: {

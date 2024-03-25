@@ -1,9 +1,6 @@
-import { pokemonSchema, pokemonSearchSchema, pokemonTypeRequestSchema } from "@/schemas/pokemon";
+import { pokemonSchema, pokemonSearchSchema, pokemonTypeRequestSchema } from "@/libs/zod/pokemon";
 import { NEXT_PUBLIC_BASE_API_URL } from "./user"
 
-if (!NEXT_PUBLIC_BASE_API_URL) {
-    throw new Error("NEXT_PUBLIC_BASE_API_URL is not set");
-}
 
 //GET /pkmn/search
 export const getPokemons = async (urlParams: string) => {

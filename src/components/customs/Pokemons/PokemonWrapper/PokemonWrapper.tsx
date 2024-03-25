@@ -1,13 +1,12 @@
 "use client"
 
-import { usePokemonTypes } from "@/components/providers/PokemonTypesContext";
+import { usePokemonTypesContext } from "@/components/providers/PokemonTypesContext";
 import { toast } from "sonner";
 import PokemonCard from "../PokemonCard/PokemonCard";
 import styles from "./PokemonWrapper.module.scss"
-import useGetPokemons from "@/hooks/Pokemons/useGetPokemons";
+import usePokemons from "@/hooks/Pokemons/usePokemons";
 import PokemonPagination from "./PokemonPagination/PokemonPagination";
 import PokemonSize from "./PokemonSize/PokemonSize";
-import pokemons from "@/contents/pokemons.json";
 
 type PokemonWrapperProps = React.HTMLAttributes<HTMLDivElement> & {
     baseUrl: string;
@@ -15,8 +14,8 @@ type PokemonWrapperProps = React.HTMLAttributes<HTMLDivElement> & {
 }
 
 const PokemonWrapper = ({ baseUrl, className, isList, ...props }: PokemonWrapperProps) => {
-    const {data, isLoading, error} = useGetPokemons();
-    const { getTypeColor } = usePokemonTypes();
+    const {data, isLoading, error} = usePokemons();
+    const { getTypeColor } = usePokemonTypesContext();
 
     if (error || (!isLoading && !data)) {
         toast.error("Error fetching pokemons");

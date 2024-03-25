@@ -2,19 +2,25 @@
 
 import { GenerateFormProps } from "@/components/customs/Form/Form";
 import AuthForm from "./AuthForm/AuthForm";
+import { register } from "@/libs/routes/user";
+import { UserRequest } from "@/libs/zod/user";
+import { toast } from "sonner";
+import { useUser } from "@/components/providers/UserContext";
 
 const RegisterForm = ({}) => {
+    const userContext = useUser();
+
     const onSubmit: GenerateFormProps['onSubmit'] = async (data) => {
-        try {
-            await new Promise((resolve, reject) => {
-                setTimeout(() => {
-                    resolve(data);
-                }, 2000);
-            });
-            console.log("Form data submitted:", data);
-        } catch (error) {
-            console.error("Form submission failed:", error);
+        const registerData = data as UserRequest;
+        const response = await register(registerData);
+        
+        if ("error" in response) {
+            return toast.error(response.error);
         }
+
+        toast.success("User registered successfully");
+        userContext.setUser(response.user, response.token);
+
     };
 
     return (

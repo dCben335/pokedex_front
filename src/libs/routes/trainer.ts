@@ -1,10 +1,5 @@
-import { TrainerOptions } from "@/schemas/trainer";
+import { TrainerOptions } from "@/libs/zod/trainer";
 import { NEXT_PUBLIC_BASE_API_URL } from "./user"
-
-if (!NEXT_PUBLIC_BASE_API_URL) {
-    throw new Error("NEXT_PUBLIC_BASE_API_URL is not set");
-}
-
 
 
 

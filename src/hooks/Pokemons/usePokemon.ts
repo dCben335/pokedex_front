@@ -1,7 +1,7 @@
-import { getPokemon } from "@/routes/pokemon";
+import { getPokemon } from "@/libs/routes/pokemon";
 import { useQuery } from "@tanstack/react-query";
 
-const useGetPokemon = (name: string) => {
+const usePokemon = (name: string) => {
     const pokemons = useQuery({
         queryKey: ["pokemon", name],
         queryFn: () => getPokemon(name)
@@ -10,4 +10,4 @@ const useGetPokemon = (name: string) => {
     return pokemons;
 }
 
-export default useGetPokemon;
+export default usePokemon;

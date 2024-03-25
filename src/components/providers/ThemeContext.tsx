@@ -34,7 +34,6 @@ export const ThemeProvider = ({ children }: PropsWithChildren<{}>) => {
     const pathname = usePathname();
 
     useEffect(() => {
-        console.log(localStorage);
         setTheme(localStorage.getItem('theme') as Theme ?? defaultTheme);
     }, []);
 

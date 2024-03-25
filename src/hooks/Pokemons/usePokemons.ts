@@ -1,10 +1,10 @@
 import { useQuery } from "@tanstack/react-query"
-import { getPokemons } from "../../routes/pokemon"
+import { getPokemons } from "../../libs/routes/pokemon"
 import { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { getUrlParams, urlParams } from "@/utils/queryParams";
 
-const useGetPokemons = () => {
+const usePokemons = () => {
     const searchParams = useSearchParams()
     const [urlParams, setUrlParams] = useState<urlParams>({})
 
@@ -20,4 +20,4 @@ const useGetPokemons = () => {
     return pokemons;
 }
 
-export default useGetPokemons;
+export default usePokemons;
