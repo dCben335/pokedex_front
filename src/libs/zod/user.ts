@@ -1,21 +1,21 @@
 import { z } from "zod";
 
 
-export type User = z.infer<typeof userSchema>;
-export const userSchema = z.object({
+export type User = z.infer<typeof UserSchema>;
+export const UserSchema = z.object({
     login: z.string().min(1).max(255),
     isAdmin: z.boolean(),
 });
 
 export type UserRequest = z.infer<typeof userRequestSchema>;
 export const userRequestSchema = z.object({
-    login: userSchema.shape.login,
+    login: UserSchema.shape.login,
     password: z.string(),
 });
 
 export type UserResponse = z.infer<typeof userResponseSchema>;
 export const userResponseSchema = z.object({
-    user: userSchema,
+    user: UserSchema,
     token: z.string(),
 });
 

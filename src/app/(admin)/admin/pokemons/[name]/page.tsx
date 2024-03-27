@@ -34,7 +34,7 @@ const Page = ({ params }: PagePops) => {
         if (firstType && color !== firstType?.color) {
             changeColor(firstType.color);
         }
-    }, [data]);
+    }, [data, color, changeColor, findType]);
     
 
     if (isLoading) {

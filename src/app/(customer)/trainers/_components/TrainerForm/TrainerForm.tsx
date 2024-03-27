@@ -1,11 +1,12 @@
 "use client";
 
 import Form, { GenerateFormProps } from "@/components/customs/Form/Form";
-import { useUser } from "@/components/providers/UserContext";
-import { createTrainer } from "@/libs/routes/trainer";
+import { handleResponse } from "@/libs/routes";
+import { createTrainer, updateTrainer } from "@/libs/routes/trainer";
 import { TrainerRequest, TrainerRequestSchema } from "@/libs/zod/trainer";
+import { fillObjectWithKey } from "@/utils/reformat";
+import { useRouter } from "next/navigation";
 import { HTMLAttributes } from "react";
-import { toast } from "sonner";
 
 const fields: GenerateFormProps['fields'] = {
     trainerName : {
@@ -24,39 +25,41 @@ const fields: GenerateFormProps['fields'] = {
 
 
 interface TrainerFormProps extends HTMLAttributes<HTMLFormElement> {
+    username: string;
+    editMode?: boolean;
     token: string;
     defaultValues?: TrainerRequest;
 }
 
-const TrainerForm = ({ token, defaultValues, ...props}: TrainerFormProps) => {
+type RequestFunction = (data: TrainerRequest, token: string) => Promise<any>;
 
-    const onSubmit: GenerateFormProps['onSubmit'] = async (data) => {
+const TrainerForm = ({ username, editMode, token, defaultValues, ...props }: TrainerFormProps) => {
+
+    const router = useRouter();
+
+    const handleSubmit = (requestFunction: RequestFunction, successMessage: string) => async (data: any) => {
         const registerData = data as TrainerRequest;
-        const response = await createTrainer(registerData, token);
-        
-        if ("error" in response) {
-            return toast.error(response.error);
+        const response = await requestFunction(registerData, token);
+        const isSuccessful = handleResponse(response, successMessage);
+    
+        if (isSuccessful) {
+            router.push(`/trainers/${username}`);
         }
-
-        toast.success("Trainer created");
     };
 
-    const finalField = defaultValues ? 
-        Object.keys(defaultValues).map((id, index) => {
-            const key = id as keyof TrainerRequest;
-            if (fields[key]) {
-                const fieldDefaultValues = defaultValues[`${key}`];
-                (fields as any)[key].defaultValue = (defaultValues[key]); 
-            }
-        }) : fields as { [key: string]: any };
+    const onSubmitPOST: GenerateFormProps['onSubmit'] = handleSubmit(createTrainer, "Trainer created");
+    const onSubmitPUT: GenerateFormProps['onSubmit'] = handleSubmit(updateTrainer, "Trainer updated");
 
+    const finalFields = defaultValues 
+        ? fillObjectWithKey(fields, defaultValues, "defaultValue") as GenerateFormProps['fields']
+        : fields;
 
     return (
         <div>
             <Form 
                 {...props}
-                fields={fields} 
-                onSubmit={onSubmit} 
+                fields={finalFields} 
+                onSubmit={editMode ? onSubmitPUT : onSubmitPOST} 
             />
         </div>
     );

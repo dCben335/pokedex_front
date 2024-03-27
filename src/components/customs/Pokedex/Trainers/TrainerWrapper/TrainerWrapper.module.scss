@@ -1,0 +1,16 @@
+.trainerWrapper {
+    display: grid;
+    gap: 1rem;
+    padding: 1rem;
+
+    &:not(.list) {
+        grid-template-columns: repeat(2, 1fr);
+    
+        @media screen and (min-width: 700px) {
+            & {
+                grid-template-columns: repeat(auto-fill, minmax(min(450px, 100%), 1fr));
+                gap: 1.5rem;
+            }
+        }
+    }
+}

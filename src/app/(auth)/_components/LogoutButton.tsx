@@ -12,7 +12,7 @@ const LogoutButton = ({...props} : LogoutButtonProps) => {
     const { logout } = useUser();
 
     return (
-        <Button onClick={logout} renderAs='button' {...props}>
+        <Button onClick={logout} {...props}>
             Logout
         </Button>
     );

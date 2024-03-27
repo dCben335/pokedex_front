@@ -1,4 +1,4 @@
-import Pokemons from "@/components/customs/Pokemons/Pokemons";
+import Pokemons from "@/components/customs/Pokedex/Pokemons/Pokemons";
 import styles from "./page.module.scss";
 
 export default function Page() {

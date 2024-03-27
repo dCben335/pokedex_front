@@ -1,29 +1,32 @@
 import Card from "@/components/ui/Card/Card";
-import styles from "./PokemonCard.module.scss";
+import styles from "./PokedexCard.module.scss";
 import Link from "next/link";
 import { slugify } from "@/utils/reformat";
 import StyledImage from "@/components/ui/StyledImage/StyledImage";
 
 
-interface PokemonCardProps {
+interface PokedexCardProps {
     name: string;
     image: string;
-    types: string[];
+    types?: string[];
     backgroundColor?: string;
     baseUrl: string;
+    suffixUrl?: string;
     skeleton?: false
 }
 
-interface PokemonSkeletonCardProps  {
+interface PokedexSkeletonCardProps  {
     skeleton: true
 }
 
-type Props =  React.HTMLAttributes<HTMLElement> & (PokemonCardProps | PokemonSkeletonCardProps) & {
+type Props =  React.HTMLAttributes<HTMLElement> & (PokedexCardProps | PokedexSkeletonCardProps) & {
     isList?: boolean;
+    scale?: number;
+
 }
 
-const PokemonCard = ({className, skeleton, isList, ...props }: Props) => {
-    const { name, image, backgroundColor, baseUrl, types, ...newProps } = props as PokemonCardProps;
+const PokedexCard = ({className, skeleton, isList, scale = 1.05, ...props }: Props) => {
+    const { name, image, backgroundColor, baseUrl, types, suffixUrl, ...newProps } = props as PokedexCardProps;
 
     if (skeleton) {
         return (
@@ -44,11 +47,11 @@ const PokemonCard = ({className, skeleton, isList, ...props }: Props) => {
 
     return (
         <Card 
+            scale={scale}
             className={`${styles.pokemonCard} ${className ? className : ""}`} 
             style={{"--_background-color": backgroundColor} as React.CSSProperties}
-            scale={isList ? 1.015 : 1.05}
         > 
-            <Link href={`${baseUrl}/${slugify(name)}`} className={`${styles.linkContainer} ${isList ? styles.list :  ""}`}>
+            <Link href={`${baseUrl}/${slugify(suffixUrl ?? name)}`} className={`${styles.linkContainer} ${isList ? styles.list :  ""}`}>
                 <StyledImage 
                     className={styles.img}
                     src={image} 
@@ -57,7 +60,7 @@ const PokemonCard = ({className, skeleton, isList, ...props }: Props) => {
                 />
                 <h3>{name}</h3>
 
-                {isList && 
+                {types && isList && types.length > 0 &&
                     <div className={styles.types}>
                         {types.map((type, index) => 
                             <span key={index} className="h5">{type}</span>
@@ -69,4 +72,4 @@ const PokemonCard = ({className, skeleton, isList, ...props }: Props) => {
     );
 }
 
-export default PokemonCard;
+export default PokedexCard;

@@ -56,7 +56,7 @@ export const UserProvider = ({ children }: PropsWithChildren) => {
             
             setUserData(response);
         })();
-    }, [token]);
+    }, [token, user]);
 
 
     return (

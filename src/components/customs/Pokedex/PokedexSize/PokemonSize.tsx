@@ -3,7 +3,7 @@
 import Select from "@/components/ui/Select/Select";
 import { createQueryString, removeQueryString } from "@/utils/queryParams";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import styles from "./PokemonSize.module.scss"
+import styles from "./PokedexSize.module.scss"
 
 const options = [
     { value: '6', label: '6' },

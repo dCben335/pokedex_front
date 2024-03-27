@@ -1,7 +1,11 @@
+import Trainers from "@/components/customs/Pokedex/Trainers/Trainers";
+
 const Page = () => {
     return (
         <main>
-            <h1>Trainers</h1>
+            <Trainers 
+                baseUrl="/trainers"
+            />
         </main>
     );
 }

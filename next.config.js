@@ -10,7 +10,6 @@ const nextConfig = {
         prependData: `@import "/src/app/utils.scss";`
     },
     images: {
-        unoptimized: true,
         remotePatterns: [
             {
                 protocol: 'https',

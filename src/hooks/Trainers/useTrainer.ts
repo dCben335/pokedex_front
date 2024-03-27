@@ -1,3 +1,4 @@
+import { useUser } from "@/components/providers/UserContext";
 import { getTrainer } from "@/libs/routes/trainer";
 import { useQuery } from "@tanstack/react-query";
 

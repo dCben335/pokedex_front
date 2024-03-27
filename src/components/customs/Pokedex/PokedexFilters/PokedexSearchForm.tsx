@@ -3,11 +3,11 @@
 import GroupForm from "@/components/ui/GroupForm/GroupForm"
 import { createQueryString, removeQueryString } from "@/utils/queryParams"
 import { usePathname, useRouter, useSearchParams } from "next/navigation"
-import { ChangeEvent, HTMLAttributes, Suspense, use, useEffect, useState } from "react"
+import { ChangeEvent, HTMLAttributes, useEffect, useState } from "react"
 
-type PokemonSearchFormProps = HTMLAttributes<HTMLFormElement>
+type PokedexSearchFormProps = HTMLAttributes<HTMLFormElement>
 
-const PokemonSearchForm = ({className, ...props}: PokemonSearchFormProps) => {
+const PokedexSearchForm = ({className, ...props}: PokedexSearchFormProps) => {
     const [inputValue, setInputValue] = useState<string | undefined>(undefined);
 
     const router = useRouter()
@@ -49,4 +49,4 @@ const PokemonSearchForm = ({className, ...props}: PokemonSearchFormProps) => {
     )
 }
 
-export default PokemonSearchForm
+export default PokedexSearchForm

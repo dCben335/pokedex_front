@@ -76,3 +76,25 @@ export function createArrayOfObjects(data: DynamicObject) {
 
     return results;
 }
+
+export interface ObjectsInObject {
+    [key: string]: {
+        [key: string]: any;
+    };
+}
+
+interface ObjectsInObjectDefaults {
+    [key: keyof ObjectsInObject]: any;
+}
+
+
+export const fillObjectWithKey = (fields: ObjectsInObject, defaultValues: ObjectsInObjectDefaults, key: string) => {
+    for (const id in defaultValues) {
+        if (defaultValues.hasOwnProperty(id) && fields.hasOwnProperty(id)) {
+            fields[id][key] = defaultValues[id];
+
+            console.log(fields[id]);
+        }
+    }
+    return fields;
+}

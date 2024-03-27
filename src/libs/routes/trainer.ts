@@ -1,3 +1,4 @@
+import { TrainerSearchResponseSchema } from './../zod/trainer';
 import { TrainerRequest } from "@/libs/zod/trainer";
 import { NEXT_PUBLIC_BASE_API_URL } from "./user"
 
@@ -9,26 +10,33 @@ export const getTrainers = async (urlParams: string) => {
         const url = `${NEXT_PUBLIC_BASE_API_URL}/trainer/search?${urlParams}`
         const response = await fetch(url);
 
+
         if (!response.ok) {
             throw new Error("Error fetching trainers");
         }
 
-        return response.json();
+        const data = await response.json();
+
+        console.log(data)
+
+        return TrainerSearchResponseSchema.parse(data);
     }
-    catch (error) {
-        throw new Error("Error fetching trainers");
+    catch (error: any) {
+        throw new Error(error.message);
     }
 }
 
 
-//GET /trainer/:username
+//GET /trainer?username
 export const getTrainer = async (username: string) => {
     try {
-        const response = await fetch(`${NEXT_PUBLIC_BASE_API_URL}/trainer/${username}`);
+        const response = await fetch(`${NEXT_PUBLIC_BASE_API_URL}/trainer?username=${username}`);
 
+        console.log(response);
         if (!response.ok) {
             throw new Error("Error fetching trainer");
         }
+
 
         return response.json();
     }
@@ -93,7 +101,8 @@ export const createTrainer = async (options: TrainerRequest, token: string) => {
 //PUT /trainer
 export const updateTrainer = async (options: TrainerRequest, token: string) => {
     try {
-        const response = await fetch(`${NEXT_PUBLIC_BASE_API_URL}/trainer?${options}`, {
+        const { trainerName, imgUrl } = options;
+        const response = await fetch(`${NEXT_PUBLIC_BASE_API_URL}/trainer?trainerName=${trainerName}&imgUrl=${imgUrl}`, {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json",
@@ -102,8 +111,9 @@ export const updateTrainer = async (options: TrainerRequest, token: string) => {
             body: JSON.stringify(options),
         });
 
+        console.log(response, token)
         if (!response.ok) {
-            throw new Error("Error updating trainer");
+            throw new Error("Error creating trainer");
         }
 
         return response.json();

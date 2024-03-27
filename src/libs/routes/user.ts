@@ -1,4 +1,4 @@
-import { UserRequest, userResponseSchema, userSchema } from "../zod/user";
+import { UserRequest, userResponseSchema, UserSchema } from "../zod/user";
 
 export const NEXT_PUBLIC_BASE_API_URL = "http://localhost:8090/api";
 
@@ -67,7 +67,7 @@ export const getUserInfo = async (token: string) => {
         }
 
         const data = await response.json();
-        return userSchema.parse(data);
+        return UserSchema.parse(data);
     
     } catch (error: any) {
         return { error: error.message };

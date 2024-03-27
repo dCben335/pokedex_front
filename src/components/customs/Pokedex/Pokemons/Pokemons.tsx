@@ -1,21 +1,20 @@
 import { PropsWithChildren, Suspense } from "react";
-import PokemonCategories from "./PokemonFilters/PokemonFilters";
 import PokemonWrapper from "./PokemonWrapper/PokemonWrapper";
 import styles from "./Pokemons.module.scss";
-import PokemonSize from "./PokemonWrapper/PokemonSize/PokemonSize";
+import PokedexFilters from "../PokedexFilters/PokedexFilters";
 
-type PokemonSectionProps = React.HTMLAttributes<HTMLElement> & PropsWithChildren<{
+type PokemonsProps = React.HTMLAttributes<HTMLElement> & PropsWithChildren<{
     baseUrl: string
     isList?: boolean
 }>
 
 
-const Pokemons = ({ children, className, baseUrl, isList, ...props}: PokemonSectionProps) => {
+const Pokemons = ({ children, className, baseUrl, isList, ...props}: PokemonsProps) => {
     
     return (
         <section className={`${styles.pokemons} ${className ? className : ""}`} {...props}>
             <Suspense fallback={<></>}>
-                <PokemonCategories />
+                <PokedexFilters isPokemons={true} />
                 {children}
                 <PokemonWrapper 
                     className={"cont"} 

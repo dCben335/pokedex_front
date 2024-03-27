@@ -1,15 +1,19 @@
 import Button from '@/components/ui/Button/Button';
-import styles from './PokemonPagination.module.scss';
-import { createQueryString, getUrlTypes } from '@/utils/queryParams';
+import styles from './PokedexPagination.module.scss';
+import { createQueryString } from '@/utils/queryParams';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 
-interface PokemonPaginationProps {
+interface PokedexPaginationProps {
     currentPage: number;
     total: number;
 }
 
-const PokemonPagination = ({ currentPage, total }: PokemonPaginationProps) => {
+const PokedexPagination = ({ currentPage, total }: PokedexPaginationProps) => {
     const pageNumbers = Array(total).fill(0).map((_, i) => i);
+ 
+    const router = useRouter()
+    const pathname = usePathname()
+    const searchParams = useSearchParams()
     
     if (!pageNumbers.at(1)) return;
 
@@ -28,9 +32,6 @@ const PokemonPagination = ({ currentPage, total }: PokemonPaginationProps) => {
         return false;
     }
 
-    const router = useRouter()
-    const pathname = usePathname()
-    const searchParams = useSearchParams()
 
     const handleClick = (pageNumber: number) => {    
         return router.push(`${pathname}?${createQueryString(searchParams, 'page', pageNumber.toString())}`)
@@ -50,10 +51,11 @@ const PokemonPagination = ({ currentPage, total }: PokemonPaginationProps) => {
                                 {number + 1}
                             </Button>
                         </li>
-                ))}
+                    )
+                )}
             </ul>
         </nav> 
     );
 }
 
-export default PokemonPagination;
+export default PokedexPagination;
