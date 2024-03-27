@@ -2,10 +2,10 @@
 
 import usePokemonTypes from '@/hooks/Pokemons/usePokemonTypes';
 import { createContext, useContext } from 'react';
-import { PokemonType, PokemonTypeRequest } from '@/libs/zod/pokemon';
+import { PokemonType, PokemonTypeResponse } from '@/libs/zod/pokemon';
 import { toast } from 'sonner';
 
-interface PokemonTypesContextType extends PokemonTypeRequest {
+interface PokemonTypesContextType extends PokemonTypeResponse {
     getTypeColor: (type: string) => string; 
     findType: (typeName: string) => PokemonType | undefined;
 }

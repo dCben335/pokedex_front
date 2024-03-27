@@ -25,7 +25,7 @@ export default function RootLayout({
           <UserProvider>
             <ThemeProvider>
               <PokemonTypesProvider>
-                <Toaster richColors closeButton duration={3000} theme='dark' visibleToasts={1}/>
+                <Toaster richColors closeButton duration={3000} theme='dark' visibleToasts={1} />
                 <Header />
                 {children}
               </PokemonTypesProvider>

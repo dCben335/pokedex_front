@@ -1,12 +1,12 @@
 import { useQuery } from "@tanstack/react-query"
 import { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
-import { getUrlParams, urlParams } from "@/utils/queryParams";
+import { getUrlParams, UrlParams } from "@/utils/queryParams";
 import { getTrainers } from "@/libs/routes/trainer";
 
 const useTrainers = () => {
     const searchParams = useSearchParams()
-    const [urlParams, setUrlParams] = useState<urlParams>({})
+    const [urlParams, setUrlParams] = useState<UrlParams>({})
 
     const trainers = useQuery({
         queryKey: ["trainers", urlParams],
@@ -17,7 +17,7 @@ const useTrainers = () => {
         setUrlParams(Object.fromEntries(searchParams.entries()))
     }, [searchParams]);
 
-    
+
     return trainers;
 }
 

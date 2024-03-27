@@ -3,18 +3,19 @@ import { z } from "zod";
 import Form, { GenerateFormProps } from "../../../../components/customs/Form/Form";
 import styles from "./AuthForm.module.scss";
 import { PropsWithChildren } from "react";
+import { userRequestSchema } from "@/libs/zod/user";
 
 const fields: GenerateFormProps['fields'] = {
     login: {
         label: "Name",
         placeholder: "Enter your name",
-        schema: z.string().min(1),
+        schema: userRequestSchema.shape.login,
         type: "text",
     },
     password: {
         label: "Password",
         placeholder: "Enter your password",
-        schema: z.string().min(1),
+        schema: userRequestSchema.shape.password,
         type: "password",
     },
 }

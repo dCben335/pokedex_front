@@ -7,34 +7,34 @@ export const pokemonTypeSchema = z.object({
     color: z.string(),
 });
 
-export type PokemonTypeRequest = z.infer<typeof pokemonTypeRequestSchema>;
-export const pokemonTypeRequestSchema = z.object({
+export type PokemonTypeResponse = z.infer<typeof PokemonTypeResponseSchema>;
+export const PokemonTypeResponseSchema = z.object({
     types: z.array(pokemonTypeSchema),
     count: z.number(),
 });
 
 
-export type PokemonRegion = z.infer<typeof pokemonRegion>;
-export const pokemonRegion = z.object({
+export type PokemonRegion = z.infer<typeof PokemonRegionSchema>;
+export const PokemonRegionSchema = z.object({
     regionName: z.string(),
     regionPokedexNumber: z.string(),
 }); 
 
 
-export type Pokemon = z.infer<typeof pokemonSchema>;
-export const pokemonSchema = z.object({
+export type Pokemon = z.infer<typeof PokemonSchema>;
+export const PokemonSchema = z.object({
     id: z.string(),
-    name: z.string(),
-    imgUrl: z.string(),
+    name: z.string().min(1).max(255),
+    imgUrl: z.string().min(1),
     description: z.string(),
-    types: z.array(z.string()).min(0).max(2),
-    regions: z.array(pokemonRegion).min(0),
+    types: z.array(pokemonTypeSchema.shape.name).min(0).max(2),
+    regions: z.array(PokemonRegionSchema).min(0),
 });
 
 
-export type PokemonSearch = z.infer<typeof pokemonSearchSchema>;
-export const pokemonSearchSchema = z.object({
-    content: z.array(pokemonSchema),
+export type PokemonSearchResponse = z.infer<typeof PokemonSearchResponseSchema>;
+export const PokemonSearchResponseSchema = z.object({
+    content: z.array(PokemonSchema),
     empty: z.boolean(),
     first: z.boolean(),
     last: z.boolean(),

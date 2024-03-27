@@ -1,4 +1,4 @@
-import { pokemonSchema, pokemonSearchSchema, pokemonTypeRequestSchema } from "@/libs/zod/pokemon";
+import { PokemonSchema, PokemonSearchResponseSchema, PokemonTypeResponseSchema } from "@/libs/zod/pokemon";
 import { NEXT_PUBLIC_BASE_API_URL } from "./user"
 
 
@@ -13,11 +13,11 @@ export const getPokemons = async (urlParams: string) => {
         }
 
         const data = await response.json();
-        return pokemonSearchSchema.parse(data);
+
+        return PokemonSearchResponseSchema.parse(data);
     }
-    catch (error) {
-        console.error(error);
-        throw new Error("Error fetching pokemons");
+    catch (error: any) {
+        throw new Error(error.message);
     }
 }
 
@@ -32,7 +32,7 @@ export const getPokemon = async (name: string) => {
         }
 
         const data = await response.json();
-        return pokemonSchema.parse(data);
+        return PokemonSchema.parse(data);
     }
     catch (error) {
         throw new Error("Error fetching pokemon");
@@ -51,7 +51,7 @@ export const getPokemonTypes = async () => {
         
         const data = await response.json();
         
-        return pokemonTypeRequestSchema.parse(data);;
+        return PokemonTypeResponseSchema.parse(data);;
     }
     catch (error) {
         throw new Error("Error fetching pokemon types");

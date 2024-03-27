@@ -52,39 +52,54 @@ export const deleteTrainer = async () => {
 
         return response.json();
     }
-    catch (error) {
-        throw new Error("Error deleting trainer");
+    catch (error: any) {
+        return { error: error.message };
     }
 }
     
 
 
 //POST /trainer
-export const createTrainer = async (options: TrainerRequest) => {
+export const createTrainer = async (options: TrainerRequest, token: string) => {
     try {
         const response = await fetch(`${NEXT_PUBLIC_BASE_API_URL}/trainer`, {
             method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${token}`,
+            },
             body: JSON.stringify(options),
         });
 
         if (!response.ok) {
+            if (response.status === 409) {
+                throw new Error("Trainer already exists");
+            } 
+            if (response.status === 401) {
+                throw new Error("You need to be logged in to create a trainer");
+            }
             throw new Error("Error creating trainer");
         }
 
         return response.json();
     }
-    catch (error) {
-        throw new Error("Error creating trainer");
+    catch (error: any) {
+        return { error: error.message };
     }
 }
 
 
 
 //PUT /trainer
-export const updateTrainer = async (options: TrainerRequest) => {
+export const updateTrainer = async (options: TrainerRequest, token: string) => {
     try {
         const response = await fetch(`${NEXT_PUBLIC_BASE_API_URL}/trainer?${options}`, {
             method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${token}`,
+            },
+            body: JSON.stringify(options),
         });
 
         if (!response.ok) {
@@ -93,8 +108,8 @@ export const updateTrainer = async (options: TrainerRequest) => {
 
         return response.json();
     }
-    catch (error) {
-        throw new Error("Error updating trainer");
+    catch (error: any) {
+        return { error: error.message };
     }
 }
 
@@ -116,8 +131,8 @@ export const createTrainerMark = async (options: string) => {
 
         return response.json();
     }
-    catch (error) {
-        throw new Error("Error updating trainer");
+    catch (error: any) {
+        return { error: error.message };
     }
 }
 

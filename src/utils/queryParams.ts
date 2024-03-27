@@ -1,12 +1,12 @@
 import { ReadonlyURLSearchParams } from "next/navigation";
 
-export type urlParams = {
+export type UrlParams = {
     [key: string]: string | number | boolean | undefined;
 }
 
 type SearchParams = ReadonlyURLSearchParams | string;
 
-export const getUrlParams = (urlParams: urlParams) => {
+export const getUrlParams = (urlParams: UrlParams) => {
     const params = new URLSearchParams();
 
     for (const [key, value] of Object.entries(urlParams)) {
