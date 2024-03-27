@@ -10,4 +10,13 @@
     .title {
         text-align: center;
     }
+
+    p {
+        text-align: center;
+        color: var(--primary-color, $primary-color);
+
+        a {
+            text-decoration: underline;
+        }
+    }
 }

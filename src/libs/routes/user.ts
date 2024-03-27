@@ -29,6 +29,29 @@ export const register = async (body: UserRequest) => {
     }
 }
 
+export const login = async (body: UserRequest) => {
+    try {
+        const response = await fetch(`${NEXT_PUBLIC_BASE_API_URL}/users/login`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(body),
+        });
+
+        if (!response.ok) {
+            console.log(response);
+            throw new Error("Error logging in");
+        }
+
+        const data = await response.json();
+        return userResponseSchema.parse(data);
+    }
+    catch (error: any) {
+        return { error: error.message };
+    }
+}
+
 
 export const getUserInfo = async (token: string) => {
     try {

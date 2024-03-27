@@ -4,16 +4,21 @@ import { useUser } from "@/components/providers/UserContext";
 import { useRouter } from "next/navigation";
 import { PropsWithChildren, useEffect } from "react";
 
-const layout = ({children} : PropsWithChildren) => {
-    const user = useUser();
+const AuthLayout = ({children} : PropsWithChildren) => {
+    const { user } = useUser();
     const router = useRouter();
 
     useEffect(() => {
-        router.push('/');
-    }, []);
+        if (user) {
+
+            console.log('User is logged in, redirecting to home page');
+            console.log(user);
+            router.push('/');
+        }
+    }, [user, router]);
 
     if (user) {
-        return <></>
+        return <></>    
     } 
 
     return (
@@ -23,4 +28,4 @@ const layout = ({children} : PropsWithChildren) => {
     );
 }
 
-export default layout;
+export default AuthLayout;

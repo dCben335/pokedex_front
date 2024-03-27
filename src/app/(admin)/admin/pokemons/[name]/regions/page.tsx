@@ -1,7 +1,7 @@
 "use client"
 
 import Form, { GenerateFormProps } from "@/components/customs/Form/Form";
-import { createArrayOfObjects, DynamicObject } from "@/utils/reformat";
+import { createArrayOfObjects } from "@/utils/reformat";
 import { useState } from "react";
 import { z } from "zod";
 

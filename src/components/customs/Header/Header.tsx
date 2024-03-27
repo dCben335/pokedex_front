@@ -13,12 +13,12 @@ import HeaderModal from './HeaderModal/HeaderModal';
 
 const Header = () => {
     const [isOpen, setIsOpen] = useState(false)
-
-    const { swichTheme } = useTheme()
-
     const handleClick = () => {
         setIsOpen(!isOpen)
     }
+
+    const { swichTheme } = useTheme()
+
     return (
         <>
             <header className={styles.header}>

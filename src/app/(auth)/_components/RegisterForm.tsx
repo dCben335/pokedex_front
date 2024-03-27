@@ -6,9 +6,10 @@ import { register } from "@/libs/routes/user";
 import { UserRequest } from "@/libs/zod/user";
 import { toast } from "sonner";
 import { useUser } from "@/components/providers/UserContext";
+import Link from "next/link";
 
 const RegisterForm = ({}) => {
-    const userContext = useUser();
+    const { setUser } = useUser();
 
     const onSubmit: GenerateFormProps['onSubmit'] = async (data) => {
         const registerData = data as UserRequest;
@@ -19,12 +20,14 @@ const RegisterForm = ({}) => {
         }
 
         toast.success("User registered successfully");
-        userContext.setUser(response.user, response.token);
+        setUser(response.user, response.token);
 
     };
 
     return (
-        <AuthForm onSubmit={onSubmit} title={"Register"} />
+        <AuthForm onSubmit={onSubmit} title={"Register"}>
+            <p>Already have an account ? <Link href="/login">Login</Link></p>
+        </AuthForm>
     )
 }
 

@@ -1,12 +1,13 @@
-import { TrainerOptions } from "@/libs/zod/trainer";
+import { TrainerRequest } from "@/libs/zod/trainer";
 import { NEXT_PUBLIC_BASE_API_URL } from "./user"
 
 
 
 //GET /trainer 
-export const getTrainer = async () => {
+export const getTrainers = async (urlParams: string) => {
     try {
-        const response = await fetch(`${NEXT_PUBLIC_BASE_API_URL}/trainer`);
+        const url = `${NEXT_PUBLIC_BASE_API_URL}/trainer/search?${urlParams}`
+        const response = await fetch(url);
 
         if (!response.ok) {
             throw new Error("Error fetching trainers");
@@ -16,6 +17,23 @@ export const getTrainer = async () => {
     }
     catch (error) {
         throw new Error("Error fetching trainers");
+    }
+}
+
+
+//GET /trainer/:username
+export const getTrainer = async (username: string) => {
+    try {
+        const response = await fetch(`${NEXT_PUBLIC_BASE_API_URL}/trainer/${username}`);
+
+        if (!response.ok) {
+            throw new Error("Error fetching trainer");
+        }
+
+        return response.json();
+    }
+    catch (error) {
+        throw new Error("Error fetching trainer");
     }
 }
 
@@ -42,7 +60,7 @@ export const deleteTrainer = async () => {
 
 
 //POST /trainer
-export const createTrainer = async (options: TrainerOptions) => {
+export const createTrainer = async (options: TrainerRequest) => {
     try {
         const response = await fetch(`${NEXT_PUBLIC_BASE_API_URL}/trainer`, {
             method: "POST",
@@ -63,7 +81,7 @@ export const createTrainer = async (options: TrainerOptions) => {
 
 
 //PUT /trainer
-export const updateTrainer = async (options: TrainerOptions) => {
+export const updateTrainer = async (options: TrainerRequest) => {
     try {
         const response = await fetch(`${NEXT_PUBLIC_BASE_API_URL}/trainer?${options}`, {
             method: "PUT",

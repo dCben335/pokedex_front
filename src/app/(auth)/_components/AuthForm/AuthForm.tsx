@@ -2,6 +2,7 @@
 import { z } from "zod";
 import Form, { GenerateFormProps } from "../../../../components/customs/Form/Form";
 import styles from "./AuthForm.module.scss";
+import { PropsWithChildren } from "react";
 
 const fields: GenerateFormProps['fields'] = {
     login: {
@@ -18,12 +19,12 @@ const fields: GenerateFormProps['fields'] = {
     },
 }
 
-interface AuthFormProps {
+type AuthFormProps = PropsWithChildren< {
     title: string;
     onSubmit: GenerateFormProps['onSubmit'];
-}
+}>;
 
-const AuthForm = ({title, onSubmit}: AuthFormProps) => {
+const AuthForm = ({children, title, onSubmit}: AuthFormProps) => {
 
     return (
         <div className={styles.authForm}>
@@ -32,6 +33,7 @@ const AuthForm = ({title, onSubmit}: AuthFormProps) => {
                 fields={fields} 
                 onSubmit={onSubmit} 
             />
+            {children}
         </div>
     );
 };

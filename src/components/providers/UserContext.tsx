@@ -7,13 +7,14 @@ type UserContextType = {
     user: User | null;
     token: string | null;
     setUser: (user: User, token: string) => void;
+    logout: () => void;
 };
 
-  // Create the context
 const UserContext = createContext<UserContextType>({
     user: null,
     token: null,
     setUser: () => {},
+    logout: () => {}
 });
 
 export const useUser = () => useContext(UserContext);
@@ -27,6 +28,17 @@ export const UserProvider = ({ children }: PropsWithChildren) => {
         setToken(token);
         localStorage.setItem('token', token);
     };
+
+    const logout = () => {
+        try {
+            setUserData(null);
+            setToken(null);
+            localStorage.removeItem('token');
+            return toast.success('Logged out successfully');
+        } catch (error) {
+            toast.error('An error occurred while logging out');
+        }
+    }
 
     useEffect(() => {
         setToken(localStorage.getItem('token') ?? null);
@@ -48,7 +60,7 @@ export const UserProvider = ({ children }: PropsWithChildren) => {
 
 
     return (
-        <UserContext.Provider value={{ user, token, setUser }}>
+        <UserContext.Provider value={{ user, token, setUser, logout }}>
             {children}
         </UserContext.Provider>
     );
