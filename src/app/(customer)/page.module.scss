@@ -1,0 +1,44 @@
+.container {
+    display: grid;
+    gap: 5vw;
+    padding: $website-padding;
+
+    section {
+        display: grid;
+        gap: 2rem;
+
+        h2 {
+            margin-bottom: 1rem;
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: 1fr 1fr;
+            gap: 1rem;
+    
+            a {
+                aspect-ratio: auto !important;
+                height: 100%;
+                div {
+                    height: 100%;
+                    max-height: 12.5rem;
+                }
+            }
+            & > :nth-child(2) {
+                grid-row: span 2;
+    
+                div {
+                    max-height: 25rem;
+    
+                }   
+            }
+        }
+    }
+
+
+    @media screen and (min-width: 1100px) {
+        grid-template-columns: 1fr 1fr;
+        
+    }
+}

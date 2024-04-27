@@ -6,12 +6,12 @@ import StyledImage from "@/components/ui/StyledImage/StyledImage";
 
 
 interface PokedexCardProps {
-    name: string;
+    name?: string;
     image: string;
+    url: string;
+
     types?: string[];
     backgroundColor?: string;
-    baseUrl: string;
-    suffixUrl?: string;
     skeleton?: false
 }
 
@@ -25,8 +25,8 @@ type Props =  React.HTMLAttributes<HTMLElement> & (PokedexCardProps | PokedexSke
 
 }
 
-const PokedexCard = ({className, skeleton, isList, scale = 1.05, ...props }: Props) => {
-    const { name, image, backgroundColor, baseUrl, types, suffixUrl, ...newProps } = props as PokedexCardProps;
+const PokedexCard = ({ className, skeleton, isList, scale = 1.025, ...props }: Props) => {
+    const { name, image, backgroundColor, types, url, ...newProps } = props as PokedexCardProps;
 
     if (skeleton) {
         return (
@@ -51,15 +51,14 @@ const PokedexCard = ({className, skeleton, isList, scale = 1.05, ...props }: Pro
             className={`${styles.pokemonCard} ${className ? className : ""}`} 
             style={{"--_background-color": backgroundColor} as React.CSSProperties}
         > 
-            <Link href={`${baseUrl}/${slugify(suffixUrl ?? name)}`} className={`${styles.linkContainer} ${isList ? styles.list :  ""}`}>
+            <Link href={url} className={`${styles.linkContainer} ${isList ? styles.list :  ""}`}>
                 <StyledImage 
                     className={styles.img}
                     src={image} 
-                    alt={name} 
+                    alt={name ?? "image"} 
                     fill
                 />
-                <h3>{name}</h3>
-
+                {name && <h3>{name}</h3>}
                 {types && isList && types.length > 0 &&
                     <div className={styles.types}>
                         {types.map((type, index) => 

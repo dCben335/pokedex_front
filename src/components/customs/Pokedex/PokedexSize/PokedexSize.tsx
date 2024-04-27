@@ -13,11 +13,11 @@ const options = [
     { value: '48', label: '48' },
 ]
 
-type PokemonSizeProps = React.HTMLAttributes<HTMLDivElement> & {
+type PokedexSizeProps = React.HTMLAttributes<HTMLDivElement> & {
     total: number;
 }
 
-const PokemonSize = ({ total, ...props}: PokemonSizeProps) => {
+const PokedexSize = ({ total, ...props}: PokedexSizeProps) => {
     const router = useRouter()
     const pathname = usePathname()
     const searchParams = useSearchParams()
@@ -54,4 +54,4 @@ const PokemonSize = ({ total, ...props}: PokemonSizeProps) => {
     )
 }
 
-export default PokemonSize;
+export default PokedexSize;

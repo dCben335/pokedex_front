@@ -1,9 +1,9 @@
 "use client"
 
+import { z } from "zod";
 import Form, { GenerateFormProps } from "@/components/customs/Form/Form";
 import { createArrayOfObjects, DynamicObject } from "@/utils/reformat";
 import { useState } from "react";
-import { z } from "zod";
 
 const fields: GenerateFormProps['fields'] = {
     test: {

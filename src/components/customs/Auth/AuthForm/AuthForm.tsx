@@ -1,9 +1,9 @@
 "use client"
 import { z } from "zod";
-import Form, { GenerateFormProps } from "../../../../components/customs/Form/Form";
+import Form, { GenerateFormProps } from "../../Form/Form";
 import styles from "./AuthForm.module.scss";
 import { PropsWithChildren } from "react";
-import { userRequestSchema } from "@/libs/zod/user";
+import { userRequestSchema } from "@/libs/schemas/user";
 
 const fields: GenerateFormProps['fields'] = {
     login: {
@@ -23,15 +23,23 @@ const fields: GenerateFormProps['fields'] = {
 type AuthFormProps = PropsWithChildren< {
     title: string;
     onSubmit: GenerateFormProps['onSubmit'];
+    isRegister: boolean;
 }>;
 
-const AuthForm = ({children, title, onSubmit}: AuthFormProps) => {
-
+const AuthForm = ({ children, title, onSubmit, isRegister }: AuthFormProps) => {
+    const finalFields = isRegister ? {
+        ...fields,
+        confirm_password: {
+            ...fields.password,
+            label: "Confirm password",
+        },
+    } : fields;
+    
     return (
         <div className={styles.authForm}>
             <h1 className={`h2 ${styles.title}`}>{title}</h1>
             <Form 
-                fields={fields} 
+                fields={finalFields} 
                 onSubmit={onSubmit} 
             />
             {children}

@@ -27,7 +27,7 @@
         gap: .25rem;
         border-radius: inherit;
         color: #fff;
-        background-color: var(--_background-color);
+        background-color: var(--_background-color, $accent-color);
         overflow: visible;
 
         & > * {

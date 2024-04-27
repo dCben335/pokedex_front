@@ -1,10 +1,10 @@
 "use client"
 
 import { GenerateFormProps } from "@/components/customs/Form/Form";
-import AuthForm from "./AuthForm/AuthForm";
+import AuthForm from "../../../components/customs/Auth/AuthForm/AuthForm";
 import Link from "next/link";
-import { UserRequest } from "@/libs/zod/user";
-import { login } from "@/libs/routes/user";
+import { UserRequest } from "@/libs/schemas/user";
+import { login } from "@/libs/routes/entities/user";
 import { toast } from "sonner";
 import { useUser } from "@/components/providers/UserContext";
 
@@ -25,7 +25,7 @@ const LoginForm = ({}) => {
     };
 
     return (
-        <AuthForm onSubmit={onSubmit} title={"Login"}>
+        <AuthForm onSubmit={onSubmit} title={"Login"} isRegister={false}>
             <p>Don&apos;t have an account yet ? <Link href="/register">Register</Link></p>
         </AuthForm>
     )

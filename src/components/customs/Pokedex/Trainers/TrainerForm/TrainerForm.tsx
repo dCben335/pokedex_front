@@ -1,24 +1,24 @@
 "use client";
 
 import Form, { GenerateFormProps } from "@/components/customs/Form/Form";
-import { handleResponse } from "@/libs/routes";
-import { createTrainer, updateTrainer } from "@/libs/routes/trainer";
-import { TrainerRequest, TrainerRequestSchema } from "@/libs/zod/trainer";
+import { createTrainer, updateTrainer } from "@/libs/routes/entities/trainer";
+import { TrainerRequest, trainerRequestSchema } from "@/libs/schemas/trainer";
 import { fillObjectWithKey } from "@/utils/reformat";
 import { useRouter } from "next/navigation";
 import { HTMLAttributes } from "react";
+import { toast } from "sonner";
 
 const fields: GenerateFormProps['fields'] = {
     trainerName : {
         label: "Trainer Name",
         type: "text",
-        schema: TrainerRequestSchema.shape.trainerName,
+        schema: trainerRequestSchema.shape.trainerName,
         placeholder: "Sacha",
     },
     imgUrl : {
         label: "Image URL",
         type: "text",
-        schema: TrainerRequestSchema.shape.imgUrl,
+        schema: trainerRequestSchema.shape.imgUrl,
         placeholder: "https://example.com/image.jpg",
     }
 }
@@ -40,11 +40,12 @@ const TrainerForm = ({ username, editMode, token, defaultValues, ...props }: Tra
     const handleSubmit = (requestFunction: RequestFunction, successMessage: string) => async (data: any) => {
         const registerData = data as TrainerRequest;
         const response = await requestFunction(registerData, token);
-        const isSuccessful = handleResponse(response, successMessage);
-    
-        if (isSuccessful) {
-            router.push(`/trainers/${username}`);
+        if ("error" in response) {
+            return toast.error(response.error);
         }
+    
+        router.push(`/trainers/${username}`);
+        return toast.success(successMessage);
     };
 
     const onSubmitPOST: GenerateFormProps['onSubmit'] = handleSubmit(createTrainer, "Trainer created");

@@ -1,11 +1,8 @@
-"use client"
+"use server";
 
-import { useUser } from "@/components/providers/UserContext";
-import useTrainer from "@/hooks/Trainers/useTrainer";
-import { notFound } from "next/navigation";
-import { toast } from "sonner";
-import TrainerForm from "../_components/TrainerForm/TrainerForm";
 import Button from "@/components/ui/Button/Button";
+import { getTrainer } from "@/libs/routes/entities/trainer";
+import TrainerFallBack from "../../../../components/customs/Pokedex/Trainers/TrainerFallBack/TrainerFallBack";
 
 interface PagePops {
     params: {
@@ -14,31 +11,13 @@ interface PagePops {
 }
 
 
-const Page = ({ params }: PagePops) => {
-    const { data, isLoading, error } = useTrainer(params.username)
-    
-    const { user, token } = useUser();
-    
-    if (isLoading) {
-        return <p>Loading...</p>
+const Page = async({ params }: PagePops) => {
+    const data  = await getTrainer(params.username)
+    if ("error" in data || !data) {
+        return <TrainerFallBack userName={params.username} />
     }
 
-    if (error) {
-        if (!token || user?.login !== params.username) {
-            toast.error(error.message);
-            return notFound();
-        }
-        
-        return (
-            <main>
-                <h1>Create your own trainer</h1>
-                <TrainerForm
-                    username={params.username}
-                    token={token} 
-                />
-            </main>
-        )
-    }
+    const { trainerName, imgUrl } = data
 
     return (
         <main>

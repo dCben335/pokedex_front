@@ -4,9 +4,10 @@ import { usePokemonTypesContext } from "@/components/providers/PokemonTypesConte
 import { toast } from "sonner";
 import styles from "./TrainerWrapper.module.scss"
 import useTrainers from "@/hooks/Trainers/useTrainers";
-import PokemonPagination from "../../PokedexPagination/PokedexPagination";
+import PokedexPagination from "../../PokedexPagination/PokedexPagination";
 import PokemonCard from "../../PodexCard/PokedexCard";
-import PokemonSize from "../../PokedexSize/PokemonSize";
+import PokemonSize from "../../PokedexSize/PokedexSize";
+import { slugify } from "@/utils/reformat";
 
 type PokemonWrapperProps = React.HTMLAttributes<HTMLDivElement> & {
     baseUrl: string;
@@ -17,18 +18,9 @@ const TrainerWrapper = ({ baseUrl, className, isList, ...props }: PokemonWrapper
     const {data, isLoading, error} = useTrainers();
     const { getTypeColor } = usePokemonTypesContext();
 
-    console.log(data)
-
     if (error || (!isLoading && !data)) {
-        console.log(error)
-        toast.error("Error fetching pokemons");
-        return (
-            <></>
-        )
+        return toast.error("Error fetching pokemons");
     }
-
-    
-
 
     return (
         <div className={`${className ? className : ""}`} {...props}>
@@ -45,11 +37,10 @@ const TrainerWrapper = ({ baseUrl, className, isList, ...props }: PokemonWrapper
                     ) : (data?.content ?? []).map(({ trainerName, imgUrl, username }, index) => 
                         <PokemonCard
                             key={index}
-                            baseUrl={baseUrl}
+                            url={`${baseUrl}/${slugify(username)}`}
                             name={trainerName}
                             image={imgUrl}
                             types={[]}
-                            suffixUrl={username}
                             backgroundColor={getTypeColor("normal")}
                             isList={isList}
                         />
@@ -57,7 +48,7 @@ const TrainerWrapper = ({ baseUrl, className, isList, ...props }: PokemonWrapper
                 }
             </div>
 
-            <PokemonPagination 
+            <PokedexPagination 
                 currentPage={data?.pageable.pageNumber || 0}
                 total={data?.totalPages || 0}
             />

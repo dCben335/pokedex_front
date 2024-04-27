@@ -3,7 +3,8 @@
 import { PropsWithChildren, Suspense } from "react";
 import styles from "./Trainers.module.scss";
 import TrainerWrapper from "./TrainerWrapper/TrainerWrapper";
-import PokemonFilters from "../PokedexFilters/PokedexFilters";
+import PokedexFilters from "../PokedexFilters/PokedexFilters";
+import Loading from "@/components/ui/Loading/Loading";
 
 type TrainersProps = React.HTMLAttributes<HTMLElement> & PropsWithChildren<{
     baseUrl: string
@@ -14,8 +15,8 @@ const Trainers = ({ baseUrl, isList, className, children, ...props  } : Trainers
     
     return (
         <section className={`${styles.pokemons} ${className ? className : ""}`} {...props}>
-            <Suspense fallback={<></>}>
-                <PokemonFilters />
+            <Suspense fallback={<Loading />}>
+                <PokedexFilters isPokemons={false}/>
                 {children}
                 <TrainerWrapper 
                     className={"cont"} 

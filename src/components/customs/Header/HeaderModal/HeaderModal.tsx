@@ -2,7 +2,7 @@ import Button from "@/components/ui/Button/Button"
 import Modal from "@/components/ui/Modal/Modal"
 import styles from './HeaderModal.module.scss'
 import { useUser } from "@/components/providers/UserContext";
-import LogoutButton from "@/app/(auth)/_components/LogoutButton";
+import LogoutButton from "@/components/customs/Auth/LogoutButton";
 
 const mainRoutes = [
     {

@@ -2,7 +2,7 @@
 
 import usePokemonTypes from '@/hooks/Pokemons/usePokemonTypes';
 import { createContext, useContext } from 'react';
-import { PokemonType, PokemonTypeResponse } from '@/libs/zod/pokemon';
+import { PokemonType, PokemonTypeResponse } from '@/libs/schemas/pokemon';
 import { toast } from 'sonner';
 
 interface PokemonTypesContextType extends PokemonTypeResponse {

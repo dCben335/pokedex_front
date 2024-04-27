@@ -2,7 +2,7 @@ import { useQuery } from "@tanstack/react-query"
 import { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { getUrlParams, UrlParams } from "@/utils/queryParams";
-import { getTrainers } from "@/libs/routes/trainer";
+import { getTrainers } from "@/libs/routes/entities/trainer";
 
 const useTrainers = () => {
     const searchParams = useSearchParams()

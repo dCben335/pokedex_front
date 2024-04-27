@@ -1,16 +1,17 @@
 import { z } from "zod";
 
-export const SortSchema = z.object({
+
+export const portSchema = z.object({
     empty: z.boolean(),
     sorted: z.boolean(),
     unsorted: z.boolean(),
 });
 
 
-export const PageableSchema = z.object({
+export const pageableSchema = z.object({
     pageNumber: z.number(),
     pageSize: z.number(),
-    sort: SortSchema,
+    sort: portSchema,
     offset: z.number(),
     unpaged: z.boolean(),
     paged: z.boolean(),

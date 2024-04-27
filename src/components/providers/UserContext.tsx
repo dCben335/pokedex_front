@@ -1,11 +1,12 @@
-import { getUserInfo } from "@/libs/routes/user";
-import { User } from "@/libs/zod/user";
+import { getUserInfo } from "@/libs/routes/entities/user";
+import { User } from "@/libs/schemas/user";
 import { createContext, PropsWithChildren, useContext, useEffect, useState } from "react";
 import { toast } from "sonner";
 
 type UserContextType = {
     user: User | null;
     token: string | null;
+    isLoading: boolean;
     setUser: (user: User, token: string) => void;
     logout: () => void;
 };
@@ -13,6 +14,7 @@ type UserContextType = {
 const UserContext = createContext<UserContextType>({
     user: null,
     token: null,
+    isLoading: true,
     setUser: () => {},
     logout: () => {}
 });
@@ -22,6 +24,7 @@ export const useUser = () => useContext(UserContext);
 export const UserProvider = ({ children }: PropsWithChildren) => {
     const [user, setUserData] = useState<User | null>(null);
     const [token, setToken] = useState<string | null>(null);
+    const [isLoading, setIsLoading] = useState(true);
 
     const setUser = (user: User, token: string) => {
         setUserData(user);
@@ -55,12 +58,13 @@ export const UserProvider = ({ children }: PropsWithChildren) => {
             }
             
             setUserData(response);
+            setIsLoading(false);
         })();
     }, [token, user]);
 
 
     return (
-        <UserContext.Provider value={{ user, token, setUser, logout }}>
+        <UserContext.Provider value={{ user, token, isLoading, setUser, logout }}>
             {children}
         </UserContext.Provider>
     );
