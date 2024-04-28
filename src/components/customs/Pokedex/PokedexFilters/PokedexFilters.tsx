@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Button from "@/components/ui/Button/Button";
 import styles from "./PokedexFilters.module.scss"
-import PokemonTypesModal from "../Pokemons/PokemonTypes/PokemonTypesModal";
+import PokemonTypesModal from "../Pokemons/PokemonTypes/PokemonTypesModal/PokemonTypesModal";
 import PokemonSearchForm from "./PokedexSearchForm";
 import FilterIcon from "@/components/Icons/FilterIcon";
 

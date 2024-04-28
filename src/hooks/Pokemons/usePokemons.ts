@@ -6,7 +6,7 @@ import { getUrlParams, UrlParams } from "@/utils/queryParams";
 
 const usePokemons = () => {
     const searchParams = useSearchParams()
-    const [urlParams, setUrlParams] = useState<UrlParams>({})
+    const [urlParams, setUrlParams] = useState<UrlParams>(Object.fromEntries(searchParams.entries()))
 
     const pokemons = useQuery({
         queryKey: ["pokemons", urlParams],

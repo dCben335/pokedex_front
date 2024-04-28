@@ -30,7 +30,7 @@ export default function Page() {
                 Discover all the trainers that user created and shared and their pokemons.
               </p>
               <p>
-                Don't forget to create your own trainer and share it with the community.
+                Don&apos;t forget to create your own trainer and share it with the community.
               </p>
             </div>
             <div className={styles.cards}>

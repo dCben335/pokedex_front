@@ -26,11 +26,12 @@ export const accentsTidy = (expression: string) => {
 };
 
 export const slugify = (expression: string) => {
-    return accentsTidy(expression).replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+    return accentsTidy(expression).replace(/[^a-z0-9-]+/g, '_').replace(/^-+|-+$/g, '');
+
 }
 
 export const unslugify = (expression: string) => {
-    return expression.replace(/-/g, ' ');
+    return expression.replace(/_/g, ' ');
 }
 
 export const firstLetterUppercase = (expression: string) => {
@@ -38,7 +39,9 @@ export const firstLetterUppercase = (expression: string) => {
 }
 
 export const firstLetterOfEachWordUppercase = (expression: string) => {
-    return expression.split(' ').map((word) => firstLetterUppercase(word)).join(' ');
+    return expression
+        .split("-").map(word => firstLetterUppercase(word)).join('-')
+        .split(' ').map(word => firstLetterUppercase(word)).join(' ');
 }
 
 

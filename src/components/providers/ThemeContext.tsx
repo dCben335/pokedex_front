@@ -4,21 +4,17 @@ import { usePathname } from 'next/navigation';
 import React, { createContext, useState, useContext, PropsWithChildren, useEffect, use } from 'react';
 
 const defaultColor = "#F86868";
-type DefaultColor = typeof defaultColor;
-
 const defaultTheme = "light";
 type Theme = "light" | "dark";
 
 interface ThemeContextType {
     theme: Theme;
-    color: string | DefaultColor;
     changeColor: (newColor: string) => void;
     swichTheme: () => void;
 }
 
 const ThemeContext = createContext<ThemeContextType>({
     theme: defaultTheme,
-    color: defaultColor,
     changeColor: () => {},
     swichTheme: () => {},
 });
@@ -29,42 +25,35 @@ export const useTheme = (): ThemeContextType => {
 
 
 export const ThemeProvider = ({ children }: PropsWithChildren<{}>) => {
-    const [theme, setTheme] = useState<Theme>(defaultTheme);
-    const [color, setColor] = useState<string>(defaultColor);
-    const pathname = usePathname();
+    usePathname();
+    const [theme, setTheme] = useState<Theme>(
+        typeof window !== 'undefined' ? localStorage.getItem('theme') as Theme : defaultTheme
+    );
+
+    if (typeof window !== 'undefined') {
+        document.documentElement.style.setProperty('--accent-color', defaultColor);
+        document.documentElement.classList.add(theme)
+    }
 
     useEffect(() => {
-        setTheme(localStorage.getItem('theme') as Theme ?? defaultTheme);
-    }, []);
-
-    useEffect(() => {
-        document.documentElement.style.setProperty('--accent-color', color);
-    }, [color]);
-    
-    useEffect(() => {
-        document.documentElement.classList.remove(theme === "light" ? "dark" : "light");
-        document.documentElement.classList.add(theme);
+        document.documentElement.classList.add(theme)
     }, [theme]);
-
-    useEffect(() => {
-        setColor(defaultColor);
-    }, [pathname]);
-    
 
     const swichTheme = () => {
         const newTheme = theme === "light" ? "dark" : "light";
         localStorage.setItem('theme', newTheme);
+        document.documentElement.classList.remove(newTheme === "light" ? "dark" : "light");
+        document.documentElement.classList.add(newTheme);
         setTheme(newTheme);
-
-        console.log(localStorage);
     }
 
     const changeColor = (newColor: string) => {
-        setColor(newColor);
+        if (typeof window === 'undefined') return
+        document.documentElement.style.setProperty('--accent-color', newColor);
     };
 
     return (
-        <ThemeContext.Provider value={{ changeColor, color, theme, swichTheme }}>
+        <ThemeContext.Provider value={{ changeColor, theme, swichTheme }}>
             {children}
         </ThemeContext.Provider>
     );
