@@ -10,16 +10,20 @@
         aspect-ratio: 1;
         max-height: 45%;
         max-width: 80%;
-        opacity: .75;
-        animation: spin 2.5s linear infinite;
+        animation: spin 2.5s ease-in-out infinite;
     }
 }
 
 @keyframes spin {
     0% {
+        opacity: 0.15;
         transform: rotate(0deg);
     }
+    50% {
+        opacity: .75;
+    }
     100% {
+        opacity: 0.15;
         transform: rotate(360deg);
     }
 }

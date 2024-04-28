@@ -31,14 +31,14 @@ export const login = async (body: UserRequest) => {
 }
 
 //GET /me
-export const getUserInfo = async (token: string) => {
+export const getUserInfoFromToken = async (token: string) => {
     const data = await handleApiFetch({
         path: `${API_USER_BASE_URL}/me`,
         method: "GET",
         token: token,
     });
+    
     if ("error" in data) return data;
-
     return parseWithZodSchema(userSchema, data);
 }
 

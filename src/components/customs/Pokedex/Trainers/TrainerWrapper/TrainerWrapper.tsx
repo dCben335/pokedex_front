@@ -3,7 +3,7 @@
 import { usePokemonTypesContext } from "@/components/providers/PokemonTypesContext";
 import { toast } from "sonner";
 import styles from "./TrainerWrapper.module.scss"
-import useTrainers from "@/hooks/Trainers/useTrainers";
+import useTrainers from "@/hooks/useTrainers";
 import PokedexPagination from "../../PokedexPagination/PokedexPagination";
 import PokemonCard from "../../PodexCard/PokedexCard";
 import PokemonSize from "../../PokedexSize/PokedexSize";

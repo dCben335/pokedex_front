@@ -2,7 +2,7 @@
 
 import { usePokemonTypesContext } from "@/components/providers/PokemonTypesContext";
 import { toast } from "sonner";
-import usePokemons from "@/hooks/Pokemons/usePokemons";
+import usePokemons from "@/hooks/usePokemons";
 import PokedexCard from "../../PodexCard/PokedexCard";
 import PokedexPagination from "../../PokedexPagination/PokedexPagination";
 import PokedexSize from "../../PokedexSize/PokedexSize";

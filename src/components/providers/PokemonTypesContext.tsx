@@ -1,6 +1,6 @@
 "use client"
 
-import usePokemonTypes from '@/hooks/Pokemons/usePokemonTypes';
+import usePokemonTypes from '@/hooks/usePokemonTypes';
 import { createContext, useContext } from 'react';
 import { PokemonType, PokemonTypeResponse } from '@/libs/schemas/pokemon';
 import { toast } from 'sonner';
@@ -26,7 +26,7 @@ export const PokemonTypesProvider = ({ children } : React.PropsWithChildren ) =>
 
     if (isLoading || error || !data) {
         if (error) toast.error(error.message);
-        if (!error && !data) toast.error('Error fetching pokemon types');
+        if (!isLoading && !error && !data) toast.error('Error fetching pokemon types');
 
         return (
             <>

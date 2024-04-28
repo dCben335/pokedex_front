@@ -3,7 +3,6 @@ import { useTheme } from '@/components/providers/ThemeContext';
 import styles from './Header.module.scss';
 
 import Link from 'next/link';
-import Button from '@/components/ui/Button/Button';
 import ThemeIcon from '@/components/Icons/ThemeLogo';
 import Logo from '@/components/Icons/Logo';
 import BurgerButton from '@/components/ui/BurgerButton/BurgerButton';

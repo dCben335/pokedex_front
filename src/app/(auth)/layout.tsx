@@ -1,25 +1,16 @@
-"use client"
+"use server"
 
-import { useUser } from "@/components/providers/UserContext";
-import { useRouter } from "next/navigation";
+import { getCookies } from "@/actions/cookies";
+import { getUserInfoFromToken } from "@/libs/routes/entities/user";
 import { PropsWithChildren, useEffect } from "react";
 
-const AuthLayout = ({children} : PropsWithChildren) => {
-    const { user } = useUser();
-    const router = useRouter();
-
-    useEffect(() => {
-        if (user) {
-
-            console.log('User is logged in, redirecting to home page');
-            console.log(user);
-            router.push('/');
-        }
-    }, [user, router]);
+const AuthLayout = async({children} : PropsWithChildren) => {
+    const { token, login } = await getCookies()
+    const user = await getUserInfoFromToken(token);
 
     if (user) {
-        return <></>    
-    } 
+        //navigate("/pokemons")
+    }
 
     return (
         <>

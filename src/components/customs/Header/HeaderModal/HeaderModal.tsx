@@ -1,8 +1,8 @@
 import Button from "@/components/ui/Button/Button"
 import Modal from "@/components/ui/Modal/Modal"
 import styles from './HeaderModal.module.scss'
-import { useUser } from "@/components/providers/UserContext";
 import LogoutButton from "@/components/customs/Auth/LogoutButton";
+import { Cookies } from "@/actions/cookies";
 
 const mainRoutes = [
     {
@@ -43,10 +43,18 @@ interface HeaderModalProps {
 }
 
 const HeaderModal = ({ isOpen, closeModal }: HeaderModalProps) => {  
-    const { user } = useUser();
+    const cookies = document.cookie.split(';');
+    const cookiesObject: Cookies = {} as Cookies;
+    cookies.forEach(cookie => {
+        const [name, value] = cookie.split('=');
+        cookiesObject[name.trim() as keyof Cookies] = value;
+    });
 
-    const routes = user ? [...mainRoutes, ...userRoutes(user.login)] : [...mainRoutes, ...authRoutes]
-
+    
+    const { token, login } = cookiesObject;
+    const user = { token, login };
+    const isUser = (user?.login && user?.token) ? true : false;
+    const routes = user && isUser ? [...mainRoutes, ...userRoutes(user.login)] : [...mainRoutes, ...authRoutes]
 
     return (
         <Modal isOpen={isOpen} closeModal={closeModal} className={styles.headerModal}>
@@ -59,7 +67,7 @@ const HeaderModal = ({ isOpen, closeModal }: HeaderModalProps) => {
                     </li>
                 ))}
 
-                { user && (
+                {isUser && (
                     <li>
                         <LogoutButton className={styles.navButton} />
                     </li>

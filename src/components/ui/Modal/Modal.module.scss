@@ -17,8 +17,8 @@
         width: 100vw;
         border-top-left-radius: $border-radius;
         border-top-right-radius: $border-radius;
-        box-shadow: 0 0 10000px 10px $primary-color-variant;
-        border-top: 2px solid $accent-color;
+        box-shadow: 0 0 10000px 10px var(--secondary-color-variant, $secondary-color-variant);
+        border-top: 2px solid var(--accent-color, $accent-color);
         background-color: var(--primary-color, $primary-color);
         overflow: hidden;      
         transform-origin: bottom;

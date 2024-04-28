@@ -29,7 +29,7 @@ export const handleApiFetch = async({ path, token, method, body }: handleApiFetc
             body: body ?? undefined,
         });
 
-        if (response.status !== 200) throw new Error(`${response.status}`)
+        if (response.status !== 200 && response.status !== 201) throw new Error(`${response.status}`)
         return await response.json();
     });    
 }

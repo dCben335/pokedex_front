@@ -1,4 +1,3 @@
-import Pokemons from "@/components/customs/Pokedex/Pokemons/Pokemons";
 import styles from "./page.module.scss";
 import PokedexCard from "@/components/customs/Pokedex/PodexCard/PokedexCard";
 
@@ -34,9 +33,9 @@ export default function Page() {
               </p>
             </div>
             <div className={styles.cards}>
-              <PokedexCard image="/images/pierre.png" url="/pokemons" name=""/>
-              <PokedexCard image="/images/sacha.png" url="/pokemons" name=""/>
-              <PokedexCard image="/images/ondine.png" url="/pokemons" name=""/>
+              <PokedexCard image="/images/pierre.png" url="/trainers" name=""/>
+              <PokedexCard image="/images/sacha.png" url="/trainers" name=""/>
+              <PokedexCard image="/images/ondine.png" url="/trainers" name=""/>
             </div>
           </section>
       </div>

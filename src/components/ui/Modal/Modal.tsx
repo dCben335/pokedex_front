@@ -1,3 +1,5 @@
+"use client"
+
 import { HTMLAttributes, PropsWithChildren, use, useEffect, useState } from "react"
 import styles from './Modal.module.scss'
 

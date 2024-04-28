@@ -2,6 +2,7 @@
 
 import { usePathname } from 'next/navigation';
 import React, { createContext, useState, useContext, PropsWithChildren, useEffect, use } from 'react';
+import Loading from '../ui/Loading/Loading';
 
 const defaultColor = "#F86868";
 const defaultTheme = "light";
@@ -32,26 +33,24 @@ export const ThemeProvider = ({ children }: PropsWithChildren<{}>) => {
 
     if (typeof window !== 'undefined') {
         document.documentElement.style.setProperty('--accent-color', defaultColor);
-        document.documentElement.classList.add(theme)
+        document.documentElement.classList.add(theme); 
     }
 
-    useEffect(() => {
-        document.documentElement.classList.add(theme)
-    }, [theme]);
 
     const swichTheme = () => {
-        const newTheme = theme === "light" ? "dark" : "light";
-        localStorage.setItem('theme', newTheme);
-        document.documentElement.classList.remove(newTheme === "light" ? "dark" : "light");
-        document.documentElement.classList.add(newTheme);
-        setTheme(newTheme);
+        setTheme((prev) => {
+            const newTheme = prev === "light" ? "dark" : "light";
+            localStorage.setItem('theme', newTheme);
+            document.documentElement.classList.remove(prev);
+            document.documentElement.classList.add(newTheme);
+            return newTheme;
+        });
     }
 
     const changeColor = (newColor: string) => {
-        if (typeof window === 'undefined') return
         document.documentElement.style.setProperty('--accent-color', newColor);
     };
-
+    
     return (
         <ThemeContext.Provider value={{ changeColor, theme, swichTheme }}>
             {children}

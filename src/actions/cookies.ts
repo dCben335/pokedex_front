@@ -2,23 +2,38 @@
 
 import { cookies } from "next/headers"
 
-interface StoreTokenRequest {
+export interface Cookies {
     token: string
     login: string
 }
 
-export async function storeToken(request: StoreTokenRequest) {
+export const storeCookies = async (request: Cookies) => {
     Object.keys(request).forEach(key => {
-        if (!request[key as keyof StoreTokenRequest]) {
+        if (!request[key as keyof Cookies]) {
             throw new Error(`The ${key} is required`)
         }
 
         cookies().set({
             name: key,
-            value: request[key as keyof StoreTokenRequest],
-            httpOnly: true,
+            value: request[key as keyof Cookies],
             sameSite: "strict",
-            secure: true,
         })
     })
 }
+
+export const getCookies = async () =>{
+    const cookie = cookies().getAll();
+    const cookiesObject: Cookies = {} as Cookies;
+    cookie.forEach(({ name, value }) =>  cookiesObject[name as keyof Cookies] = value)
+
+    return cookiesObject;
+}
+
+export const deleteCookies = async () => {
+    const cookie = cookies().getAll();
+    cookie.forEach(({ name }) => cookies().delete(name));
+}
+
+
+
+
