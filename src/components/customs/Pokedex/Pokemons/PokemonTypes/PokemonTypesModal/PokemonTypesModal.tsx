@@ -28,6 +28,11 @@ const PokemonTypesModal = ({ isOpen, closeModal }: PokemonTypesModalProps) => {
         return !typeOne && !typeTwo
     }
 
+    const isDisabled = () => {
+        const { typeOne, typeTwo } = getUrlTypes(searchParams)
+        return (typeOne && typeTwo) ? true : false
+    }
+
     const routerPush = (params: any) => {
         router.push(`${pathname}?${params}`)
     }
@@ -51,6 +56,13 @@ const PokemonTypesModal = ({ isOpen, closeModal }: PokemonTypesModalProps) => {
         }
     }
 
+    const handleAllClick = () => {
+        const removedTypeOneFromParams = removeQueryString(searchParams, 'typeOne');
+        const removedTypeTwoFromParams = removeQueryString(removedTypeOneFromParams, 'typeTwo');
+
+        router.push(`${pathname}?${removedTypeTwoFromParams}`)
+    }
+
     
 
     return (
@@ -59,9 +71,9 @@ const PokemonTypesModal = ({ isOpen, closeModal }: PokemonTypesModalProps) => {
                 <li className={styles.allBtnLi}>
                     <PokemonTypesButton 
                         name="All" 
-                        color="radial-gradient(circle at 50%, #eee 15%, #ffffff 35%, #101010 100%)" 
+                        color="radial-gradient(circle at 50%, var(--primary-color) 35%, var(--secondary-color) 100%)" 
                         isActive={isAll()}
-                        handleClick={() => router.push(pathname)}
+                        handleClick={() => handleAllClick()}
                     />
                 </li>
                 {(types ?? []).map(({name, color}) => (
@@ -70,6 +82,7 @@ const PokemonTypesModal = ({ isOpen, closeModal }: PokemonTypesModalProps) => {
                             name={name} 
                             color={color} 
                             isActive={isActive(name)}
+                            disabled={!isActive(name) && isDisabled()}
                             handleClick={handleCategoryClick}
                         />
                     </li>

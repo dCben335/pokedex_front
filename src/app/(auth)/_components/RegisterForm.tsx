@@ -22,7 +22,7 @@ const RegisterForm = ({}) => {
         }
 
         toast.success("User registered successfully");
-        storeCookies({ token: response.token, login: response.user.login });
+        storeCookies({ token: response.token, login: response.user.login, isAdmin: response.user.isAdmin.toString() });
         await navigate(`/trainers/${response.user.login}`);
     };
 

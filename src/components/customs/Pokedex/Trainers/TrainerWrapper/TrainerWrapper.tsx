@@ -24,7 +24,7 @@ const TrainerWrapper = ({ baseUrl, className, isList, ...props }: PokemonWrapper
 
     return (
         <div className={`${className ? className : ""}`} {...props}>
-            <PokemonSize total={data?.totalElements ?? 0}/>
+            <PokemonSize total={data?.totalElements ?? 0} entityName="trainers"/>
 
             <div  className={`${styles.trainerWrapper} ${isList ? styles.list : ""}`}>
                 {isLoading 

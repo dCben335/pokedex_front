@@ -5,6 +5,7 @@ import { cookies } from "next/headers"
 export interface Cookies {
     token: string
     login: string
+    isAdmin: string
 }
 
 export const storeCookies = async (request: Cookies) => {

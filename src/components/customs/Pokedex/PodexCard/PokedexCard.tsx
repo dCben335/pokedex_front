@@ -1,11 +1,10 @@
 import Card from "@/components/ui/Card/Card";
 import styles from "./PokedexCard.module.scss";
 import Link from "next/link";
-import { slugify } from "@/utils/reformat";
 import StyledImage from "@/components/ui/StyledImage/StyledImage";
 
 
-interface PokedexCardProps {
+export interface PokedexCardProps {
     name?: string;
     image: string;
     url: string;

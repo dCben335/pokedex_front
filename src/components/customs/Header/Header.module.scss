@@ -49,7 +49,7 @@
         
         .logo {
             transition: transform 1s cubic-bezier(.03,.98,.52,.99);
-
+          
             svg {
                 height: $header-height - $header-padding-y * 2;
                 max-width: 45vw;

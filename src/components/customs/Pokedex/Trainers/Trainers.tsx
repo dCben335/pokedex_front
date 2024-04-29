@@ -16,7 +16,7 @@ const Trainers = ({ baseUrl, isList, className, children, ...props  } : Trainers
     return (
         <section className={`${styles.pokemons} ${className ? className : ""}`} {...props}>
             <Suspense fallback={<Loading />}>
-                <PokedexFilters isPokemons={false}/>
+                <PokedexFilters isPokemons={false} entityName="trainer"/>
                 {children}
                 <TrainerWrapper 
                     className={"cont"} 

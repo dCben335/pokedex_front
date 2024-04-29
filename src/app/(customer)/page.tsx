@@ -1,5 +1,40 @@
 import styles from "./page.module.scss";
-import PokedexCard from "@/components/customs/Pokedex/PodexCard/PokedexCard";
+import PokedexCard, { PokedexCardProps } from "@/components/customs/Pokedex/PodexCard/PokedexCard";
+
+const pokemonCards = [
+  {
+    image: "/images/base_pokemons.png",
+    url: "/pokemons"
+  },
+  {
+    image: "/images/pikachu.png",
+    url: "/pokemons",
+    backgroundColor: "#FFCB05"
+  },
+  {
+    image: "/images/kanto_pokemons.png",
+    url: "/pokemons",
+    backgroundColor: "#3368B1"
+  }
+] satisfies PokedexCardProps[]
+
+const trainerCards = [
+  {
+    image: "/images/pierre.png",
+    url: "/trainers",
+    backgroundColor: "#3368B1",
+  },
+  {
+    image: "/images/sacha.png",
+    url: "/trainers"
+  },
+  {
+    image: "/images/ondine.png",
+    url: "/trainers",
+    backgroundColor: "#FFCB05"
+  }
+] satisfies PokedexCardProps[]
+
 
 export default function Page() {
 
@@ -17,9 +52,9 @@ export default function Page() {
               </p>
             </div>
             <div className={styles.cards}>
-              <PokedexCard image="/images/base_pokemons.png" url="/pokemons" name=""/>
-              <PokedexCard image="/images/pikachu.png" url="/pokemons" name=""/>
-              <PokedexCard image="/images/kanto_pokemons.png" url="/pokemons" name=""/>
+              {pokemonCards.map((card, index) => (
+                <PokedexCard key={index} image={card.image} url={card.url} backgroundColor={card.backgroundColor}/>
+              ))}
             </div>
           </section>
           <section>
@@ -33,9 +68,9 @@ export default function Page() {
               </p>
             </div>
             <div className={styles.cards}>
-              <PokedexCard image="/images/pierre.png" url="/trainers" name=""/>
-              <PokedexCard image="/images/sacha.png" url="/trainers" name=""/>
-              <PokedexCard image="/images/ondine.png" url="/trainers" name=""/>
+              {trainerCards.map((card, index) => (
+                <PokedexCard key={index} image={card.image} url={card.url} backgroundColor={card.backgroundColor}/>
+              ))}
             </div>
           </section>
       </div>

@@ -8,29 +8,28 @@ import PokemonSearchForm from "./PokedexSearchForm";
 import FilterIcon from "@/components/Icons/FilterIcon";
 
 
-interface PokedexFiltersProps {
-    isPokemons: boolean   
+interface PokedexFiltersProps extends React.HTMLAttributes<HTMLElement> {
+    isPokemons: boolean,
+    entityName: string 
 }
 
-const PokedexFilters = ({ isPokemons } : PokedexFiltersProps) => {
+const PokedexFilters = ({ isPokemons, entityName, className, ...props } : PokedexFiltersProps) => {
     const [isOpen, setIsOpen] = useState(false)
 
     const handleShowFilter = () => {
         setIsOpen(!isOpen)
     }
-    
 
     return (
         <>  
             <nav className={styles.nav}>
                 <div className={styles.container}>
-                    <PokemonSearchForm />
+                    <PokemonSearchForm entityName={entityName}/>
                     {isPokemons && (
-                            <Button className={styles.showFilterBtn} onClick={() => handleShowFilter()}>
-                                <FilterIcon />
-                            </Button>
-                        )
-                    }
+                        <Button className={styles.showFilterBtn} onClick={() => handleShowFilter()}>
+                            <FilterIcon />
+                        </Button>
+                    )}
                 </div>
             </nav>
 

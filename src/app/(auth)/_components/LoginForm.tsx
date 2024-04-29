@@ -10,7 +10,6 @@ import { storeCookies } from "@/actions/cookies";
 import { navigate } from "@/actions/navigate";
 
 const LoginForm = ({}) => {
-
     const onSubmit: GenerateFormProps['onSubmit'] = async (data) => {
         const registerData = data as UserRequest;
         const response = await login(registerData) as UserResponse | { error: string };
@@ -18,7 +17,7 @@ const LoginForm = ({}) => {
             return toast.error(response.error);
         }
 
-        storeCookies({ token: response.token, login: response.user.login });
+        storeCookies({ token: response.token, login: response.user.login, isAdmin: response.user.isAdmin.toString() });
         toast.success("User registered successfully");
         await navigate(`/trainers/${response.user.login}`);
     };

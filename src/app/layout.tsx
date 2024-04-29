@@ -9,6 +9,7 @@ import { ThemeProvider } from "@/components/providers/ThemeContext";
 import Loading from "@/components/ui/Loading/Loading";
 import useIsLoading from "@/hooks/useIsLoading";
 import "./globals.scss";
+import Footer from "@/components/customs/Footer/Footer";
 
 const inter = Inter({ subsets: ["latin"] });
 const queryClient = new QueryClient();
@@ -34,6 +35,7 @@ export default function RootLayout({
                     : <>
                         <Header />
                         {children}
+                        <Footer />
                       </>
                   }
               </PokemonTypesProvider>

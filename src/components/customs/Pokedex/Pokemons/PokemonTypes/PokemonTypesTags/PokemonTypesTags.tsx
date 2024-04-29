@@ -5,6 +5,8 @@ import styles from './PokemonTypesTags.module.scss';
 import { firstLetterUppercase } from '@/utils/reformat';
 import { useTheme } from '@/components/providers/ThemeContext';
 import { useCallback } from 'react';
+import Button from '@/components/ui/Button/Button';
+import PokemonCategoryButton from '../PokemonTypesModal/PokemonTypesButton';
 
 type PokemonTypesTagProps = {
     types: string[],
@@ -15,13 +17,23 @@ const PokemonTypesTag = ({ types, updateAccentColor } : PokemonTypesTagProps) =>
     const { findType } = usePokemonTypesContext(); 
     const { changeColor } = useTheme() 
 
-    changeColor(findType(types[0])?.color || '')
+    const colors = types.map((type) => findType(type)?.color)
+    if (colors[0] && updateAccentColor) changeColor(colors[0])
 
     return (
         <ul className={styles.wrapper}>
-            {types.map((type) => (
-                <li key={type} style={{backgroundColor: findType(type)?.color}}>
-                    {firstLetterUppercase(type)}
+            {types.map((type, index) => (
+                <li key={type} >
+                    <Button 
+                        href={`/pokemons?typeOne=${type}`} 
+                        renderAs='link'
+                        className={styles.tag} 
+                        style={{ 
+                            backgroundColor: colors[index],
+                            border: `1px solid ${colors[index]}`,
+                         }}>
+                        {firstLetterUppercase(type)}
+                    </Button>
                 </li>
             ))}
         </ul>   

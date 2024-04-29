@@ -5,9 +5,11 @@ import { createQueryString, removeQueryString } from "@/utils/queryParams"
 import { usePathname, useRouter, useSearchParams } from "next/navigation"
 import { ChangeEvent, HTMLAttributes, useEffect, useState } from "react"
 
-type PokedexSearchFormProps = HTMLAttributes<HTMLFormElement>
+type PokedexSearchFormProps = HTMLAttributes<HTMLFormElement> & {
+    entityName: string
+}
 
-const PokedexSearchForm = ({className, ...props}: PokedexSearchFormProps) => {
+const PokedexSearchForm = ({className, entityName, ...props}: PokedexSearchFormProps) => {
     const [inputValue, setInputValue] = useState<string | undefined>(undefined);
 
     const router = useRouter()
@@ -39,7 +41,7 @@ const PokedexSearchForm = ({className, ...props}: PokedexSearchFormProps) => {
                 style={{ height: "100%" }}
                 groupForm={{ 
                     defaultValue: defaultValue, 
-                    placeholder: 'Search Pokemon by partial name', 
+                    placeholder: `Search ${entityName} by partial name`, 
                     type: "text", 
                     name: "partialName",
                 }}

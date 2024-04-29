@@ -10,12 +10,12 @@ const mainRoutes = [
         path: '/pokemons'
     },
     {
-        name: 'Types',
-        path: '/types'
+        name: 'Trainers',
+        path: '/trainers'
     },
     {
-        name: 'Abilities',
-        path: '/abilities'
+        name: 'Types',
+        path: '/types'
     }
 ]
 

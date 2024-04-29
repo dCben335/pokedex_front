@@ -21,16 +21,14 @@ const PokemonWrapper = ({ baseUrl, className, isList, ...props }: PokemonWrapper
     if (error || (!isLoading && !data)) {
         toast.error(error?.message ?? "Error fetching pokemons");
         return (
-            <div>
-                Error fetching pokemons
-            </div>
+            <div>Error fetching pokemons</div>
         )
     }
 
 
     return (
         <div className={`${className ? className : ""}`} {...props}>
-            <PokedexSize total={data?.totalElements ?? 0}/>
+            <PokedexSize total={data?.totalElements ?? 0} entityName="pokemons"/>
 
             <div  className={`${styles.pokemonWrapper} ${isList ? styles.list : ""}`}>
                 {isLoading 

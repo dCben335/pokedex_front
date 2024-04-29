@@ -15,7 +15,7 @@ const Pokemons = ({ children, className, baseUrl, isList, ...props}: PokemonsPro
     return (
         <section className={`${styles.pokemons} ${className ? className : ""}`} {...props}>
             <Suspense fallback={<Loading />}>
-                <PokedexFilters isPokemons={true} />
+                <PokedexFilters isPokemons={true} entityName="pokemon"/>
                 {children}
                 <PokemonWrapper 
                     className={"cont"} 

@@ -15,9 +15,10 @@ const options = [
 
 type PokedexSizeProps = React.HTMLAttributes<HTMLDivElement> & {
     total: number;
+    entityName: string;
 }
 
-const PokedexSize = ({ total, ...props}: PokedexSizeProps) => {
+const PokedexSize = ({ total, entityName, ...props}: PokedexSizeProps) => {
     const router = useRouter()
     const pathname = usePathname()
     const searchParams = useSearchParams()
@@ -39,7 +40,7 @@ const PokedexSize = ({ total, ...props}: PokedexSizeProps) => {
     return (
         <div { ...props} className={styles.container}>
             <div className={styles.size}>
-                <span className={styles.info}>(Nombre de pokémons à afficher)</span>
+                <span className={styles.info}>(Number of {entityName} to show)</span>
                 <Select 
                     onChange={(e) => handleChange(e)} 
                     options={options}  
@@ -48,7 +49,7 @@ const PokedexSize = ({ total, ...props}: PokedexSizeProps) => {
             </div>
 
             <div> 
-                <span className={styles.info}>Total de pokémons: {total}</span>
+                <span className={styles.info}>Total of {entityName} searched: {total}</span>
             </div>
         </div>
     )
