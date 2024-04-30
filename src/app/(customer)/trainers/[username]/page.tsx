@@ -1,11 +1,10 @@
 import Button from "@/components/ui/Button/Button";
 import { getTrainer } from "@/libs/routes/entities/trainer";
-import {cookies} from "next/headers";
-import { getUserInfoFromToken } from "@/libs/routes/entities/user";
 import { notFound } from "next/navigation";
 import TrainerForm from "@/components/customs/Pokedex/Trainers/TrainerForm/TrainerForm";
-import { getCookies } from "@/actions/cookies";
-
+import { getCookies, isCurrentUserTrainer } from "@/actions/cookies";
+import ButtonGoBack from "@/components/ui/ButtonGoBack/ButtonGoBack";
+import styles from "./page.module.scss";
 
 interface PagePops {
     params: {
@@ -14,33 +13,32 @@ interface PagePops {
 }
 
 const Page = async({ params }: PagePops) => {
-    const data  = await getTrainer(params.username)
+    const trainer  = await getTrainer(params.username);
+    const { login, token } = await getCookies();
+    const isUserTrainer = await isCurrentUserTrainer(login, token, params.username);
     
-    if ("error" in data) {
-        const { login, token } = await getCookies();
-        if (!token) return notFound();
-        if (login !== params.username) return notFound();
-
-        const user = await getUserInfoFromToken(token);
-        if (user?.login !== login) return notFound()
+    if ("error" in trainer) {
+        if (!isUserTrainer) return notFound();
 
         return (
             <main>
-                <TrainerForm token={token} username={user?.login}/>
+                <TrainerForm token={token} username={login}/>
             </main>
         )
     }
 
 
-    const { trainerName, imgUrl } = data
+    const { trainerName, imgUrl } = trainer
     return (
         <main>
-            <Button renderAs="link" href="/trainers">Back</Button>
-            <Button renderAs="link" href={`/trainers/${params.username}/edit`}>Edit</Button>
+            <nav className={styles.banner}> 
+                <ButtonGoBack href="/trainers">Trainers</ButtonGoBack>
+                { isUserTrainer && <Button renderAs="link" href={`/trainers/${params.username}/edit`}>Edit</Button> }
+            </nav>
+            
 
             <h1>{trainerName}</h1>
             <img src={imgUrl} alt={trainerName} />
-            
         </main>
     );
 }

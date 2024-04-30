@@ -6,6 +6,10 @@ import { Cookies } from "@/actions/cookies";
 
 const mainRoutes = [
     {
+        name: 'Home',
+        path: '/'
+    },
+    {
         name: 'Pokemons',
         path: '/pokemons'
     },

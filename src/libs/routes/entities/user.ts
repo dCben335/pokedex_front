@@ -13,8 +13,6 @@ export const register = async (body: UserRequest) => {
     });
     if ("error" in data) return data;
 
-    console.log(data);
-
     return parseWithZodSchema(userResponseSchema, data);
 }
 

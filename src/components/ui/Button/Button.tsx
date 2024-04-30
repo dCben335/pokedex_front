@@ -1,11 +1,11 @@
 import styles from './Button.module.scss'
 import Link from 'next/link'
 
-interface LinkProps extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
+export interface LinkProps extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
     renderAs: "link"
     href: string
 }
-interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
     renderAs?: "button" 
 }
 

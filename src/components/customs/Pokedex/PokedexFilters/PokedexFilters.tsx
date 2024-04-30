@@ -27,7 +27,13 @@ const PokedexFilters = ({ isPokemons, entityName, className, ...props } : Pokede
                     <PokemonSearchForm entityName={entityName}/>
                     {isPokemons && (
                         <Button className={styles.showFilterBtn} onClick={() => handleShowFilter()}>
-                            <FilterIcon />
+                            <span >
+                                <FilterIcon />
+                                <span>
+                                    Trainers
+                                </span>
+
+                            </span>
                         </Button>
                     )}
                 </div>

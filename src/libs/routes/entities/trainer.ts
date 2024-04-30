@@ -23,7 +23,9 @@ export const getTrainer = async (username: string) => {
     const data = await handleApiFetch({
         path: `${API_TRAINER_BASE_URL}?username=${username}`,
         method: "GET",
+        tags: [`trainer-${username}`]
     });
+    if ("error" in data) return data
 
     return parseWithZodSchema(trainerSchema, data);
 }
@@ -61,7 +63,6 @@ export const createTrainer = async (options: TrainerRequest, token: string) => {
 //PUT /
 export const updateTrainer = async (options: TrainerRequest, token: string) => {
     const suffix = (options.trainerName ? `trainerName=${options.trainerName}&` : '') + (options.imgUrl ? `imgUrl=${options.imgUrl}` : '');
-    console.log(`${API_TRAINER_BASE_URL}?${suffix}`);
     const data = await handleApiFetch({
         path: `${API_TRAINER_BASE_URL}?${suffix}`,
         method: "PUT",

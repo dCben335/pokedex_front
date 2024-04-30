@@ -95,8 +95,6 @@ export const fillObjectWithKey = (fields: ObjectsInObject, defaultValues: Object
     for (const id in defaultValues) {
         if (defaultValues.hasOwnProperty(id) && fields.hasOwnProperty(id)) {
             fields[id][key] = defaultValues[id];
-
-            console.log(fields[id]);
         }
     }
     return fields;

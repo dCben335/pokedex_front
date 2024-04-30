@@ -12,11 +12,11 @@ type handleApiFetchProps = {
     schema?: ZodSchema;
     body?: string;
     token?: string;
-
+    tags?: string[];
 }
 
 
-export const handleApiFetch = async({ path, token, method, body }: handleApiFetchProps) => {
+export const handleApiFetch = async({ path, token, method, body, tags }: handleApiFetchProps) => {
     return await handleApiFetchErrors(async() => {
         const response = await fetch(`${BASE_API_URL}/${path}`, {
             method: method,
@@ -27,6 +27,9 @@ export const handleApiFetch = async({ path, token, method, body }: handleApiFetc
                 "Content-Type": "application/json",
             },
             body: body ?? undefined,
+            next: tags ? {
+                tags,
+            } : {}
         });
 
         if (response.status !== 200 && response.status !== 201) throw new Error(`${response.status}`)

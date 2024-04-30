@@ -90,19 +90,14 @@ const Page = () => {
         try {
 
             const result = createArrayOfObjects(data);
-            
-            
-            console.log("Submitting form data:", result);
-            
+                        
             await new Promise((resolve, reject) => {
                 setTimeout(() => {
                     resolve(data);
                 }, 2000);
             });
 
-            console.log("Form data submitted:", data);
         } catch (error) {
-            console.error("Form submission failed:", error);
         }
     };
 

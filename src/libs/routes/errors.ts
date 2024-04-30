@@ -20,7 +20,6 @@ export const handleApiFetchErrors = async<T>(fn: () => Promise<T>) => {
         }
 
         if (typeof error === "string") {
-            console.log("aqui 2");
             return { error: error };
         }
 
