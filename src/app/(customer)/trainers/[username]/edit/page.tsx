@@ -17,7 +17,7 @@ const Page = async({ params }: PageProps) => {
     if (!isCurrentUserTrainer(login,token, params.username)) return notFound();
 
     return (
-        <main>
+        <main className="centered-page-content">
             <TrainerForm 
                 token={token} 
                 username={login} 

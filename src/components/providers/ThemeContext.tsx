@@ -2,7 +2,6 @@
 
 import { usePathname } from 'next/navigation';
 import React, { createContext, useState, useContext, PropsWithChildren, useEffect, use } from 'react';
-import Loading from '../ui/Loading/Loading';
 
 const defaultColor = "#F86868";
 const defaultTheme = "light";
@@ -35,7 +34,6 @@ export const ThemeProvider = ({ children }: PropsWithChildren<{}>) => {
         document.documentElement.style.setProperty('--accent-color', defaultColor);
         document.documentElement.classList.add(theme); 
     }
-
 
     const swichTheme = () => {
         setTheme((prev) => {

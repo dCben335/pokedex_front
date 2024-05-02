@@ -21,7 +21,7 @@ const Page = async({ params }: PagePops) => {
         if (!isUserTrainer) return notFound();
 
         return (
-            <main>
+            <main className="centered-page-content">
                 <TrainerForm token={token} username={login}/>
             </main>
         )

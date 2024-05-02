@@ -27,18 +27,12 @@ const PokedexFilters = ({ isPokemons, entityName, className, ...props } : Pokede
                     <PokemonSearchForm entityName={entityName}/>
                     {isPokemons && (
                         <Button className={styles.showFilterBtn} onClick={() => handleShowFilter()}>
-                            <span >
-                                <FilterIcon />
-                                <span>
-                                    Trainers
-                                </span>
-
-                            </span>
+                            <FilterIcon />
                         </Button>
                     )}
                 </div>
             </nav>
-
+                    
             {isPokemons && (
                 <PokemonTypesModal isOpen={isOpen} closeModal={handleShowFilter} />
             )}

@@ -1,5 +1,5 @@
 import { parseWithZodSchema } from "@/utils/parse";
-import { UserRequest, userResponseSchema, userSchema } from "../../schemas/user";
+import { UserRequest, userResponseSchema, userSchema } from "../../schemas/entities/user";
 import { handleApiFetch } from "..";
 
 

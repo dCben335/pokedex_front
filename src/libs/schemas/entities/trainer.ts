@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { pageableSchema, portSchema } from "./pageable";
+import { pageableSchema, portSchema } from "../pageable";
 import { userSchema } from "./user";
 
 

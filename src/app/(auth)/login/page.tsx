@@ -1,9 +1,8 @@
 import LoginForm from "../_components/LoginForm";
-import styles from "../page.module.scss";
 
 const Page = () => {
     return (
-        <main className={styles.page}>
+        <main className={"centered-page-content"}>
             <LoginForm />
         </main>
     );

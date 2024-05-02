@@ -3,7 +3,7 @@ import { z } from "zod";
 import Form, { GenerateFormProps } from "../../Form/Form";
 import styles from "./AuthForm.module.scss";
 import { PropsWithChildren } from "react";
-import { userRequestSchema } from "@/libs/schemas/user";
+import { userRequestSchema } from "@/libs/schemas/entities/user";
 
 const fields: GenerateFormProps['fields'] = {
     login: {

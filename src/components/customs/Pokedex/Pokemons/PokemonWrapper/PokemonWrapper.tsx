@@ -47,7 +47,7 @@ const PokemonWrapper = ({ baseUrl, className, isList, ...props }: PokemonWrapper
                             types={types}
                             backgroundColor={getTypeColor(types[0])}
                             isList={isList}
-                            scale={isList ? 1.01 : 1.1}
+                            scale={isList ? 1.01 : 1.05}
                         />
                     )
                 }

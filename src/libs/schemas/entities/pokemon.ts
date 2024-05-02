@@ -1,5 +1,6 @@
 import { z } from "zod";
-import { pageableSchema, portSchema } from "./pageable";
+import { pageableSchema, portSchema } from "../pageable";
+import { types } from "util";
 
 export type PokemonType = z.infer<typeof pokemonTypeSchema>;
 export const pokemonTypeSchema = z.object({
@@ -26,15 +27,33 @@ export const pokemonSchema = z.object({
     id: z.string(),
     name: z.string().min(1).max(255),
     imgUrl: z.string().min(1),
-    description: z.string(),
-    types: z.array(pokemonTypeSchema.shape.name).min(0).max(2),
-    regions: z.array(pokemonRegionSchemp).min(0),
+    description: z.string().nullable(),
+    types: z.array(pokemonTypeSchema.shape.name),
+    regions: z.array(pokemonRegionSchemp).nullable(),
 });
 
 
+export type PokemonPostRequest = z.infer<typeof pokemonPostRequestSchema>;
+export const pokemonPostRequestSchema = z.object({
+    name: pokemonSchema.shape.name,
+    imgUrl: pokemonSchema.shape.imgUrl,
+    description: pokemonSchema.shape.description,
+    types: z.array(pokemonTypeSchema.shape.name),
+});
+
+export type PokemonPutRequest = z.infer<typeof pokemonPutRequestSchema>;
+export const pokemonPutRequestSchema = z.object({
+    id: pokemonSchema.shape.id,
+    name: pokemonSchema.shape.name.optional(),
+    imgUrl: pokemonSchema.shape.imgUrl.optional(),
+    description: pokemonSchema.shape.description.optional(),
+    typeOne: pokemonTypeSchema.shape.name.optional(),
+    typeTwo: pokemonTypeSchema.shape.name.optional(),
+});
+
 export type PokemonSearchResponse = z.infer<typeof pokemonSearchResponseSchema>;
 export const pokemonSearchResponseSchema = z.object({
-    content: z.array(pokemonSchema),
+    content: z.array(pokemonSchema).min(0),
     empty: z.boolean(),
     first: z.boolean(),
     last: z.boolean(),

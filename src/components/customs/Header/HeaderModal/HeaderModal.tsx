@@ -55,7 +55,8 @@ const HeaderModal = ({ isOpen, closeModal }: HeaderModalProps) => {
     });
 
     
-    const { token, login } = cookiesObject;
+    const { token, login, isAdmin } = cookiesObject;
+    const isAdminBool = isAdmin === 'true' ? true : false;
     const user = { token, login };
     const isUser = (user?.login && user?.token) ? true : false;
     const routes = user && isUser ? [...mainRoutes, ...userRoutes(user.login)] : [...mainRoutes, ...authRoutes]
@@ -70,6 +71,14 @@ const HeaderModal = ({ isOpen, closeModal }: HeaderModalProps) => {
                         </Button>
                     </li>
                 ))}
+
+                {isAdminBool && (
+                    <li>
+                        <Button className={styles.navButton} href='/admin'  renderAs='link' onClick={() => closeModal()}>
+                            Admin
+                        </Button>
+                    </li>
+                )}
 
                 {isUser && (
                     <li>

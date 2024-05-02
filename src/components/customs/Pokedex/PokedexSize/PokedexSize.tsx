@@ -49,7 +49,7 @@ const PokedexSize = ({ total, entityName, ...props}: PokedexSizeProps) => {
             </div>
 
             <div> 
-                <span className={styles.info}>Total of {entityName} searched: {total}</span>
+                <span className={styles.info}>Total of {entityName} found: {total}</span>
             </div>
         </div>
     )

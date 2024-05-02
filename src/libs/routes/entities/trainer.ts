@@ -1,6 +1,6 @@
 import { parseWithZodSchema } from '@/utils/parse';
-import { trainerSchema, trainerSearchResponseSchema } from '../../schemas/trainer';
-import { TrainerRequest } from "@/libs/schemas/trainer";
+import { trainerSchema, trainerSearchResponseSchema } from '../../schemas/entities/trainer';
+import { TrainerRequest } from "@/libs/schemas/entities/trainer";
 import { handleApiFetch } from '..';
 
 const API_TRAINER_BASE_URL = `trainer`;

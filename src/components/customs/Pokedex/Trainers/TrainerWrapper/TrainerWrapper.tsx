@@ -16,7 +16,8 @@ type PokemonWrapperProps = React.HTMLAttributes<HTMLDivElement> & {
 
 const TrainerWrapper = ({ baseUrl, className, isList, ...props }: PokemonWrapperProps) => {
     const {data, isLoading, error} = useTrainers();
-    const { getTypeColor } = usePokemonTypesContext();
+    const { getRandomTypeColor } = usePokemonTypesContext();
+
 
     if (error || (!isLoading && !data)) {
         return toast.error("Error fetching pokemons");
@@ -37,11 +38,11 @@ const TrainerWrapper = ({ baseUrl, className, isList, ...props }: PokemonWrapper
                     ) : (data?.content ?? []).map(({ trainerName, imgUrl, username }, index) => 
                         <PokemonCard
                             key={index}
-                            url={`${baseUrl}/${slugify(username)}`}
+                            url={`${baseUrl}/${username}`}
                             name={trainerName}
                             image={imgUrl}
                             types={[]}
-                            backgroundColor={getTypeColor("normal")}
+                            backgroundColor={getRandomTypeColor()}
                             isList={isList}
                         />
                     )

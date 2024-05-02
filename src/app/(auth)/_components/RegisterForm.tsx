@@ -3,7 +3,7 @@
 import { GenerateFormProps } from "@/components/customs/Form/Form";
 import AuthForm from "../../../components/customs/Auth/AuthForm/AuthForm";
 import { register } from "@/libs/routes/entities/user";
-import { UserRequest, UserResponse } from "@/libs/schemas/user";
+import { UserRequest, UserResponse } from "@/libs/schemas/entities/user";
 import { toast } from "sonner";
 import Link from "next/link";
 import { storeCookies } from "@/actions/cookies";

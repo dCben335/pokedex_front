@@ -5,8 +5,11 @@ $gap: 1.5rem;
 .main {
     background-color: var(--accent-color, $accent-color);
     padding: 0 .5rem .5rem .5rem;
-    padding-top: $image-height / 2;
     min-height: auto;
+
+    .banner {
+        padding-bottom: $image-height / 2 + 1rem;
+    }
     
 
     .container {

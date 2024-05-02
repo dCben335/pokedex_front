@@ -1,4 +1,5 @@
-import { pokemonSearchResponseSchema, pokemonTypeResponseSchema, pokemonSchema } from "@/libs/schemas/pokemon";
+import { UrlParams } from '@/utils/queryParams';
+import { pokemonSearchResponseSchema, pokemonTypeResponseSchema, pokemonSchema, PokemonPostRequest, PokemonPutRequest } from "@/libs/schemas/entities/pokemon";
 import { handleApiFetch } from "../";
 import { parseWithZodSchema } from "@/utils/parse";
 
@@ -45,11 +46,55 @@ export const getPokemon = async (name: string) => {
 }
 
 
+//POST /
+export const createPokemon = async (pokemon: PokemonPostRequest, token: string) => {
+    const data = await handleApiFetch({
+        path: `${API_POKEMON_BASE_URL}`,
+        method: "POST",
+        token: token,
+        body: JSON.stringify(pokemon)
+    });
+
+    return data;
+}
+
+export const updatePokemon = async (pokemon: PokemonPutRequest, token: string) => {
+    if (!pokemon.id) throw new Error("Pokemon id is required");
+    
+    const UrlParams = new URLSearchParams();
+    UrlParams.append("id", pokemon.id);
+    if (pokemon.name) UrlParams.append("name", pokemon.name);
+    if (pokemon.description) UrlParams.append("description", pokemon.description);
+    if (pokemon.typeOne) UrlParams.append("typeOne", pokemon.typeOne);
+    if (pokemon.typeTwo) UrlParams.append("typeTwo", pokemon.typeTwo);
+    if (pokemon.imgUrl) UrlParams.append("imgUrl", pokemon.imgUrl);
+    console.log(UrlParams.toString(), pokemon);
+
+    const data = await handleApiFetch({
+        path: `${API_POKEMON_BASE_URL}?${UrlParams.toString()}`,
+        method: "PUT",
+        token: token,
+    });
+
+    return data;
+}
+
+export const deletePokemon = async (pokemonName: string, token: string) => {
+    const data = await handleApiFetch({
+        path: `${API_POKEMON_BASE_URL}`,
+        method: "DELETE",
+        token: token
+    });
+
+    return data;
+}
+
 //POST region 
-export const createPokemonRegion = async (region: string) => {
+export const createPokemonRegion = async (region: string, token: string) => {
     const data = await handleApiFetch({
         path: `${API_POKEMON_BASE_URL}/region`,
         method: "POST",
+        token: token, 
         body: JSON.stringify({ region })
     });
 

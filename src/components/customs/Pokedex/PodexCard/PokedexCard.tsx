@@ -24,7 +24,7 @@ type Props =  React.HTMLAttributes<HTMLElement> & (PokedexCardProps | PokedexSke
 
 }
 
-const PokedexCard = ({ className, skeleton, isList, scale = 1.025, ...props }: Props) => {
+const PokedexCard = ({ className, skeleton, isList, scale = 1.015, ...props }: Props) => {
     const { name, image, backgroundColor, types, url, ...newProps } = props as PokedexCardProps;
 
     if (skeleton) {

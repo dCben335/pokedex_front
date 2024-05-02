@@ -2,12 +2,13 @@
 
 import usePokemonTypes from '@/hooks/usePokemonTypes';
 import { createContext, useContext } from 'react';
-import { PokemonType, PokemonTypeResponse } from '@/libs/schemas/pokemon';
+import { PokemonType, PokemonTypeResponse } from '@/libs/schemas/entities/pokemon';
 import { toast } from 'sonner';
 
 interface PokemonTypesContextType extends PokemonTypeResponse {
     getTypeColor: (type: string) => string; 
     findType: (typeName: string) => PokemonType | undefined;
+    getRandomTypeColor: () => string;
 }
 
 const PokemonTypesContext = createContext<PokemonTypesContextType>({
@@ -15,6 +16,7 @@ const PokemonTypesContext = createContext<PokemonTypesContextType>({
     count: 0,
     getTypeColor: () => '',
     findType: () => undefined,
+    getRandomTypeColor: () => '',
 });
 
 export const usePokemonTypesContext = () => {
@@ -47,8 +49,13 @@ export const PokemonTypesProvider = ({ children } : React.PropsWithChildren ) =>
         return correspondingType?.color || '';
     };
 
+    const getRandomTypeColor = (): string => {
+        const randomIndex = Math.floor(Math.random() * data.types.length);
+        return data.types[randomIndex].color;
+    }
+
     return (
-        <PokemonTypesContext.Provider value={{ types: data.types, count: data.count, getTypeColor, findType }}>
+        <PokemonTypesContext.Provider value={{ types: data.types, count: data.count, getTypeColor, getRandomTypeColor, findType }}>
             {children}
         </PokemonTypesContext.Provider>
     );

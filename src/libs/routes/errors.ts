@@ -13,7 +13,7 @@ const errorPossibilities = {
 export const handleApiFetchErrors = async<T>(fn: () => Promise<T>) => {
     try {
         return await fn();
-    } catch (error: unknown) {        
+    } catch (error: unknown) {  
         if (error instanceof Error) {
             const errorText = errorPossibilities[error.message as keyof typeof errorPossibilities] ?? error.message;
             return { error: errorText };

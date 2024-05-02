@@ -3,15 +3,22 @@ $image-height: 25rem;
 $gap: 1.5rem;
 
 .main {
-    background-color: var(--accent-color);
+    background-color: var(--accent-color, $accent-color);
     padding: 0 .5rem .5rem .5rem;
-    padding-top: $image-height / 2;
+    min-height: auto;
+
+    .banner {
+        padding-bottom: $image-height / 2 + 1rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+    }
     
 
     .container {
         display: grid;
         gap: $gap;
-        background-color: var(--primary-color);
+        background-color: var(--primary-color, $primary-color);
         border-radius: $border-radius;
         padding: ($image-height / 2 + $gap) 1rem 1rem 1rem;
         position: relative;
@@ -28,6 +35,12 @@ $gap: 1.5rem;
             display: grid;
             place-items: center;
             transform: translateY(-50%) translateX(-50%);
+        }
+
+        .centered {
+            display: grid;
+            gap: 1rem;
+            place-items: center;
         }
     }
 

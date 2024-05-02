@@ -6,6 +6,7 @@ import { firstLetterOfEachWordUppercase, unslugify } from '@/utils/reformat';
 import StyledImage from '@/components/ui/StyledImage/StyledImage';
 import { getPokemon } from '@/libs/routes/entities/pokemon';
 import PokemonTypesTag from '@/components/customs/Pokedex/Pokemons/PokemonTypes/PokemonTypesTags/PokemonTypesTags';
+import ButtonGoBack from '@/components/ui/ButtonGoBack/ButtonGoBack';
 
 interface PagePops {
     params: {
@@ -22,6 +23,9 @@ const Page = async({ params }: PagePops) => {
 
     return (
         <main className={styles.main}>
+            <nav className={styles.banner}> 
+                <ButtonGoBack href="/pokemons">Trainers</ButtonGoBack>
+            </nav>
             <div className={styles.container}>
                 <StyledImage 
                     className={styles.imageContainer}

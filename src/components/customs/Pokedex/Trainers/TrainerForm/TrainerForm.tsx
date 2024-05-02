@@ -3,10 +3,11 @@
 import { navigate, refreshTags } from "@/actions/navigate";
 import Form, { GenerateFormProps } from "@/components/customs/Form/Form";
 import { createTrainer, updateTrainer } from "@/libs/routes/entities/trainer";
-import { TrainerRequest, trainerRequestSchema } from "@/libs/schemas/trainer";
+import { TrainerRequest, trainerRequestSchema } from "@/libs/schemas/entities/trainer";
 import { fillObjectWithKey } from "@/utils/reformat";
 import { HTMLAttributes } from "react";
 import { toast } from "sonner";
+import styles from "./TrainerForm.module.scss";
 
 const fields: GenerateFormProps['fields'] = {
     trainerName : {
@@ -55,7 +56,8 @@ const TrainerForm = ({ username, editMode, token, defaultValues, ...props }: Tra
         : fields;
 
     return (
-        <div>
+        <div className={styles.form}>
+            <h1 className={`${styles.title} h2`}>{editMode ? "Edit your Trainer" : "Create your Trainer"}</h1>
             <Form 
                 {...props}
                 fields={finalFields} 
