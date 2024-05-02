@@ -3,6 +3,7 @@ import Modal from "@/components/ui/Modal/Modal"
 import styles from './HeaderModal.module.scss'
 import LogoutButton from "@/components/customs/Auth/LogoutButton";
 import { Cookies } from "@/actions/cookies";
+import { slugify } from "@/utils/reformat";
 
 const mainRoutes = [
     {
@@ -37,7 +38,7 @@ const authRoutes = [
 const userRoutes = (username: string) => [
     {
         name: 'My Trainer',
-        path: `/trainers/${username}`
+        path: `/trainers/${slugify(username)}`
     }
 ]
 

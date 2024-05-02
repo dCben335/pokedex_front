@@ -19,9 +19,11 @@ const PokemonWrapper = ({ baseUrl, className, isList, ...props }: PokemonWrapper
     const { getTypeColor } = usePokemonTypesContext();
 
     if (error || (!isLoading && !data)) {
-        toast.error(error?.message ?? "Error fetching pokemons");
+        toast.error("Error fetching pokemons");
         return (
-            <div>Error fetching pokemons</div>
+            <div className={styles.center}>
+                <p>Error fetching pokemons, please try again later</p>
+            </div>
         )
     }
 

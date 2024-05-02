@@ -2,6 +2,7 @@ import { UrlParams } from '@/utils/queryParams';
 import { pokemonSearchResponseSchema, pokemonTypeResponseSchema, pokemonSchema, PokemonPostRequest, PokemonPutRequest } from "@/libs/schemas/entities/pokemon";
 import { handleApiFetch } from "../";
 import { parseWithZodSchema } from "@/utils/parse";
+import { slugify } from '@/utils/reformat';
 
 const API_POKEMON_BASE_URL = `pkmn`;
 
@@ -40,7 +41,9 @@ export const getPokemon = async (name: string) => {
     const data = await handleApiFetch({
         path: `${API_POKEMON_BASE_URL}?name=${name}`,
         method: "GET",
+        tags: [`pokemon-${slugify(name)}`]
     });
+    if ("error" in data) return data as { error: string };
 
     return parseWithZodSchema(pokemonSchema, data);
 }
@@ -52,8 +55,11 @@ export const createPokemon = async (pokemon: PokemonPostRequest, token: string) 
         path: `${API_POKEMON_BASE_URL}`,
         method: "POST",
         token: token,
-        body: JSON.stringify(pokemon)
+        body: JSON.stringify({...pokemon}),
+        tags: [`pokemon-${slugify(pokemon.name)}`],
+        notJsonResponse: true
     });
+
 
     return data;
 }
@@ -68,12 +74,12 @@ export const updatePokemon = async (pokemon: PokemonPutRequest, token: string) =
     if (pokemon.typeOne) UrlParams.append("typeOne", pokemon.typeOne);
     if (pokemon.typeTwo) UrlParams.append("typeTwo", pokemon.typeTwo);
     if (pokemon.imgUrl) UrlParams.append("imgUrl", pokemon.imgUrl);
-    console.log(UrlParams.toString(), pokemon);
 
     const data = await handleApiFetch({
         path: `${API_POKEMON_BASE_URL}?${UrlParams.toString()}`,
         method: "PUT",
         token: token,
+        tags: [`pokemon-${slugify(pokemon.name)}`]
     });
 
     return data;
@@ -81,11 +87,12 @@ export const updatePokemon = async (pokemon: PokemonPutRequest, token: string) =
 
 export const deletePokemon = async (pokemonName: string, token: string) => {
     const data = await handleApiFetch({
-        path: `${API_POKEMON_BASE_URL}`,
+        path: `${API_POKEMON_BASE_URL}?name=${pokemonName}`,
         method: "DELETE",
-        token: token
+        token: token,
+        notJsonResponse: true,
     });
-
+    
     return data;
 }
 

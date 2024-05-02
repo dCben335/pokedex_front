@@ -1,6 +1,7 @@
 "use server"
 
 import { getUserInfoFromToken } from "@/libs/routes/entities/user"
+import { slugify } from "@/utils/reformat"
 import { cookies } from "next/headers"
 
 export interface Cookies {
@@ -38,9 +39,8 @@ export const deleteCookies = async () => {
 
 
 export const isCurrentUserTrainer = async(login: Cookies['login'], token: Cookies["token"], username: string) => {
-    if (!token || login !== username) return false;
-    
+    if (!token || login !== username) return false;    
     const user = await getUserInfoFromToken(token);
-    return user?.login === login;
+    return slugify(user?.login) === login;
 }
 

@@ -2,6 +2,7 @@ import { parseWithZodSchema } from '@/utils/parse';
 import { trainerSchema, trainerSearchResponseSchema } from '../../schemas/entities/trainer';
 import { TrainerRequest } from "@/libs/schemas/entities/trainer";
 import { handleApiFetch } from '..';
+import { slugify } from '@/utils/reformat';
 
 const API_TRAINER_BASE_URL = `trainer`;
 
@@ -23,7 +24,7 @@ export const getTrainer = async (username: string) => {
     const data = await handleApiFetch({
         path: `${API_TRAINER_BASE_URL}?username=${username}`,
         method: "GET",
-        tags: [`trainer-${username}`]
+        tags: [`trainer-${slugify(username)}`]
     });
     if ("error" in data) return data
 
@@ -38,6 +39,7 @@ export const deleteTrainer = async (token: string) => {
         path: `${API_TRAINER_BASE_URL}`,
         method: "DELETE",
         token: token,
+        notJsonResponse: true
     });
 
     return data;

@@ -8,6 +8,7 @@ import { toast } from "sonner";
 import Link from "next/link";
 import { storeCookies } from "@/actions/cookies";
 import { navigate } from "@/actions/navigate";
+import { slugify } from "@/utils/reformat";
 
 const RegisterForm = ({}) => {
 
@@ -18,12 +19,13 @@ const RegisterForm = ({}) => {
 
         const response = await register(data as UserRequest) as UserResponse | { error: string };
         if ("error" in response) {
-            return toast.error(response.error);
+            return toast.error("The user already exists, please try again with another name");
         }
-
+        
+        const sluggifiedLogin = slugify(response.user.login);
+        storeCookies({ token: response.token, login: sluggifiedLogin, isAdmin: response.user.isAdmin.toString() });
         toast.success("User registered successfully");
-        storeCookies({ token: response.token, login: response.user.login, isAdmin: response.user.isAdmin.toString() });
-        await navigate(`/trainers/${response.user.login}`);
+        await navigate(`/trainers/${sluggifiedLogin}`);
     };
 
     return (

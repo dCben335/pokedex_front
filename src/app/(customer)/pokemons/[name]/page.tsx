@@ -15,7 +15,7 @@ interface PagePops {
 }
 
 const Page = async({ params }: PagePops) => {
-    const data = await getPokemon(firstLetterOfEachWordUppercase(unslugify(params.name)));
+    const data = await getPokemon(unslugify(params.name));
     if ("error" in data) {
         return notFound();
     }

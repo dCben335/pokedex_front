@@ -14,8 +14,8 @@ export const trainerSchema = z.object({
     createdDate: z.string(),
     id: z.string(),
     username: userSchema.shape.login,
-    trainerName: z.string(),
-    imgUrl: z.string(),
+    trainerName: z.string().regex(/^[a-zA-Z0-9 -]+$/, { message: "Only letters, numbers, spaces and hyphens are allowed" }),
+    imgUrl: z.string().url(),
     pkmnSeen: z.array(trainerMarkRequestSchema.shape.pkmnId).optional(),
     caughtPokemons: z.array(trainerMarkRequestSchema.shape.pkmnId).optional(),
 });

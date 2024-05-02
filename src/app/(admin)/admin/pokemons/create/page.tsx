@@ -10,7 +10,7 @@ const Page = async({  }) => {
 
     return (
         <main>
-            <PokemonForm token={token} />
+            <PokemonForm key={"create"} token={token} />
         </main>
     )
 }

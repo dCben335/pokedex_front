@@ -28,7 +28,7 @@ export const pokemonSchema = z.object({
     name: z.string().min(1).max(255),
     imgUrl: z.string().min(1),
     description: z.string().nullable(),
-    types: z.array(pokemonTypeSchema.shape.name),
+    types: z.array(pokemonTypeSchema.shape.name).min(0).max(2),
     regions: z.array(pokemonRegionSchemp).nullable(),
 });
 
@@ -44,7 +44,7 @@ export const pokemonPostRequestSchema = z.object({
 export type PokemonPutRequest = z.infer<typeof pokemonPutRequestSchema>;
 export const pokemonPutRequestSchema = z.object({
     id: pokemonSchema.shape.id,
-    name: pokemonSchema.shape.name.optional(),
+    name: pokemonSchema.shape.name,
     imgUrl: pokemonSchema.shape.imgUrl.optional(),
     description: pokemonSchema.shape.description.optional(),
     typeOne: pokemonTypeSchema.shape.name.optional(),

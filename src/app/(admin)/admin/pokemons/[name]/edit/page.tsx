@@ -14,7 +14,7 @@ type PageProps = {
 
 
 const Page = async({ params }: PageProps) => {
-    const data = await getPokemon(firstLetterOfEachWordUppercase(unslugify(params.name)));
+    const data = await getPokemon(unslugify(params.name));
     if ("error" in data || !data) {
         return notFound();
     }
@@ -23,7 +23,8 @@ const Page = async({ params }: PageProps) => {
     
     return (
         <main className="centered-page-content">
-            <PokemonForm 
+            <PokemonForm
+                key={data.id} 
                 pokemonId={data.id}
                 token={token} 
                 editMode={true}
@@ -34,7 +35,7 @@ const Page = async({ params }: PageProps) => {
                     typeOne: data.types[0],
                     typeTwo: data.types[1],
                 }}
-                />
+            />
         </main>
     )
 }

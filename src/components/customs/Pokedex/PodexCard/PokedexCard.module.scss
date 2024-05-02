@@ -23,11 +23,14 @@
         
     }
 
+    &:not(.skeleton) .linkContainer {
+        background-color: var(--_background-color, $accent-color);
+    }
+
     .linkContainer {
         gap: .25rem;
         border-radius: inherit;
         color: #fff;
-        background-color: var(--_background-color, $accent-color);
         overflow: visible;
 
         & > * {

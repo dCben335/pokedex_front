@@ -7,6 +7,6 @@ export const navigate = async(path: string) => {
     redirect(path)
 }
 
-export const refreshTags = async(tag: string) => {
+export const refreshTag = async(tag: string) => {
     revalidateTag(tag)
 }

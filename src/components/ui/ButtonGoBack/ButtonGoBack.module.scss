@@ -1,13 +1,13 @@
 a.goBack {
     align-items: center;
     gap: .5rem;
-    height: fit-content;
-    width: fit-content;
-    padding: .75rem;
+    height: max-content;
+    width: max-content;
+    padding: .5rem;
     
 
     .icon {
-        height: 2rem;
+        height: 1.75rem;
         aspect-ratio: 1;
         fill: var(--secondary-color, $secondary-color);
     }

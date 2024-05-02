@@ -1,6 +1,6 @@
 "use client";
 
-import { navigate, refreshTags } from "@/actions/navigate";
+import { navigate, refreshTag } from "@/actions/navigate";
 import Form, { GenerateFormProps } from "@/components/customs/Form/Form";
 import { createTrainer, updateTrainer } from "@/libs/routes/entities/trainer";
 import { TrainerRequest, trainerRequestSchema } from "@/libs/schemas/entities/trainer";
@@ -42,8 +42,8 @@ const TrainerForm = ({ username, editMode, token, defaultValues, ...props }: Tra
         if ("error" in response) {
             return toast.error(response.error);
         }
-    
-        await refreshTags(`trainer-${username}`);
+        
+        await refreshTag(`trainer-${username}`);
         await navigate(`/trainers/${username}`);
         return toast.success(successMessage);
     };

@@ -20,7 +20,12 @@ const TrainerWrapper = ({ baseUrl, className, isList, ...props }: PokemonWrapper
 
 
     if (error || (!isLoading && !data)) {
-        return toast.error("Error fetching pokemons");
+        toast.error("Error fetching trainers");
+        return (
+            <div className={styles.center}>
+                <p>Error fetching trainers, please try again later</p>
+            </div>
+        )
     }
 
     return (
@@ -38,7 +43,7 @@ const TrainerWrapper = ({ baseUrl, className, isList, ...props }: PokemonWrapper
                     ) : (data?.content ?? []).map(({ trainerName, imgUrl, username }, index) => 
                         <PokemonCard
                             key={index}
-                            url={`${baseUrl}/${username}`}
+                            url={`${baseUrl}/${slugify(username)}`}
                             name={trainerName}
                             image={imgUrl}
                             types={[]}

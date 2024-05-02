@@ -16,18 +16,16 @@ const non_asciis: NonAsciiMap = {
 };
 
 export const accentsTidy = (expression: string) => {
-    let lower = expression.toLowerCase();
+    let lower = expression;
 
     for (let i in non_asciis) {
         lower = lower.replace(new RegExp(non_asciis[i], 'g'), i)
     }
-    
     return lower;
 };
 
 export const slugify = (expression: string) => {
-    return accentsTidy(expression).replace(/[^a-z0-9-]+/g, '_').replace(/^-+|-+$/g, '');
-
+    return accentsTidy(expression).split(" ").join("_").replace(/^-+|-+$/g, '');
 }
 
 export const unslugify = (expression: string) => {

@@ -39,6 +39,10 @@ $gap: 1rem;
         max-width: 100%;
         height: $icon-height;
 
+        & > :only-child {
+            grid-column: 1 / -1;
+        }
+
         & > * {
             height: 100%;
         }

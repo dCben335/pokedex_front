@@ -13,10 +13,11 @@ type handleApiFetchProps = {
     body?: string;
     token?: string;
     tags?: string[];
+    notJsonResponse?: boolean;
 }
 
 
-export const handleApiFetch = async({ path, token, method, body, tags }: handleApiFetchProps) => {
+export const handleApiFetch = async({ path, token, method, body, tags, notJsonResponse }: handleApiFetchProps) => {
     return await handleApiFetchErrors(async() => {
         const response = await fetch(`${BASE_API_URL}/${path}`, {
             method: method,
@@ -33,7 +34,7 @@ export const handleApiFetch = async({ path, token, method, body, tags }: handleA
         });
 
         if (response.status !== 200 && response.status !== 201) throw new Error(`${response.status}`)
-        return await response.json();
+        return notJsonResponse ? {} : await response?.json();
     });    
 }
 

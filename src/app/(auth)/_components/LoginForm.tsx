@@ -8,18 +8,19 @@ import { login } from "@/libs/routes/entities/user";
 import { toast } from "sonner";
 import { storeCookies } from "@/actions/cookies";
 import { navigate } from "@/actions/navigate";
+import { slugify } from "@/utils/reformat";
 
-const LoginForm = ({}) => {
+const LoginForm = ({ }) => {
     const onSubmit: GenerateFormProps['onSubmit'] = async (data) => {
         const registerData = data as UserRequest;
         const response = await login(registerData) as UserResponse | { error: string };
         if ("error" in response) {
-            return toast.error(response.error);
+            return toast.error("Error logging in, please check your credentials");
         }
-
-        storeCookies({ token: response.token, login: response.user.login, isAdmin: response.user.isAdmin.toString() });
+        const sluggifiedLogin = slugify(response.user.login);
+        storeCookies({ token: response.token, login: sluggifiedLogin, isAdmin: response.user.isAdmin.toString() });
         toast.success("User registered successfully");
-        await navigate(`/trainers/${response.user.login}`);
+        await navigate(`/trainers/${sluggifiedLogin}`);
     };
 
     return (
