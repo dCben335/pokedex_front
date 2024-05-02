@@ -1,5 +1,5 @@
 import Button from "@/components/ui/Button/Button";
-import { deleteTrainer, getTrainer } from "@/libs/routes/entities/trainer";
+import { deleteTrainer, getTrainer, getTrainers } from "@/libs/routes/entities/trainer";
 import { notFound } from "next/navigation";
 import TrainerForm from "@/components/customs/Pokedex/Trainers/TrainerForm/TrainerForm";
 import { getCookies, isCurrentUserTrainer } from "@/actions/cookies";
@@ -12,6 +12,18 @@ interface PagePops {
     params: {
         username: string;
     };
+}
+
+export async function generateStaticParams() {
+    const data = await getTrainers("size=100");
+    if ("error" in data) {
+        return [];
+    }
+    return data.content.map((trainer) => ({
+        params: {
+            name: trainer.username,
+        },
+    }));
 }
 
 const Page = async({ params }: PagePops) => {

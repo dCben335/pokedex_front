@@ -4,7 +4,7 @@ import styles from './page.module.scss';
 import { notFound } from 'next/navigation';
 import { firstLetterOfEachWordUppercase, unslugify } from '@/utils/reformat';
 import StyledImage from '@/components/ui/StyledImage/StyledImage';
-import { getPokemon } from '@/libs/routes/entities/pokemon';
+import { getPokemon, getPokemons } from '@/libs/routes/entities/pokemon';
 import PokemonTypesTag from '@/components/customs/Pokedex/Pokemons/PokemonTypes/PokemonTypesTags/PokemonTypesTags';
 import ButtonGoBack from '@/components/ui/ButtonGoBack/ButtonGoBack';
 
@@ -12,6 +12,18 @@ interface PagePops {
     params: {
         name: string;
     };
+}
+
+export async function generateStaticParams() {
+    const data = await getPokemons("size=100");
+    if ("error" in data) {
+        return [];
+    }
+    return data.content.map((pokemon) => ({
+        params: {
+            name: pokemon.name,
+        },
+    }));
 }
 
 const Page = async({ params }: PagePops) => {
