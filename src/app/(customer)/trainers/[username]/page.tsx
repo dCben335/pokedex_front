@@ -1,5 +1,5 @@
 import Button from "@/components/ui/Button/Button";
-import { deleteTrainer, getTrainer, getTrainers } from "@/libs/routes/entities/trainer";
+import { deleteTrainer, getTrainer } from "@/libs/routes/entities/trainer";
 import { notFound } from "next/navigation";
 import TrainerForm from "@/components/customs/Pokedex/Trainers/TrainerForm/TrainerForm";
 import { getCookies, isCurrentUserTrainer } from "@/actions/cookies";
@@ -14,15 +14,29 @@ interface PagePops {
     };
 }
 
+
+
 export async function generateStaticParams() {
-    const data = await getTrainers("size=100");
-    if ("error" in data) {
-        return [];
-    }
-    return data.content.map((trainer) => ({
-        params: {
-            name: trainer.username,
+    const fakeTrainers = [
+        {
+            username: "ash",
+            trainerName: "Ash Ketchum",
+            imgUrl: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/trainers/1.png",
         },
+        {
+            username: "misty",
+            trainerName: "Misty",
+            imgUrl: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/trainers/2.png",
+        },
+        {
+            username: "brock",
+            trainerName: "Brock",
+            imgUrl: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/trainers/3.png",
+        },
+    ];
+    
+    return fakeTrainers.map((trainer) => ({
+        username: trainer.username,
     }));
 }
 
