@@ -16,15 +16,23 @@
             grid-template-columns: 1fr 1fr;
             grid-template-rows: 1fr 1fr;
             gap: 1rem;
-    
-            a {
-                aspect-ratio: auto !important;
-                height: 100%;
-                div {
+
+            & > * {
+                min-height: 12.5rem;
+                
+                a {
+                    aspect-ratio: auto !important;
                     height: 100%;
-                    max-height: 12.5rem;
+                    
+                    & > div {
+                        height: 100%;
+                        max-height: 12.5rem;
+    
+                        aspect-ratio: auto !important;
+                    }
                 }
             }
+    
             & > :nth-child(2) {
                 grid-row: span 2;
     

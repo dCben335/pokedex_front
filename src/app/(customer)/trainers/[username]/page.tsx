@@ -19,18 +19,6 @@ interface PagePops {
     };
 }
 
-export async function generateStaticParams() {
-    const data = await getTrainers("size=100");
-    if ("error" in data) {
-        return [];
-    }
-    return data.content.map((trainer) => ({
-        params: {
-            name: trainer.username,
-        },
-    }));
-}
-
 const Page = async({ params }: PagePops) => {
     const trainer = await getTrainer(unslugify(params.username)) as Trainer | { error: string };
     const { login, token } = await getCookies();
@@ -98,14 +86,14 @@ const Page = async({ params }: PagePops) => {
                             <p><time>Created at: {reformatedDate}</time></p>
                             <p>Username: {trainer.username}</p>
                             <p>Pokemons Caught: {trainer?.pkmnCaught?.length ?? 0}</p>
-                            <p>Pokemons Seen {trainer.pkmnSeen?.length ?? 0}</p>
+                            <p>Pokemons Seen: {trainer.pkmnSeen?.length ?? 0}</p>
                         </div>
                     </section>
                     {pkmnCaught && pkmnCaught.length > 0 &&
                         <section>
                             <h2>Caught Pokemons</h2>
                             <ul className={styles.wrapper}>
-                                {pkmnCaught.map(({id, name, imgUrl, types}) => (
+                                {pkmnCaught.map(({ id, name, imgUrl, types }) => (
                                     <li key={id}>
                                         <PokedexCard 
                                             key={id}

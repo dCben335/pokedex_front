@@ -14,7 +14,7 @@ export const middleware = async(request: NextRequest) => {
   if (request.nextUrl.pathname.startsWith('/admin')) {  
     return handleAdminRoutes(request, token)
   }
- 
+  
   if (entryRoutes.includes(request.nextUrl.pathname)) {
     return handleEntryRoutes(request, token)
   }

@@ -4,7 +4,7 @@ import styles from './page.module.scss';
 import { notFound } from 'next/navigation';
 import { unslugify } from '@/utils/reformat';
 import StyledImage from '@/components/ui/StyledImage/StyledImage';
-import { getPokemon, getPokemons } from '@/libs/routes/entities/pokemon';
+import { getPokemon } from '@/libs/routes/entities/pokemon';
 import PokemonTypesTag from '@/components/customs/Pokedex/Pokemons/PokemonTypes/PokemonTypesTags/PokemonTypesTags';
 import ButtonGoBack from '@/components/ui/ButtonGoBack/ButtonGoBack';
 import PokedexVoiceSpeak from '@/components/customs/Pokedex/PokedexVoiceSpeak/PokedexVoiceSpeak';
@@ -12,6 +12,7 @@ import TrainerCatchButton from '@/components/customs/Pokedex/Trainers/TrainerCat
 import { getCookies } from '@/actions/cookies';
 import { getTrainer } from '@/libs/routes/entities/trainer';
 import { Trainer } from '@/libs/schemas/entities/trainer';
+import { PokemonRegion } from '@/libs/schemas/entities/pokemon';
 
 interface PagePops {
     params: {
@@ -19,22 +20,11 @@ interface PagePops {
     };
 }
 
-export async function generateStaticParams() {
-    const data = await getPokemons("size=100");
-    if ("error" in data) {
-        return [];
-    }
-    return data.content.map((pokemon) => ({
-        params: {
-            name: pokemon.name,
-        },
-    }));
-}
 
 const Page = async({ params }: PagePops) => {
     const pokemon = await getPokemon(unslugify(params.name));
     if ("error" in pokemon) {
-        return notFound();
+        notFound();
     }
 
     const { login } = await getCookies();
@@ -48,8 +38,11 @@ const Page = async({ params }: PagePops) => {
     const voiceText = `
         This is the page of the ${pokemon.name} pokemon. 
         This pokemon is a ${pokemon.types.join(' and ')} pokemon. ${pokemon.description}. 
-        It can be found in the following regions: 
-            ${(pokemon.regions ?? []).map(region => `number ${region.regionPokedexNumber} in ${region.regionName}`).join(', ')}.`;
+        ${(pokemon.regions && pokemon.regions.length > 0) 
+            ? `It can be found in the following regions: ${pokemon.regions.map(region => `number ${region.regionPokedexNumber} in ${region.regionName}`).join(', ')}` 
+            : ''
+        }.  
+    `;
 
     return (
         <main className={styles.main}>

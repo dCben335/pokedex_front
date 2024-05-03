@@ -19,27 +19,27 @@ export const accentsTidy = (expression: string) => {
     let lower = expression;
 
     for (let i in non_asciis) {
-        lower = lower.replace(new RegExp(non_asciis[i], 'g'), i)
+        lower = lower?.replace(new RegExp(non_asciis[i], 'g'), i)
     }
     return lower;
 };
 
 export const slugify = (expression: string) => {
-    return accentsTidy(expression).split(" ").join("_").replace(/^-+|-+$/g, '');
+    return accentsTidy(expression)?.split(" ")?.join("_")?.replace(/^-+|-+$/g, '');
 }
 
 export const unslugify = (expression: string) => {
-    return expression.replace(/_/g, ' ');
+    return expression?.replace(/_/g, ' ');
 }
 
 export const firstLetterUppercase = (expression: string) => {
-    return expression.charAt(0).toUpperCase() + expression.slice(1);
+    return expression?.charAt(0)?.toUpperCase() + expression?.slice(1);
 }
 
 export const firstLetterOfEachWordUppercase = (expression: string) => {
     return expression
-        .split("-").map(word => firstLetterUppercase(word)).join('-')
-        .split(' ').map(word => firstLetterUppercase(word)).join(' ');
+        ?.split("-").map(word => firstLetterUppercase(word))?.join('-')
+        ?.split(' ').map(word => firstLetterUppercase(word))?.join(' ');
 }
 
 

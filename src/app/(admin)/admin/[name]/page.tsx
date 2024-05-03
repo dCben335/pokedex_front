@@ -17,36 +17,28 @@ interface PagePops {
         name: string;
     };
 }
-export async function generateStaticParams() {
-    const data = await getPokemons("size=100");
-    if ("error" in data) {
-        return [];
-    }
-    return data.content.map((pokemon) => ({
-        params: {
-            name: pokemon.name,
-        },
-    }));
-}
 
 const Page = async({ params }: PagePops) => {
-    const data = await getPokemon(unslugify(params.name));
+    const pokemon = await getPokemon(unslugify(params.name));
     const { token } = await getCookies();
-    if ("error" in data) {
+    if ("error" in pokemon) {
         return notFound();
     }
 
     const handleDelete = async () => {
         "use server"
-        return await deletePokemon(data.name, token);
+        return await deletePokemon(pokemon.name, token);
     }
 
 
     const voiceText = `
-        This is the page of the ${data.name} pokemon. 
-        This pokemon is a ${data.types.join(' and ')} pokemon. ${data.description}. 
-        It can be found in the following regions: 
-            ${(data.regions ?? []).map(region => `number ${region.regionPokedexNumber} in ${region.regionName}`).join(', ')}.`;
+        This is the page of the ${pokemon.name} pokemon. 
+        This pokemon is a ${pokemon.types.join(' and ')} pokemon. ${pokemon.description}. 
+        ${(pokemon.regions && pokemon.regions.length > 0) 
+            ? `It can be found in the following regions: ${pokemon.regions.map(region => `number ${region.regionPokedexNumber} in ${region.regionName}`).join(', ')}` 
+            : ''
+        }.  
+    `;
 
 
     return (
@@ -62,7 +54,7 @@ const Page = async({ params }: PagePops) => {
                         deleteFunction={handleDelete} 
                         redirectToUrl='/admin' 
                         refreshTagName={`pokemon-${params.name}`}
-                        successMessage={`The pokemon ${data.name} is succesfully deleted`}
+                        successMessage={`The pokemon ${pokemon.name} is succesfully deleted`}
                     />
                     <Button href={`/admin/${params.name}/edit`} renderAs='link'>Edit</Button>
                     <Button href={`/admin/${params.name}/regions`} renderAs='link'>Regions</Button>
@@ -71,30 +63,30 @@ const Page = async({ params }: PagePops) => {
             <div className={styles.container}>
                 <StyledImage 
                     className={styles.imageContainer}
-                    src={data.imgUrl} 
-                    alt={data.name} 
+                    src={pokemon.imgUrl} 
+                    alt={pokemon.name} 
                     fill
                 />
                 <div>
                     <div className={styles.centered}>
-                        <h1>{data.name}</h1>
-                        <PokemonTypesTag types={data.types} baseUrl={"/admin/"} updateAccentColor={true}/>              
+                        <h1>{pokemon.name}</h1>
+                        <PokemonTypesTag types={pokemon.types} baseUrl={"/admin/"} updateAccentColor={true}/>              
                     </div>
                     <div className={styles.gridContainer}>
                         <section >
-                            {data.description && 
+                            {pokemon.description && 
                                 <>
                                     <h2>Pokemon&apos;s description</h2>
-                                    <p>{data.description}</p>
+                                    <p>{pokemon.description}</p>
                                 </>
                             }
                         </section>
                         <section>
-                            {data.regions && 
+                            {pokemon.regions && (pokemon?.regions ?? []).length > 0 && 
                                 <>
                                     <h2>Pokemon&apos;s Regions</h2>
                                     <ul className={styles.regions}>
-                                        {data.regions.map((region) => (
+                                        {pokemon.regions.map((region) => (
                                             <li key={region.regionName}>
                                                 <p className={styles.region}>
                                                     <strong className='h2'>{region.regionPokedexNumber}</strong> in {region.regionName}

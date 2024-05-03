@@ -17,10 +17,6 @@ const mainRoutes = [
     {
         name: 'Trainers',
         path: '/trainers'
-    },
-    {
-        name: 'Types',
-        path: '/types'
     }
 ]
 

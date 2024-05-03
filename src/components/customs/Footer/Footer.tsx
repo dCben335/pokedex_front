@@ -18,12 +18,8 @@ const routes = [
     path: '/types'
   },
   {
-    name: 'Policy',
-    path: '/policy'
-  },
-  {
-    name: 'Terms',
-    path: '/terms'
+    name: 'Policies',
+    path: '/policies'
   }
 ]
 
