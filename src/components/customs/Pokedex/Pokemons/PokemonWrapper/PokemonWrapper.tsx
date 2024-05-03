@@ -14,7 +14,9 @@ type PokemonWrapperProps = React.HTMLAttributes<HTMLDivElement> & {
     isList?: boolean;
 }
 
-const PokemonWrapper = ({ baseUrl, className, isList, ...props }: PokemonWrapperProps) => {
+
+
+const PokemonWrapper = ({ baseUrl, className, isList,  ...props }: PokemonWrapperProps) => {
     const { data, isLoading, error } = usePokemons();
     const { getTypeColor } = usePokemonTypesContext();
 
@@ -40,9 +42,10 @@ const PokemonWrapper = ({ baseUrl, className, isList, ...props }: PokemonWrapper
                             skeleton={true}
                             isList={isList}
                         />
-                    ) : (data?.content ?? []).map(({ name, imgUrl, types }, index) => 
+                    ) : (data?.content ?? []).map(({ name, imgUrl, types, id }, index) => 
                         <PokedexCard
-                            key={index}
+                            key={id}
+                            id={id}
                             url={`${baseUrl}/${slugify(name)}`}
                             name={name}
                             image={imgUrl}

@@ -8,7 +8,7 @@ type ButtonGoBackProps = Omit<LinkProps, "renderAs"> & PropsWithChildren<{
 }>
 
 
-const ButtonGoBack = ({ children, ...props }: ButtonGoBackProps) => {
+const ButtonGoBack = ({ ...props }: ButtonGoBackProps) => {
     return (
         <Button renderAs="link" className={styles.goBack} {...props}>
             <ArrowBack className={styles.icon} />            

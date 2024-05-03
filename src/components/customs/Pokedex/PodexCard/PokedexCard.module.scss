@@ -27,6 +27,7 @@
         background-color: var(--_background-color, $accent-color);
     }
 
+
     .linkContainer {
         gap: .25rem;
         border-radius: inherit;
@@ -73,6 +74,18 @@
             display: flex;
             align-items: center;
             padding: .5rem min(5%, 1.25rem);
+
+            &.smaller {
+                padding: .25rem min(5%, 1.25rem);
+
+                .img {
+                    height: 1.5rem;
+                }
+
+                .types {
+                    font-size: .75rem;
+                }
+            }
 
             .img {
                 height: 3rem;

@@ -22,7 +22,7 @@ const Page = async({ params }: PageProps) => {
     return (
         <main>
             <nav className={styles.banner}> 
-                <ButtonGoBack href={`/trainers/${params.username}`}>Trainers</ButtonGoBack>
+                <ButtonGoBack href={`/trainers/${params.username}`} />
             </nav>
             <div className="centered-page-content">
                 <TrainerForm 

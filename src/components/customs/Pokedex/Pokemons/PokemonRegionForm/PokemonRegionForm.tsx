@@ -77,7 +77,7 @@ const PokemonRegionForm = ({ token, pokemonName, currentRegionName } : PokemonRe
         
         toast.success(`Region ${data.regionName} is successfully added to ${pokemonName}`);
         await refreshTag(`pokemon-${slugify(pokemonName)}`);
-        await navigate(`/admin/pokemons/${pokemonName}/regions`);
+        await navigate(`/admin/${pokemonName}/regions`);
     }
 
     return (

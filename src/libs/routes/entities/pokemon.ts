@@ -1,5 +1,5 @@
 import { UrlParams } from '@/utils/queryParams';
-import { pokemonSearchResponseSchema, pokemonTypeResponseSchema, pokemonSchema, PokemonPostRequest, PokemonPutRequest, PokemonRegionRequest } from "@/libs/schemas/entities/pokemon";
+import { pokemonSearchResponseSchema, pokemonTypeResponseSchema, pokemonSchema, PokemonPostRequest, PokemonPutRequest, PokemonRegionRequest, pokemonsSchema } from "@/libs/schemas/entities/pokemon";
 import { handleApiFetch } from "../";
 import { parseWithZodSchema } from "@/utils/parse";
 import { slugify } from '@/utils/reformat';
@@ -48,6 +48,17 @@ export const getPokemon = async (name: string) => {
     return parseWithZodSchema(pokemonSchema, data);
 }
 
+//GET /ids
+export const getPokemonByIds = async (ids: string[]) => {
+    const data = await handleApiFetch({
+        path: `${API_POKEMON_BASE_URL}/ids`,
+        method: "POST",
+        body: JSON.stringify(ids),
+    });
+    
+    if ("error" in data) return data as { error: string };
+    return parseWithZodSchema(pokemonsSchema, data);
+}
 
 //POST /
 export const createPokemon = async (pokemon: PokemonPostRequest, token: string) => {
@@ -59,7 +70,6 @@ export const createPokemon = async (pokemon: PokemonPostRequest, token: string) 
         tags: [`pokemon-${slugify(pokemon.name)}`],
         notJsonResponse: true
     });
-
 
     return data;
 }

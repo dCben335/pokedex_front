@@ -86,17 +86,17 @@ const PokemonForm = ({ editMode, token, defaultValues, pokemonId, ...props }: Po
         const sluggifiedName = slugify(pokemonData.name);
 
         await refreshTag(`pokemon-${sluggifiedName}`);
-        await navigate(`/admin/pokemons/${sluggifiedName}`);
+        await navigate(`/admin/${sluggifiedName}`);
         return toast.success(successMessage);
     };
 
     const onSubmitPOST: GenerateFormProps['onSubmit'] = handleSubmit(createPokemon, "Trainer created");
     const onSubmitPUT: GenerateFormProps['onSubmit'] = handleSubmit(updatePokemon, "Trainer updated");
 
-    const finalFields = defaultValues 
+    const finalFields = defaultValues !== undefined
         ? fillObjectWithKey(fieldsWithTypes, defaultValues, "defaultValue") as GenerateFormProps['fields']
         : fieldsWithTypes as GenerateFormProps['fields'];
-
+    
 
     return (
         <div className={styles.container}>

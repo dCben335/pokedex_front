@@ -7,10 +7,11 @@ import Loading from "@/components/ui/Loading/Loading";
 type PokemonsProps = React.HTMLAttributes<HTMLElement> & PropsWithChildren<{
     baseUrl: string
     isList?: boolean
+    catchMode?: boolean
 }>
 
 
-const Pokemons = ({ children, className, baseUrl, isList, ...props}: PokemonsProps) => {
+const Pokemons = ({ children, className, baseUrl, isList, catchMode, ...props}: PokemonsProps) => {
     
     return (
         <section className={`${styles.pokemons} ${className ? className : ""}`} {...props}>

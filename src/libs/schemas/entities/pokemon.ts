@@ -34,6 +34,8 @@ export const pokemonSchema = z.object({
     regions: z.array(pokemonRegionSchema).nullable(),
 });
 
+export const pokemonsSchema = z.array(pokemonSchema);
+
 
 export type PokemonPostRequest = z.infer<typeof pokemonPostRequestSchema>;
 export const pokemonPostRequestSchema = z.object({

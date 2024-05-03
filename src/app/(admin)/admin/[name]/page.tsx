@@ -53,19 +53,19 @@ const Page = async({ params }: PagePops) => {
         <main className={styles.main}>
             <nav className={styles.banner}> 
                 <div className={styles.buttons}>
-                    <ButtonGoBack href="/admin/pokemons">Trainers</ButtonGoBack>
+                    <ButtonGoBack href="/admin" />
                     <PokedexVoiceSpeak text={voiceText} />
                 </div>
                 <div className={styles.methods}>
                     <PokedexDelete 
                         entityName="Pokemon"
                         deleteFunction={handleDelete} 
-                        redirectToUrl='/admin/pokemons/' 
+                        redirectToUrl='/admin' 
                         refreshTagName={`pokemon-${params.name}`}
                         successMessage={`The pokemon ${data.name} is succesfully deleted`}
                     />
-                    <Button href={`/admin/pokemons/${params.name}/edit`} renderAs='link'>Edit</Button>
-                    <Button href={`/admin/pokemons/${params.name}/regions`} renderAs='link'>Regions</Button>
+                    <Button href={`/admin/${params.name}/edit`} renderAs='link'>Edit</Button>
+                    <Button href={`/admin/${params.name}/regions`} renderAs='link'>Regions</Button>
                 </div>
             </nav>
             <div className={styles.container}>
@@ -78,7 +78,7 @@ const Page = async({ params }: PagePops) => {
                 <div>
                     <div className={styles.centered}>
                         <h1>{data.name}</h1>
-                        <PokemonTypesTag types={data.types} baseUrl={"/admin/pokemons/"} updateAccentColor={true}/>              
+                        <PokemonTypesTag types={data.types} baseUrl={"/admin/"} updateAccentColor={true}/>              
                     </div>
                     <div className={styles.gridContainer}>
                         <section >

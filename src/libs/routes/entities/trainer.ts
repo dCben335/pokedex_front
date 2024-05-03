@@ -1,5 +1,5 @@
 import { parseWithZodSchema } from '@/utils/parse';
-import { trainerSchema, trainerSearchResponseSchema } from '../../schemas/entities/trainer';
+import { Trainer, trainerSchema, trainerSearchResponseSchema } from '../../schemas/entities/trainer';
 import { TrainerRequest } from "@/libs/schemas/entities/trainer";
 import { handleApiFetch } from '..';
 import { slugify } from '@/utils/reformat';
@@ -78,11 +78,11 @@ export const updateTrainer = async (options: TrainerRequest, token: string) => {
 
 
 //POST /mark
-export const createTrainerMark = async (options: string) => {
+export const createTrainerMark = async (pkmnId: string, isCaught: boolean, token: string) => {
     const data = await handleApiFetch({
-        path: `${API_TRAINER_BASE_URL}/mark`,
+        path: `${API_TRAINER_BASE_URL}/mark?pkmnId=${pkmnId}&isCaught=${isCaught}`,
         method: "POST",
-        body: JSON.stringify({ options })
+        token: token,
     });
 
     return data;

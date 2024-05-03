@@ -19,5 +19,10 @@
     &.active {
         background-color: var(--accent-color, $accent-color);
     }
+
+    &[disabled] {
+        filter: brightness(.5);
+        cursor: not-allowed;
+    }
 }
 

@@ -17,7 +17,7 @@ export const trainerSchema = z.object({
     trainerName: z.string().regex(/^[a-zA-Z0-9 -]+$/, { message: "Only letters, numbers, spaces and hyphens are allowed" }),
     imgUrl: z.string().url(),
     pkmnSeen: z.array(trainerMarkRequestSchema.shape.pkmnId).optional(),
-    caughtPokemons: z.array(trainerMarkRequestSchema.shape.pkmnId).optional(),
+    pkmnCaught: z.array(trainerMarkRequestSchema.shape.pkmnId).optional(),
 });
 
 export type TrainerRequest = z.infer<typeof trainerRequestSchema>;

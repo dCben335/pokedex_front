@@ -25,11 +25,10 @@ const Page = async({ params }: PageProps) => {
     return (
         <main>
             <nav className={styles.banner}> 
-                <ButtonGoBack href={`/admin/pokemons/${data.name}`}>Trainers</ButtonGoBack>
+                <ButtonGoBack href={`/admin/${data.name}`} />
             </nav>
             <div className="centered-page-content">
                 <PokemonForm
-                    key={data.id} 
                     pokemonId={data.id}
                     token={token} 
                     editMode={true}

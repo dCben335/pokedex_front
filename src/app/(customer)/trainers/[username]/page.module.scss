@@ -1,7 +1,98 @@
-.banner {
-    background-color: var(--accent-color, $accent-color);
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
-    padding: 0 .5rem .5rem .5rem;
+.main {
+
+    .banner {
+        padding: .5rem;
+        background-color: var(--accent-color, $accent-color);
+        display: flex;
+        flex-direction: column;
+        gap: .5rem;
+        align-items: center;
+        justify-content: space-between;
+        
+        @media screen and (min-width: 600px){
+            flex-direction: row;
+        }
+
+        .methods, .buttons {
+            display: flex;
+            flex-wrap: wrap;
+            font-size: .8rem;
+            justify-content: center;
+            gap: .5rem;
+        }
+    }
+
+
+    .gridContainer {
+        display: grid;
+        gap: 1.5rem;
+        margin-top: 2.5rem;
+        padding: 0 1rem;
+        min-height: 75vh;
+        place-items: center;
+
+        @media screen and (min-width: 800px) {
+            grid-template-columns: repeat(2, 1fr);
+
+            .imgContainer {
+                height: 100%;
+                width: 100%;
+    
+                .img {
+                    position: sticky;
+                    top: 2rem;
+                    max-height: 40rem;
+                    width: 100%;
+                    height: 100%;
+                }
+            }
+
+            .sections {
+                justify-self: flex-start;
+            }
+        }
+
+        .imgContainer {
+            height: 100%;
+            width: 100%;
+        }
+
+        .img {
+            height: 25rem;
+        }
+
+
+
+        .sections {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            padding: 1rem;
+            width: max-content;
+            height: max-content;
+            border-radius: $border-radius;
+            z-index: 10;
+
+            section {
+                display: flex;
+                flex-direction: column;
+                gap: 1.5rem;
+
+                &:not(:first-child) {
+                    border-top: 1px solid var(--secondary-color, $secondary-color);
+                    padding-top: 1rem;
+                }
+            }
+        }
+
+        
+    }
+
+    .wrapper {
+        display: grid;
+        gap: .25rem
+    }
+
 }
+
+

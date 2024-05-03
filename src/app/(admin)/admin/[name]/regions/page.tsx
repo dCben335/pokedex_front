@@ -26,7 +26,7 @@ const Page = async({ params }: PageProps) => {
     return (
         <main>
             <nav className={styles.banner}> 
-                <ButtonGoBack href={`/admin/pokemons/${data.name}`}>Trainers</ButtonGoBack>
+                <ButtonGoBack href={`/admin/${data.name}`} />
             </nav>
 
             <div className="centered-page-content">
@@ -47,7 +47,7 @@ const Page = async({ params }: PageProps) => {
                                                 "use server"
                                                 return await deletePokemonRegion(data.id, region.regionName, token);
                                             }}
-                                            redirectToUrl={`/admin/pokemons/${data.name}/regions`}
+                                            redirectToUrl={`/admin/${data.name}/regions`}
                                             refreshTagName={`pokemon-${data.name}`}
                                             successMessage={`The region ${region.regionName} is succesfully deleted`}
                                         />
@@ -57,7 +57,11 @@ const Page = async({ params }: PageProps) => {
                         </ul>
                     </div>
                 }
-                <PokemonRegionForm token={token} pokemonName={unslugifiedName} currentRegionName={(data.regions ?? []).map(({regionName}) => regionName)} />
+                <PokemonRegionForm 
+                    token={token} 
+                    pokemonName={unslugifiedName} 
+                    currentRegionName={(data.regions ?? []).map(({regionName}) => regionName)} 
+                />
             </div>
         </main>
     )
