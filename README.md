@@ -25,7 +25,7 @@ This is a Pokedex and Trainer Management System built using Next.js. It allows u
 - **Login:** Authenticate users to access their trainer profiles.
 - **Register:** Allow new users to create accounts to become trainers.
 
-### Auth
+### Authenticated
 
 - **Trainer Creation:** Create your own Trainer profile with a name, image, etc.
 - **Trainer Update:** Update your trainer profile information.
@@ -118,3 +118,16 @@ I created API routes to help frontend tester :
   "isAdmin": true
 }
 ```
+
+## Current deployement
+
+I wanted to make an export build for github page. 
+How ever I've got lot's of error about Next.js server actions that I spend hours to outpass but I couldn't figure how to get tid of it.
+I saw that many people got the same issue since Next.js 13 with no solution available since then.
+
+So for now, I chose the easiest and one of the best free solution which is vercel : https://pokedex-front-ble0lch4j-dcben335s-projects.vercel.app
+
+
+This deployed version contains not event a quarter of the application because the APi isn't hosted yet.
+This version only contains fiew available pages and you can only navigate throught it thanks to static json representing the pokemons, types and trainers
+(no authentification feature available); 
