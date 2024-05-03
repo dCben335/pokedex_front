@@ -22,7 +22,6 @@ const LoginForm = ({ }) => {
         toast.success("User registered successfully");
         await navigate(`/trainers/${sluggifiedLogin}`);
     };
-
     return (
         <AuthForm onSubmit={onSubmit} title={"Login"} isRegister={false}>
             <p>Don&apos;t have an account yet ? <Link href="/register">Register</Link></p>

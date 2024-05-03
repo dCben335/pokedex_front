@@ -4,16 +4,16 @@ import { usePokemonTypesContext } from '@/components/providers/PokemonTypesConte
 import styles from './PokemonTypesTags.module.scss';
 import { firstLetterUppercase } from '@/utils/reformat';
 import { useTheme } from '@/components/providers/ThemeContext';
-import { useCallback } from 'react';
+import { HTMLAttributes } from 'react';
 import Button from '@/components/ui/Button/Button';
-import PokemonCategoryButton from '../PokemonTypesModal/PokemonTypesButton';
 
-type PokemonTypesTagProps = {
+type PokemonTypesTagProps = HTMLAttributes<HTMLUListElement> & {
     types: string[],
     updateAccentColor: boolean
+    baseUrl: string
 }
 
-const PokemonTypesTag = ({ types, updateAccentColor } : PokemonTypesTagProps) => {
+const PokemonTypesTag = ({ types, updateAccentColor, baseUrl, className, ...props } : PokemonTypesTagProps) => {
     const { findType } = usePokemonTypesContext(); 
     const { changeColor } = useTheme() 
 
@@ -21,17 +21,17 @@ const PokemonTypesTag = ({ types, updateAccentColor } : PokemonTypesTagProps) =>
     if (colors[0] && updateAccentColor) changeColor(colors[0])
 
     return (
-        <ul className={styles.wrapper}>
+        <ul className={styles.wrapper} {...props}>
             {types.map((type, index) => (
                 <li key={type} >
                     <Button 
-                        href={`/pokemons?typeOne=${type}`} 
+                        href={`${baseUrl}?typeOne=${type}`} 
                         renderAs='link'
                         className={styles.tag} 
                         style={{ 
                             backgroundColor: colors[index],
                             border: `1px solid ${colors[index]}`,
-                         }}>
+                        }}>
                         {firstLetterUppercase(type)}
                     </Button>
                 </li>

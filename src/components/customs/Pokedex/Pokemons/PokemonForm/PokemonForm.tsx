@@ -27,7 +27,7 @@ const fields: GenerateFormProps['fields'] = {
         label: "Description",
         type: "textarea",
         schema: pokemonPostRequestSchema.shape.description,
-        placeholder: "Pikachu is an electric type Pokemon",
+        placeholder: "Pikachu is an Electric-type Pokémon known for its yellow fur with brown stripes on its back. It has large, pointed ears with black tips and a small, lightning bolt-shaped tail. Pikachu's cheeks store electrical energy, which it uses to unleash powerful electric attacks such as Thunderbolt and Thunder. Despite its small size, Pikachu is courageous and fiercely loyal to its Trainer. It is often seen as the mascot of the Pokémon franchise and is beloved by trainers and fans alike",
     },
 }
 

@@ -1,5 +1,5 @@
 import { UrlParams } from '@/utils/queryParams';
-import { pokemonSearchResponseSchema, pokemonTypeResponseSchema, pokemonSchema, PokemonPostRequest, PokemonPutRequest } from "@/libs/schemas/entities/pokemon";
+import { pokemonSearchResponseSchema, pokemonTypeResponseSchema, pokemonSchema, PokemonPostRequest, PokemonPutRequest, PokemonRegionRequest } from "@/libs/schemas/entities/pokemon";
 import { handleApiFetch } from "../";
 import { parseWithZodSchema } from "@/utils/parse";
 import { slugify } from '@/utils/reformat';
@@ -97,13 +97,33 @@ export const deletePokemon = async (pokemonName: string, token: string) => {
 }
 
 //POST region 
-export const createPokemonRegion = async (region: string, token: string) => {
+export const createPokemonRegion = async (body: PokemonRegionRequest, token: string) => {
+    const finalBody = {
+        name: body.name,
+        region: {
+            regionName: body.region.regionName,
+            regionPokedexNumber: body.region.regionPokedexNumber.toString()
+        }
+    };
     const data = await handleApiFetch({
         path: `${API_POKEMON_BASE_URL}/region`,
         method: "POST",
         token: token, 
-        body: JSON.stringify({ region })
+        body: JSON.stringify(finalBody),
     });
 
+
+    return data;
+}
+
+//DELETE region
+export const deletePokemonRegion = async (pokemonId: string, regionName: string, token: string) => {
+    const data = await handleApiFetch({
+        path: `${API_POKEMON_BASE_URL}/region?id=${pokemonId}&regionName=${regionName}`,
+        method: "DELETE",
+        token: token,
+        notJsonResponse: true,
+    });
+    
     return data;
 }

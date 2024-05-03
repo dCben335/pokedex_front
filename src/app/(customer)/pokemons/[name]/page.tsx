@@ -48,7 +48,7 @@ const Page = async({ params }: PagePops) => {
                 <div>
                     <div className={styles.centered}>
                         <h1>{data.name}</h1>
-                        <PokemonTypesTag types={data.types} updateAccentColor={true}/>              
+                        <PokemonTypesTag types={data.types} updateAccentColor={true} baseUrl='/pokemons'/>              
                     </div>
                     <p>{data.description}</p>
                 </div>

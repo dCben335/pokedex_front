@@ -10,8 +10,22 @@ $gap: 1.5rem;
     .banner {
         padding-bottom: $image-height / 2 + 1rem;
         display: flex;
+        flex-direction: column;
+        gap: .5rem;
+        align-items: center;
         justify-content: space-between;
-        align-items: flex-end;
+        
+        @media screen and (min-width: 600px){
+            flex-direction: row;
+        }
+
+        .methods, .buttons {
+            display: flex;
+            flex-wrap: wrap;
+            font-size: .8rem;
+            justify-content: center;
+            gap: .5rem;
+        }
     }
     
 
@@ -41,6 +55,34 @@ $gap: 1.5rem;
             display: grid;
             gap: 1rem;
             place-items: center;
+        }
+
+        .gridContainer {
+            display: grid;
+            gap: $gap;
+            margin-top: 2rem;
+
+            @media screen and (min-width: 800px) {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            section {
+                display: flex;
+                flex-direction: column;
+                gap: 1rem;
+                
+                .regions {
+                    margin-left: 1rem;
+                    
+                    .region {
+                        display: flex;
+                        align-items: center;
+                        gap: .5rem;  
+                    }
+                }
+    
+            }
+
         }
     }
 

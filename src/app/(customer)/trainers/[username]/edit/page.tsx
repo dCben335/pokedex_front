@@ -13,8 +13,7 @@ interface PageProps {
 }
 
 const Page = async({ params }: PageProps) => {
-    const sluggifiedUsername = unslugify(params.username);
-    const trainer = await getTrainer(sluggifiedUsername);
+    const trainer = await getTrainer(unslugify(params.username));
     if ("error" in trainer) return notFound();
 
     const { login, token } = await getCookies();
@@ -23,7 +22,7 @@ const Page = async({ params }: PageProps) => {
     return (
         <main>
             <nav className={styles.banner}> 
-                <ButtonGoBack href={`/trainers/${sluggifiedUsername}`}>Trainers</ButtonGoBack>
+                <ButtonGoBack href={`/trainers/${params.username}`}>Trainers</ButtonGoBack>
             </nav>
             <div className="centered-page-content">
                 <TrainerForm 

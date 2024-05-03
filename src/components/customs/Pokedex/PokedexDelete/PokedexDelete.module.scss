@@ -1,0 +1,13 @@
+.buttons {
+    display: flex;
+    gap: .5rem;
+    margin-top: 1rem;
+}
+
+button.delete {
+    background-color: rgb(148, 0, 0);
+
+    &:hover {
+        background-color: rgb(148, 0, 0, .8);
+    }
+}

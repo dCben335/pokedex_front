@@ -1,0 +1,22 @@
+.banner {
+    padding: .5rem;
+    background-color: $accent-color;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+
+}
+
+.regions {
+    display: grid;
+    gap: 1rem;
+    margin: 1rem 0;
+
+
+    .region {
+        display: flex;
+        align-items: center;
+        gap: .5rem;  
+        justify-content: space-between;
+    }
+}

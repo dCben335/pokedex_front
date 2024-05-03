@@ -4,6 +4,7 @@ import { firstLetterOfEachWordUppercase, unslugify } from '@/utils/reformat';
 import { getPokemon } from '@/libs/routes/entities/pokemon';
 import { getCookies } from '@/actions/cookies';
 import PokemonForm from '@/components/customs/Pokedex/Pokemons/PokemonForm/PokemonForm';
+import ButtonGoBack from '@/components/ui/ButtonGoBack/ButtonGoBack';
 
 
 type PageProps = {
@@ -22,20 +23,25 @@ const Page = async({ params }: PageProps) => {
     
     
     return (
-        <main className="centered-page-content">
-            <PokemonForm
-                key={data.id} 
-                pokemonId={data.id}
-                token={token} 
-                editMode={true}
-                defaultValues={{
-                    name: data.name,
-                    imgUrl: data.imgUrl,
-                    description: data.description,
-                    typeOne: data.types[0],
-                    typeTwo: data.types[1],
-                }}
-            />
+        <main>
+            <nav className={styles.banner}> 
+                <ButtonGoBack href={`/admin/pokemons/${data.name}`}>Trainers</ButtonGoBack>
+            </nav>
+            <div className="centered-page-content">
+                <PokemonForm
+                    key={data.id} 
+                    pokemonId={data.id}
+                    token={token} 
+                    editMode={true}
+                    defaultValues={{
+                        name: data.name,
+                        imgUrl: data.imgUrl,
+                        description: data.description,
+                        typeOne: data.types[0],
+                        typeTwo: data.types[1],
+                    }}
+                />
+            </div>
         </main>
     )
 }

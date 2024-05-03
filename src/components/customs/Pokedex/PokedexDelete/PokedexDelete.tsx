@@ -36,12 +36,12 @@ const PokedexDelete = ({ entityName, deleteFunction, redirectToUrl, successMessa
 
     return (
         <>
-            <Button onClick={() => handleModal()}>Delete</Button>   
+            <Button onClick={() => handleModal()} className={styles.delete}>Delete</Button>   
             <Modal isOpen={isOpened} closeModal={handleModal}>
                 <div className={styles.modal}>
                     <h2>Are you sure you want to delete this {entityName} ?</h2>
                     <div className={styles.buttons}>
-                        <Button onClick={() => handleDelete()}>Yes</Button>
+                        <Button onClick={() => handleDelete()} className={styles.delete}>Yes</Button>
                         <Button onClick={() => handleModal()}>Cancel</Button>
                     </div>
                 </div>

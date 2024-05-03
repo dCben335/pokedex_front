@@ -15,21 +15,23 @@ export const pokemonTypeResponseSchema = z.object({
 });
 
 
-export type PokemonRegion = z.infer<typeof pokemonRegionSchemp>;
-export const pokemonRegionSchemp = z.object({
+export type PokemonRegion = z.infer<typeof pokemonRegionSchema>;
+export const pokemonRegionSchema = z.object({
     regionName: z.string(),
     regionPokedexNumber: z.string(),
 }); 
+
+
 
 
 export type Pokemon = z.infer<typeof pokemonSchema>;
 export const pokemonSchema = z.object({
     id: z.string(),
     name: z.string().min(1).max(255),
-    imgUrl: z.string().min(1),
+    imgUrl: z.string().min(1).url(),
     description: z.string().nullable(),
     types: z.array(pokemonTypeSchema.shape.name).min(0).max(2),
-    regions: z.array(pokemonRegionSchemp).nullable(),
+    regions: z.array(pokemonRegionSchema).nullable(),
 });
 
 
@@ -64,4 +66,16 @@ export const pokemonSearchResponseSchema = z.object({
     sort: portSchema,
     totalElements: z.number(),
     totalPages: z.number(),
+});
+
+
+
+
+export type PokemonRegionRequest = z.infer<typeof pokemonRegionRequestSchema>;
+export const pokemonRegionRequestSchema = z.object({
+    name: pokemonSchema.shape.name,
+    region: z.object({
+        regionName: pokemonRegionSchema.shape.regionName,
+        regionPokedexNumber: z.number().min(1),
+    }),
 });

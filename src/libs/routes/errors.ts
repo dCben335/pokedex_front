@@ -1,5 +1,3 @@
-
-
 const errorPossibilities = {
     "401": "Unauthorized",
     "403": "Forbidden",

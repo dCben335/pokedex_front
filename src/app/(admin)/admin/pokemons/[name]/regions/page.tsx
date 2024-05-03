@@ -1,111 +1,64 @@
-"use client"
+import PokemonRegionForm from "@/components/customs/Pokedex/Pokemons/PokemonRegionForm/PokemonRegionForm";
+import ButtonGoBack from "@/components/ui/ButtonGoBack/ButtonGoBack";
+import { getCookies } from "@/actions/cookies";
+import { notFound } from "next/navigation";
+import { deletePokemonRegion, getPokemon } from "@/libs/routes/entities/pokemon";
+import { unslugify } from "@/utils/reformat";
+import PokedexDelete from "@/components/customs/Pokedex/PokedexDelete/PokedexDelete";
+import styles from './page.module.scss';
 
-import Form, { GenerateFormProps } from "@/components/customs/Form/Form";
-import { createArrayOfObjects } from "@/utils/reformat";
-import { useState } from "react";
-import { z } from "zod";
-
-const fields: GenerateFormProps['fields'] = {
-    test: {
-        label: "Test",
-        type: "text",
-        schema: z.string().min(1),
-        defaultValue: "mamaadou",
-    },
-    "regions-0-name": {
-        label: "Regions",
-        type: "select",
-        schema: z.string().min(1),
-        options: [
-            { label: "Kanto", value: "kanto" },
-            { label: "Johto", value: "johto" },
-            { label: "Hoenn", value: "hoenn" },
-            { label: "Sinnoh", value: "sinnoh" },
-            { label: "Unova", value: "unova" },
-            { label: "Kalos", value: "kalos" },
-            { label: "Alola", value: "alola" },
-            { label: "Galar", value: "galar" },
-        ],
-        defaultValue: "kanto",
-    },
-    "regions-0-number": {
-        label: "Number",
-        type: "number",
-        schema: z.number().min(1),
-        defaultValue: 1,
-    },
-    "regions-0-description": {
-        label: "Description",
-        type: "textarea",
-        schema: z.string().min(1),
-        defaultValue: "mamaadou",
-    },
-    "regions-0-legendary": {
-        label: "Legendary",
-        type: "checkbox",
-        schema: z.boolean(),
-        defaultValue: true,
-    },
+type PageProps = {
+    params: {
+        name: string;
+    };
 }
 
-
-
-const Page = () => {
-    const [counter, setCounter] = useState(0);
-    const [formfields, setFormFields] = useState(fields);
-
-    const removeRegions = () => {
-        if (counter === 0) return;
-
-        const newFields = { ...formfields };
-        delete newFields[`regions-${counter}-name`];
-        delete newFields[`regions-${counter}-number`];
-
-        setFormFields(newFields);
-        setCounter((prev) => prev - 1);
+const Page = async({ params }: PageProps) => {
+    const unslugifiedName = unslugify(params.name);
+    const data = await getPokemon(unslugifiedName);
+    if ("error" in data || !data) {
+        return notFound();
     }
+    const { token } = await getCookies();
 
-    const addRegions = () => {
-        const newCounter = counter + 1;
-        setCounter(newCounter);
-        setFormFields({
-            ...formfields,
-            [`regions-${newCounter}-name`]: {
-                ...fields["regions-0-name"]
-            },
-            [`regions-${newCounter}-number`]: {
-                ...fields["regions-0-number"]
-            },
-            [`regions-${newCounter}-description`]: {
-                ...fields["regions-0-description"]
-            },
-            [`regions-${newCounter}-legendary`]: {
-                ...fields["regions-0-legendary"]
-            },
-        });
-    }
-
-
-    const onSubmit: GenerateFormProps['onSubmit'] = async (data) => {
-        try {
-
-            const result = createArrayOfObjects(data);
-                        
-            await new Promise((resolve, reject) => {
-                setTimeout(() => {
-                    resolve(data);
-                }, 2000);
-            });
-
-        } catch (error) {
-        }
-    };
+    
 
     return (
         <main>
-            <button onClick={() => addRegions()}>Add field</button>
-            <button onClick={() => removeRegions()}>Remove</button>
-            <Form fields={formfields} onSubmit={onSubmit}/>
+            <nav className={styles.banner}> 
+                <ButtonGoBack href={`/admin/pokemons/${data.name}`}>Trainers</ButtonGoBack>
+            </nav>
+
+            <div className="centered-page-content">
+                {data.regions && data.regions.length > 0 &&
+                    <div>
+                        <h2>Pokemon&apos;s Regions</h2>
+                        <ul className={styles.regions}>
+                            {data.regions.map((region) => (
+                                <li key={region.regionName}>
+                                    <div className={styles.region}>
+                                        <p>
+                                            <strong className='h2'>{region.regionPokedexNumber}</strong> in {region.regionName} 
+                                            <span></span>
+                                        </p>
+                                        <PokedexDelete 
+                                            entityName="Region"
+                                            deleteFunction={async () => {
+                                                "use server"
+                                                return await deletePokemonRegion(data.id, region.regionName, token);
+                                            }}
+                                            redirectToUrl={`/admin/pokemons/${data.name}/regions`}
+                                            refreshTagName={`pokemon-${data.name}`}
+                                            successMessage={`The region ${region.regionName} is succesfully deleted`}
+                                        />
+                                    </div>
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+                }
+                <PokemonRegionForm token={token} pokemonName={unslugifiedName} currentRegionName={(data.regions ?? []).map(({regionName}) => regionName)} />
+            </div>
         </main>
     )
 }
