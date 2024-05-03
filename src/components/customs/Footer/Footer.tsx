@@ -6,16 +6,16 @@ import Link from 'next/link';
 
 const routes = [
   {
+    name: 'Home',
+    path: '/'
+  },
+  {
     name: 'Pokemons',
     path: '/pokemons'
   },
   {
     name: 'Trainers',
     path: '/trainers'
-  },
-  {
-    name: 'Types',
-    path: '/types'
   },
   {
     name: 'Policies',
