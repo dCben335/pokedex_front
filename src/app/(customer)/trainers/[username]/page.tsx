@@ -1,8 +1,5 @@
 import Button from "@/components/ui/Button/Button";
-import { deleteTrainer, getTrainer, getTrainers } from "@/libs/routes/entities/trainer";
 import { notFound } from "next/navigation";
-import TrainerForm from "@/components/customs/Pokedex/Trainers/TrainerForm/TrainerForm";
-import { getCookies, isCurrentUserTrainer } from "@/actions/cookies";
 import ButtonGoBack from "@/components/ui/ButtonGoBack/ButtonGoBack";
 import styles from "./page.module.scss";
 import { slugify, unslugify } from "@/utils/reformat";
@@ -10,7 +7,6 @@ import PokedexDelete from "@/components/customs/Pokedex/PokedexDelete/PokedexDel
 import PokedexVoiceSpeak from "@/components/customs/Pokedex/PokedexVoiceSpeak/PokedexVoiceSpeak";
 import StyledImage from "@/components/ui/StyledImage/StyledImage";
 import { Trainer, TrainerSearchResponse } from "@/libs/schemas/entities/trainer";
-import { getPokemonByIds } from "@/libs/routes/entities/pokemon";
 import PokedexCard from "@/components/customs/Pokedex/PodexCard/PokedexCard";
 import trainerJson from "@/contents/trainers.json";
 
@@ -21,34 +17,25 @@ interface PagePops {
     };
 }
 
+export async function generateStaticParams() {    
+    return json.content.map((trainer) => ({
+        username: trainer.username,
+    }));
+}
 
-const Page = async({ params }: PagePops) => {
+
+const Page = ({ params }: PagePops) => {
     const trainer = json.content.find(trainer => trainer.username === unslugify(params.username));
     if (!trainer) return notFound();
+    const isUserTrainer = false;
 
-    const { login, token } = await getCookies();
-    const isUserTrainer = await isCurrentUserTrainer(login, token, params.username);
-    
-    if ("error" in trainer) {
-        if (!isUserTrainer) return notFound();
+    const pkmnCaught: any = [];
+    const pkmnSeen: any = [];
 
-        return (
-            <main className="centered-page-content">
-                <TrainerForm token={token} username={login}/>
-            </main>
-        )
-    }
-
-    const pkmnCaughtRequest = await getPokemonByIds(trainer?.pkmnCaught ?? []);
-    const pkmnCaught = !("error" in pkmnCaughtRequest) && pkmnCaughtRequest;
-
-    const pkmnSeenRequest = await getPokemonByIds(trainer?.pkmnSeen ?? []);
-    const pkmnSeen = !("error" in pkmnSeenRequest) && pkmnSeenRequest;
 
 
     const handleDelete = async () => {
-        "use server"
-        return await deleteTrainer(token);
+        // return await deleteTrainer(token);
     }
     
     const reformatedDate = new Date(trainer.createdDate).toLocaleDateString();
@@ -94,7 +81,7 @@ const Page = async({ params }: PagePops) => {
                             <p>Pokemons Seen: {trainer.pkmnSeen?.length ?? 0}</p>
                         </div>
                     </section>
-                    {pkmnCaught && pkmnCaught.length > 0 &&
+                    {/* {pkmnCaught && pkmnCaught.length > 0 &&
                         <section>
                             <h2>Caught Pokemons</h2>
                             <ul className={styles.wrapper}>
@@ -137,7 +124,7 @@ const Page = async({ params }: PagePops) => {
                                 ))}
                             </ul>
                         </section>
-                    }
+                    } */}
                 </div>
             </div>
         </main>

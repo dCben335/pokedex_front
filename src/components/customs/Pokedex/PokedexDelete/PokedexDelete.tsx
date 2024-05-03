@@ -5,7 +5,6 @@ import Modal from '@/components/ui/Modal/Modal';
 import { useState } from 'react';
 import styles from './PokedexDelete.module.scss';
 import { toast } from 'sonner';
-import { navigate, refreshTag } from '@/actions/navigate';
 
 type PokedexDeleteProps = {
     entityName: string;
@@ -25,8 +24,6 @@ const PokedexDelete = ({ entityName, deleteFunction, redirectToUrl, successMessa
         }
 
         handleModal();
-        await refreshTag(refreshTagName);
-        await navigate(redirectToUrl);
         toast.success(successMessage);
     }
 

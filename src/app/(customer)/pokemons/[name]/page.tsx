@@ -1,4 +1,3 @@
-"use server";
 
 import styles from './page.module.scss';
 import { notFound } from 'next/navigation';
@@ -9,7 +8,6 @@ import PokemonTypesTag from '@/components/customs/Pokedex/Pokemons/PokemonTypes/
 import ButtonGoBack from '@/components/ui/ButtonGoBack/ButtonGoBack';
 import PokedexVoiceSpeak from '@/components/customs/Pokedex/PokedexVoiceSpeak/PokedexVoiceSpeak';
 import TrainerCatchButton from '@/components/customs/Pokedex/Trainers/TrainerCatchButton/TrainerCatchButton';
-import { getCookies } from '@/actions/cookies';
 import { getTrainer } from '@/libs/routes/entities/trainer';
 import { Trainer } from '@/libs/schemas/entities/trainer';
 import { PokemonRegion, PokemonSearchResponse } from '@/libs/schemas/entities/pokemon';
@@ -22,17 +20,20 @@ interface PagePops {
     };
 }
 
+export async function generateStaticParams() {
+    return json.content.map((pokemon) => ({
+        name: pokemon.name,
+    }));
+}
 
-const Page = async({ params }: PagePops) => {
+const Page = ({ params }: PagePops) => {
     const pokemon = json.content.find(pokemon => pokemon.name === params.name);
     if (!pokemon) return notFound();
 
-    const { login } = await getCookies();
-    
-    const myTrainer = await getTrainer(unslugify(login)) as Trainer | { error: string };
-    const isTrainer = !("error" in myTrainer);
-    const isAlreadyCaught = (isTrainer && myTrainer.pkmnCaught?.includes(pokemon.id)) ?? false;
-    const isAlreadySeen = (isTrainer && myTrainer.pkmnSeen?.includes(pokemon.id)) ?? false;
+
+    const isTrainer = false;
+    const isAlreadyCaught =   false;
+    const isAlreadySeen =  false;
 
 
     const voiceText = `

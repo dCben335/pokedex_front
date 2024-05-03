@@ -1,23 +1,28 @@
-import { getCookies, isCurrentUserTrainer } from "@/actions/cookies";
 import TrainerForm from "@/components/customs/Pokedex/Trainers/TrainerForm/TrainerForm";
 import ButtonGoBack from "@/components/ui/ButtonGoBack/ButtonGoBack";
 import { getTrainer } from "@/libs/routes/entities/trainer";
 import { unslugify } from "@/utils/reformat";
 import { notFound } from "next/navigation";
 import styles from "./page.module.scss";
+import trainerJson from "@/contents/trainers.json";
+import { TrainerSearchResponse } from "@/libs/schemas/entities/trainer";
 
+const json = trainerJson as TrainerSearchResponse;
 interface PageProps {
     params: {
         username: string;
     };
 }
 
-const Page = async({ params }: PageProps) => {
-    const trainer = await getTrainer(unslugify(params.username));
-    if ("error" in trainer) return notFound();
+export async function generateStaticParams() {    
+    return json.content.map((trainer) => ({
+        username: trainer.username,
+    }));
+}
 
-    const { login, token } = await getCookies();
-    if (!isCurrentUserTrainer(login,token, params.username)) return notFound();
+const Page = ({ params }: PageProps) => {
+    const trainer = json.content.find(trainer => trainer.username === unslugify(params.username));
+    if (!trainer) return notFound();
 
     return (
         <main>
@@ -25,7 +30,7 @@ const Page = async({ params }: PageProps) => {
                 <ButtonGoBack href={`/trainers/${params.username}`} />
             </nav>
             <div className="centered-page-content">
-                <TrainerForm 
+                {/* <TrainerForm 
                     token={token} 
                     username={login} 
                     editMode={true}
@@ -33,7 +38,7 @@ const Page = async({ params }: PageProps) => {
                         trainerName: trainer.trainerName,
                         imgUrl: trainer.imgUrl,
                     }}
-                />
+                /> */}
             </div>
         </main>
     );

@@ -5,7 +5,6 @@ import { PokemonRegionRequest, pokemonRegionRequestSchema, pokemonRegionSchema, 
 import styles from './PokemonRegionForm.module.scss';
 import { createPokemonRegion } from '@/libs/routes/entities/pokemon';
 import { toast } from 'sonner';
-import { navigate, refreshTag } from '@/actions/navigate';
 import { slugify } from '@/utils/reformat';
 
 type PokemonRegionFormProps = {
@@ -76,8 +75,6 @@ const PokemonRegionForm = ({ token, pokemonName, currentRegionName } : PokemonRe
         }
         
         toast.success(`Region ${data.regionName} is successfully added to ${pokemonName}`);
-        await refreshTag(`pokemon-${slugify(pokemonName)}`);
-        await navigate(`/admin/${pokemonName}/regions`);
     }
 
     return (

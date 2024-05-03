@@ -1,4 +1,3 @@
-"use server";
 
 import { ZodSchema } from "zod";
 import { handleApiFetchErrors } from "./errors";

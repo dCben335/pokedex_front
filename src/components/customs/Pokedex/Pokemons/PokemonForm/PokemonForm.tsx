@@ -4,7 +4,6 @@ import { HTMLAttributes } from 'react';
 import { PokemonPostRequest, pokemonPostRequestSchema, PokemonPutRequest, pokemonPutRequestSchema } from '@/libs/schemas/entities/pokemon';
 import Form, { GenerateFormProps } from '@/components/customs/Form/Form';
 import { toast } from 'sonner';
-import { navigate, refreshTag } from '@/actions/navigate';
 import { fillObjectWithKey, slugify } from '@/utils/reformat';
 import { createPokemon, updatePokemon } from '@/libs/routes/entities/pokemon';
 import styles from './PokemonForm.module.scss';
@@ -84,9 +83,6 @@ const PokemonForm = ({ editMode, token, defaultValues, pokemonId, ...props }: Po
         }
 
         const sluggifiedName = slugify(pokemonData.name);
-
-        await refreshTag(`pokemon-${sluggifiedName}`);
-        await navigate(`/admin/${sluggifiedName}`);
         return toast.success(successMessage);
     };
 
