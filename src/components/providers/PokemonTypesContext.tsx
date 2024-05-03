@@ -4,6 +4,7 @@ import usePokemonTypes from '@/hooks/usePokemonTypes';
 import { createContext, useContext } from 'react';
 import { PokemonType, PokemonTypeResponse } from '@/libs/schemas/entities/pokemon';
 import { toast } from 'sonner';
+import jsonTypes from '@/contents/types.json';
 
 interface PokemonTypesContextType extends PokemonTypeResponse {
     getTypeColor: (type: string) => string; 
@@ -24,18 +25,7 @@ export const usePokemonTypesContext = () => {
 };
 
 export const PokemonTypesProvider = ({ children } : React.PropsWithChildren ) => {
-    const { data, isLoading, error } = usePokemonTypes();
-
-    if (isLoading || error || !data) {
-        if (error) toast.error(error.message);
-        if (!isLoading && !error && !data) toast.error('Error fetching pokemon types');
-
-        return (
-            <>
-                { children }
-            </>
-        );
-    }    
+    const data = jsonTypes as PokemonTypeResponse;
 
     const findType = (typeName: string) => {
         return data.types.find(({name}) => name === typeName.toUpperCase());

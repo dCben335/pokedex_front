@@ -9,18 +9,23 @@ import { slugify, unslugify } from "@/utils/reformat";
 import PokedexDelete from "@/components/customs/Pokedex/PokedexDelete/PokedexDelete";
 import PokedexVoiceSpeak from "@/components/customs/Pokedex/PokedexVoiceSpeak/PokedexVoiceSpeak";
 import StyledImage from "@/components/ui/StyledImage/StyledImage";
-import { Trainer } from "@/libs/schemas/entities/trainer";
+import { Trainer, TrainerSearchResponse } from "@/libs/schemas/entities/trainer";
 import { getPokemonByIds } from "@/libs/routes/entities/pokemon";
 import PokedexCard from "@/components/customs/Pokedex/PodexCard/PokedexCard";
+import trainerJson from "@/contents/trainers.json";
 
+const json = trainerJson as TrainerSearchResponse;
 interface PagePops {
     params: {
         username: string;
     };
 }
 
+
 const Page = async({ params }: PagePops) => {
-    const trainer = await getTrainer(unslugify(params.username)) as Trainer | { error: string };
+    const trainer = json.content.find(trainer => trainer.username === unslugify(params.username));
+    if (!trainer) return notFound();
+
     const { login, token } = await getCookies();
     const isUserTrainer = await isCurrentUserTrainer(login, token, params.username);
     

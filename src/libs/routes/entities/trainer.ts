@@ -13,6 +13,7 @@ export const getTrainers = async (urlParams: string) => {
         method: "GET",
     });
 
+    console.log(data);
     const parsedData = parseWithZodSchema(trainerSearchResponseSchema, data);
     if ("error" in parsedData) throw new Error(parsedData.error);
     return parsedData;

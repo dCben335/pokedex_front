@@ -1,0 +1,154 @@
+{
+    "content": [
+        {
+            "name": "Venusaur",
+            "description": "",
+            "types": [
+                "GRASS",
+                "POISON"
+            ],
+            "regions": [],
+            "imgUrl": "https://raw.githubusercontent.com/Yarkis01/TyraDex/images/sprites/3/regular.png",
+            "id": "663475ea2b5fbe6f982a2885"
+        },
+        {
+            "name": "Charmander",
+            "description": "",
+            "types": [
+                "FIRE"
+            ],
+            "regions": [],
+            "imgUrl": "https://raw.githubusercontent.com/Yarkis01/TyraDex/images/sprites/4/regular.png",
+            "id": "663475ea2b5fbe6f982a2886"
+        },
+        {
+            "name": "Charmeleon",
+            "description": "",
+            "types": [
+                "FIRE"
+            ],
+            "regions": [],
+            "imgUrl": "https://raw.githubusercontent.com/Yarkis01/TyraDex/images/sprites/5/regular.png",
+            "id": "663475ea2b5fbe6f982a2887"
+        },
+        {
+            "name": "Charizard",
+            "description": "",
+            "types": [
+                "FIRE",
+                "FLYING"
+            ],
+            "regions": [],
+            "imgUrl": "https://raw.githubusercontent.com/Yarkis01/TyraDex/images/sprites/6/regular.png",
+            "id": "663475ea2b5fbe6f982a2888"
+        },
+        {
+            "name": "Squirtle",
+            "description": "",
+            "types": [
+                "WATER"
+            ],
+            "regions": [],
+            "imgUrl": "https://raw.githubusercontent.com/Yarkis01/TyraDex/images/sprites/7/regular.png",
+            "id": "663475ea2b5fbe6f982a2889"
+        },
+        {
+            "name": "Wartortle",
+            "description": "",
+            "types": [
+                "WATER"
+            ],
+            "regions": [],
+            "imgUrl": "https://raw.githubusercontent.com/Yarkis01/TyraDex/images/sprites/8/regular.png",
+            "id": "663475ea2b5fbe6f982a288a"
+        },
+        {
+            "name": "Blastoise",
+            "description": "",
+            "types": [
+                "WATER"
+            ],
+            "regions": [],
+            "imgUrl": "https://raw.githubusercontent.com/Yarkis01/TyraDex/images/sprites/9/regular.png",
+            "id": "663475ea2b5fbe6f982a288b"
+        },
+        {
+            "name": "Caterpie",
+            "description": "",
+            "types": [
+                "BUG"
+            ],
+            "regions": [],
+            "imgUrl": "https://raw.githubusercontent.com/Yarkis01/TyraDex/images/sprites/10/regular.png",
+            "id": "663475ea2b5fbe6f982a288c"
+        },
+        {
+            "name": "Metapod",
+            "description": "",
+            "types": [
+                "BUG"
+            ],
+            "regions": [],
+            "imgUrl": "https://raw.githubusercontent.com/Yarkis01/TyraDex/images/sprites/11/regular.png",
+            "id": "663475ea2b5fbe6f982a288d"
+        },
+        {
+            "name": "Butterfree",
+            "description": "",
+            "types": [
+                "BUG",
+                "FLYING"
+            ],
+            "regions": [],
+            "imgUrl": "https://raw.githubusercontent.com/Yarkis01/TyraDex/images/sprites/12/regular.png",
+            "id": "663475ea2b5fbe6f982a288e"
+        },
+        {
+            "name": "Weedle",
+            "description": "",
+            "types": [
+                "BUG",
+                "POISON"
+            ],
+            "regions": [],
+            "imgUrl": "https://raw.githubusercontent.com/Yarkis01/TyraDex/images/sprites/13/regular.png",
+            "id": "663475ea2b5fbe6f982a288f"
+        },
+        {
+            "name": "Kakuna",
+            "description": "",
+            "types": [
+                "BUG",
+                "POISON"
+            ],
+            "regions": [],
+            "imgUrl": "https://raw.githubusercontent.com/Yarkis01/TyraDex/images/sprites/14/regular.png",
+            "id": "663475ea2b5fbe6f982a2890"
+        }
+    ],
+    "pageable": {
+        "pageNumber": 0,
+        "pageSize": 12,
+        "sort": {
+            "empty": true,
+            "unsorted": true,
+            "sorted": false
+        },
+        "offset": 0,
+        "paged": true,
+        "unpaged": false
+    },
+    "last": false,
+    "totalPages": 1,
+    "totalElements": 12,
+    "size": 12,
+    "number": 0,
+    "sort": {
+        "empty": true,
+        "unsorted": true,
+        "sorted": false
+    },
+    "first": true,
+    "numberOfElements": 12,
+    "empty": false
+}

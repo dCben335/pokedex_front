@@ -1,0 +1,77 @@
+{
+    "types": [
+        {
+            "name": "NORMAL",
+            "color": "#A8A878"
+        },
+        {
+            "name": "FIRE",
+            "color": "#F08030"
+        },
+        {
+            "name": "FIGHTING",
+            "color": "#C03028"
+        },
+        {
+            "name": "WATER",
+            "color": "#6890F0"
+        },
+        {
+            "name": "FLYING",
+            "color": "#A890F0"
+        },
+        {
+            "name": "GRASS",
+            "color": "#78C850"
+        },
+        {
+            "name": "POISON",
+            "color": "#A040A0"
+        },
+        {
+            "name": "ELECTRIC",
+            "color": "#F8D030"
+        },
+        {
+            "name": "GROUND",
+            "color": "#E0C068"
+        },
+        {
+            "name": "PSYCHIC",
+            "color": "#F85888"
+        },
+        {
+            "name": "ROCK",
+            "color": "#B8A038"
+        },
+        {
+            "name": "ICE",
+            "color": "#98D8D8"
+        },
+        {
+            "name": "BUG",
+            "color": "#A8B820"
+        },
+        {
+            "name": "DRAGON",
+            "color": "#7038F8"
+        },
+        {
+            "name": "GHOST",
+            "color": "#705898"
+        },
+        {
+            "name": "DARK",
+            "color": "#705848"
+        },
+        {
+            "name": "STEEL",
+            "color": "#B8B8D0"
+        },
+        {
+            "name": "FAIRY",
+            "color": "#EE99AC"
+        }
+    ],
+    "count": 18
+}

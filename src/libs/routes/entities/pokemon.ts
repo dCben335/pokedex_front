@@ -17,6 +17,7 @@ export const getPokemonTypes = async () => {
     if ("error" in data) throw new Error(data.error);
 
     const parsedData = parseWithZodSchema(pokemonTypeResponseSchema, data);
+    console.log(parsedData);
     if ("error" in parsedData) throw new Error(parsedData.error);
     return parsedData;
 }
@@ -29,6 +30,7 @@ export const getPokemons = async (urlParams: string) => {
     });
     if ("error" in data) throw new Error(data.error);
     
+    console.log(data);
     const parsedData = parseWithZodSchema(pokemonSearchResponseSchema, data);
     if ("error" in parsedData) throw new Error(parsedData.error);
     return parsedData;

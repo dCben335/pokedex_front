@@ -8,6 +8,7 @@ import PokedexPagination from "../../PokedexPagination/PokedexPagination";
 import PokemonCard from "../../PodexCard/PokedexCard";
 import PokemonSize from "../../PokedexSize/PokedexSize";
 import { slugify } from "@/utils/reformat";
+import trainerjson from "@/contents/trainers.json";
 
 type PokemonWrapperProps = React.HTMLAttributes<HTMLDivElement> & {
     baseUrl: string;
@@ -15,18 +16,9 @@ type PokemonWrapperProps = React.HTMLAttributes<HTMLDivElement> & {
 }
 
 const TrainerWrapper = ({ baseUrl, className, isList, ...props }: PokemonWrapperProps) => {
-    const {data, isLoading, error} = useTrainers();
+    const data = trainerjson ;
+    const isLoading = false;
     const { getRandomTypeColor } = usePokemonTypesContext();
-
-
-    if (error || (!isLoading && !data)) {
-        toast.error("Error fetching trainers");
-        return (
-            <div className={styles.center}>
-                <p>Error fetching trainers, please try again later</p>
-            </div>
-        )
-    }
 
     return (
         <div className={`${className ? className : ""}`} {...props}>

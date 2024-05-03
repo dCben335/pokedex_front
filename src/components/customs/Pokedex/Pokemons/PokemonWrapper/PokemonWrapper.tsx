@@ -8,6 +8,7 @@ import PokedexPagination from "../../PokedexPagination/PokedexPagination";
 import PokedexSize from "../../PokedexSize/PokedexSize";
 import styles from "./PokemonWrapper.module.scss"
 import { slugify } from "@/utils/reformat";
+import pokemonJson from "@/contents/pokemons.json";
 
 type PokemonWrapperProps = React.HTMLAttributes<HTMLDivElement> & {
     baseUrl: string;
@@ -17,19 +18,10 @@ type PokemonWrapperProps = React.HTMLAttributes<HTMLDivElement> & {
 
 
 const PokemonWrapper = ({ baseUrl, className, isList,  ...props }: PokemonWrapperProps) => {
-    const { data, isLoading, error } = usePokemons();
+    const data = pokemonJson;
+    const isLoading = false;
     const { getTypeColor } = usePokemonTypesContext();
-
-    if (error || (!isLoading && !data)) {
-        toast.error("Error fetching pokemons");
-        return (
-            <div className={styles.center}>
-                <p>Error fetching pokemons, please try again later</p>
-            </div>
-        )
-    }
-
-
+  
     return (
         <div className={`${className ? className : ""}`} {...props}>
             <PokedexSize total={data?.totalElements ?? 0} entityName="pokemons"/>

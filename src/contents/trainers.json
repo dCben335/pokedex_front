@@ -1,0 +1,96 @@
+{
+    "content": [
+        {
+            "username": "b",
+            "imgUrl": "https://yt3.googleusercontent.com/2cZBFrVMMwZQFA2W3z4JI5Z50AAHA4Wb9mdIOqi_z7Q-pw0p-p7-v8lqRtheppvNUa9B3jvh=s900-c-k-c0x00ffffff-no-rj",
+            "trainerName": "sacha",
+            "pkmnSeen": [],
+            "pkmnCaught": [],
+            "id": "662d012ae629903bb56616a7",
+            "createdDate": "2024-04-27T13:44:10.613+00:00"
+        },
+        {
+            "username": "shrek",
+            "imgUrl": "https://img1.picmix.com/output/stamp/normal/4/4/1/7/2457144_f59a3.png",
+            "trainerName": "Shrekaqsefesdfs",
+            "pkmnSeen": [],
+            "pkmnCaught": [],
+            "id": "662eb6db46d9096b71157a9d",
+            "createdDate": "2024-04-28T20:51:39.404+00:00"
+        },
+        {
+            "username": "test a",
+            "imgUrl": "https://static.wikia.nocookie.net/fa5fb810-1403-4668-91a6-3f4ba23c7ac7/scale-to-width/370",
+            "trainerName": "Luffy",
+            "pkmnSeen": [],
+            "pkmnCaught": [],
+            "id": "6633c81ffe399a035021e427",
+            "createdDate": "2024-05-02T17:06:39.504+00:00"
+        },
+        {
+            "username": "gerard depardieux",
+            "imgUrl": "https://i.ebayimg.com/images/g/xSoAAOSwnhddzeSp/s-l1600.png",
+            "trainerName": "Jesse Pinkman",
+            "pkmnSeen": [
+                "663436cc2b5fbe6f982a25a2",
+                "663475ea2b5fbe6f982a2885",
+                "663475ea2b5fbe6f982a2886",
+                "663475ea2b5fbe6f982a288c",
+                "663475ea2b5fbe6f982a2890",
+                "663475ea2b5fbe6f982a2883",
+                "663475ea2b5fbe6f982a2889",
+                "663475ea2b5fbe6f982a2897",
+                "6634919256de7e36f7700edd"
+            ],
+            "pkmnCaught": [
+                "663436cc2b5fbe6f982a25a2",
+                "663475ea2b5fbe6f982a2885",
+                "663475ea2b5fbe6f982a2886",
+                "663475ea2b5fbe6f982a288c",
+                "663475ea2b5fbe6f982a2883",
+                "6634919256de7e36f7700edd"
+            ],
+            "id": "66345c1d2b5fbe6f982a273f",
+            "createdDate": "2024-05-03T03:38:05.663+00:00"
+        },
+        {
+            "username": "TEST",
+            "imgUrl": "https://m.media-amazon.com/images/I/61vugU8njoL._AC_UF1000,1000_QL80_DpWeblab_.jpg",
+            "trainerName": "DupontJ",
+            "pkmnSeen": [
+                "663436cc2b5fbe6f982a25a2",
+                "6634919256de7e36f7700edd"
+            ],
+            "pkmnCaught": [
+                "6634919256de7e36f7700edd"
+            ],
+            "id": "66348fab56de7e36f7700e23",
+            "createdDate": "2024-05-03T07:18:03.710+00:00"
+        }
+    ],
+    "pageable": {
+        "pageNumber": 0,
+        "pageSize": 12,
+        "sort": {
+            "empty": true,
+            "unsorted": true,
+            "sorted": false
+        },
+        "offset": 0,
+        "paged": true,
+        "unpaged": false
+    },
+    "last": true,
+    "totalPages": 1,
+    "totalElements": 5,
+    "size": 12,
+    "number": 0,
+    "sort": {
+        "empty": true,
+        "unsorted": true,
+        "sorted": false
+    },
+    "first": true,
+    "numberOfElements": 5,
+    "empty": false
+}

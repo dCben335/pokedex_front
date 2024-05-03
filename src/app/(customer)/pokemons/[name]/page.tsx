@@ -12,8 +12,10 @@ import TrainerCatchButton from '@/components/customs/Pokedex/Trainers/TrainerCat
 import { getCookies } from '@/actions/cookies';
 import { getTrainer } from '@/libs/routes/entities/trainer';
 import { Trainer } from '@/libs/schemas/entities/trainer';
-import { PokemonRegion } from '@/libs/schemas/entities/pokemon';
+import { PokemonRegion, PokemonSearchResponse } from '@/libs/schemas/entities/pokemon';
+import pokemonJson from '@/contents/pokemons.json';
 
+const json = pokemonJson as PokemonSearchResponse
 interface PagePops {
     params: {
         name: string;
@@ -22,10 +24,8 @@ interface PagePops {
 
 
 const Page = async({ params }: PagePops) => {
-    const pokemon = await getPokemon(unslugify(params.name));
-    if ("error" in pokemon) {
-        notFound();
-    }
+    const pokemon = json.content.find(pokemon => pokemon.name === params.name);
+    if (!pokemon) return notFound();
 
     const { login } = await getCookies();
     
