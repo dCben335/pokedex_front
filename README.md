@@ -1,36 +1,120 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Pokedex with Next.js
 
-## Getting Started
+This is a Pokedex and Trainer Management System built using Next.js. It allows users to browse through a collection of Pokemon and Trainers, manage their own trainer profile, catch Pokemon, and perform administrative tasks related to Pokemon management.
 
-First, run the development server:
+## Features
+
+### Random Customers
+
+#### Pokemon Features
+
+- **Pokemon Listing:** Browse through a list of Pokemon with their basic information.
+- **Pokemon Details:** View detailed information about each Pokemon, including their types, description, and regions.
+- **Pokemon Search Functionality:** Search for specific Pokemon by partial name and types.
+- **Pokemon Pagination:** Navigate through multiple pages of Pokemon.
+
+#### Trainer Features
+
+- **Trainer Listing:** Browse through a list of Trainers with their basic information.
+- **Trainer Details:** View detailed information about each Trainer, including their Pokemon.
+- **Trainer Search Functionality:** Search for specific Trainer by the username of the person who created them.
+- **Trainer Pagination:** Navigate through multiple pages of Trainers.
+
+### Entry
+
+- **Login:** Authenticate users to access their trainer profiles.
+- **Register:** Allow new users to create accounts to become trainers.
+
+### Auth
+
+- **Trainer Creation:** Create your own Trainer profile with a name, image, etc.
+- **Trainer Update:** Update your trainer profile information.
+- **Trainer Catch Pokemons:** Capture and add Pokemon to your trainer profile.
+
+### Admin
+
+- **Create Pokemons:** Add new Pokemon entries to the system.
+- **Update Pokemons:** Modify existing Pokemon information.
+- **Add Regions to Pokemons:** Assign regions to specific Pokemon.
+- **Delete Regions from Pokemons:** Remove regions to specific Pokemon.
+- **Pokemon Deletion:** Delete Pokemon entries from the system.
+
+## Installation
+
+To run this project locally, you'll need to set up both the frontend and backend environments.
+
+### Backend (Java API)
+
+1. Ensure you have Java installed on your machine. You can download it from [Java's official website](https://www.java.com/en/download/).
+
+2. Clone the backend API repository (if not done already):
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone https://github.com/dCben335/pokedex.git
+cd ./pokedex
+git checkout feature/jwt
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+3. Build the backend API project:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+mvn clean package
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+4. Start your local database (mongoDB)
 
-## Learn More
+5. Start the backend API and connect to your local database.
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+java -jar
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+6. Ensure the backend API server is running on the correct port and accessible from the frontend (adjust the server.port in application.properties if needed).
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+### Front
 
-## Deploy on Vercel
+1. Clone the repository:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```bash
+git clone https://github.com/dCben335/pokedex_front.git
+cd ./pokedex_front
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+2. Install dependencies
+
+```bash
+npm install
+```
+
+3. Set .env file
+
+```bash
+#.env, set BASE_API_URL
+#for exemple
+BASE_API_URL="http://localhost:8080/api"
+```
+
+4. Start the project and go to localhost:3000
+
+```bash
+#dev
+npm run dev
+#or
+#build
+npm run build
+npm run start
+```
+
+## Fill the Database
+
+I created API routes to help frontend tester :
+
+1. **POST /pkmn/api** to fill a little bit the pokemon collection. However field are missing such as regions and description.  
+2. **PUT /users.admin WITH Body** after crating a user, to put someone as admin so that you can test the admin role functionnalities.
+
+```json
+{
+  "id": "TEST",
+  "isAdmin": true
+}
+```
