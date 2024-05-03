@@ -1,0 +1,14 @@
+.headerModal {
+  max-height: 90vh !important;
+}
+.headerModal .modalList {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.headerModal .modalList li {
+  width: 100%;
+}
+.headerModal .modalList .navButton {
+  width: 100%;
+}/*# sourceMappingURL=HeaderModal.module.css.map */

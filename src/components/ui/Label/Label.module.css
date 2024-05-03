@@ -1,0 +1,10 @@
+.label {
+  width: 100%;
+  display: grid;
+  gap: 0.65rem;
+}
+.label .name {
+  font-size: 0.85rem;
+  font-weight: 500;
+  margin-left: 0.5rem;
+}/*# sourceMappingURL=Label.module.css.map */

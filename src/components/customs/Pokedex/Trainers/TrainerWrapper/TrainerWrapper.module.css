@@ -1,0 +1,19 @@
+.trainerWrapper {
+  display: grid;
+  gap: 1rem;
+  padding: 1rem;
+}
+.trainerWrapper:not(.list) {
+  grid-template-columns: repeat(2, 1fr);
+}
+@media screen and (min-width: 900px) {
+  .trainerWrapper:not(.list) {
+    grid-template-columns: repeat(auto-fill, minmax(min(400px, 100%), 1fr));
+    gap: 1.5rem;
+  }
+}
+
+.center {
+  text-align: center;
+  padding: 0.5rem;
+}/*# sourceMappingURL=TrainerWrapper.module.css.map */

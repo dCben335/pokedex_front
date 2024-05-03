@@ -1,0 +1,16 @@
+.container {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  margin: 0 1.5rem;
+  justify-content: space-between;
+}
+.container .size {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.container .info {
+  font-size: 0.75rem;
+  order: 1;
+}/*# sourceMappingURL=PokedexSize.module.css.map */

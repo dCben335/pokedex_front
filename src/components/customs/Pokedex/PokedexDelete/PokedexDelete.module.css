@@ -1,0 +1,12 @@
+.buttons {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+button.delete {
+  background-color: rgb(148, 0, 0);
+}
+button.delete:hover {
+  background-color: rgba(148, 0, 0, 0.8);
+}/*# sourceMappingURL=PokedexDelete.module.css.map */

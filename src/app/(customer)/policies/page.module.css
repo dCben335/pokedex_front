@@ -1,0 +1,11 @@
+.main {
+  padding: 3rem 0.5rem;
+}
+.main h2 {
+  margin-bottom: 1rem;
+}
+
+.grid {
+  display: grid;
+  gap: 1.5rem;
+}/*# sourceMappingURL=page.module.css.map */

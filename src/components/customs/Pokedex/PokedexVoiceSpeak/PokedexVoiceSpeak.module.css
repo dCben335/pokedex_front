@@ -1,0 +1,7 @@
+button.voiceButton {
+  padding: 0.5rem;
+}
+button.voiceButton .icon {
+  height: 1.75rem;
+  fill: currentColor;
+}/*# sourceMappingURL=PokedexVoiceSpeak.module.css.map */
