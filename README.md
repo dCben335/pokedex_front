@@ -55,7 +55,7 @@ cd ./pokedex
 git checkout feature/jwt
 ```
 
-3. Build the backend API project:
+3. Build the backend API project: (already in my repository)
 
 ```bash
 mvn clean package
