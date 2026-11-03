@@ -1,3 +1,4 @@
+import Button from "@/components/ui/Button/Button";
 import styles from "./page.module.scss";
 import PokedexCard, { PokedexCardProps } from "@/components/customs/Pokedex/PodexCard/PokedexCard";
 

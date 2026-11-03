@@ -60,4 +60,3 @@ export const PokemonTypesProvider = ({ children } : React.PropsWithChildren ) =>
         </PokemonTypesContext.Provider>
     );
 };
-

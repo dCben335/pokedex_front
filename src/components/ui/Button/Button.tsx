@@ -11,12 +11,13 @@ export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElemen
 
 type Props = (LinkProps | ButtonProps) & {
     active?: boolean
+	variant?: "primary" | "secondary"
 }
 
 const Button = ({ children, className, active, ...props} : Props ) => {  
-    const classes = `${styles.btn} ${active ? styles.active : ""} ${className ? className : ""}`
+	const classes = `${styles.btn} ${active ? styles.active : ""} ${className ? className : ""}`
     
-    if (props.renderAs === 'link') {
+	if (props.renderAs === 'link') {
         const { renderAs, ...newProps } = props
 
         return (
@@ -25,7 +26,6 @@ const Button = ({ children, className, active, ...props} : Props ) => {
             </Link>
         )
     }
-
     return (    
         <button className={classes} {...props}>
             {children}

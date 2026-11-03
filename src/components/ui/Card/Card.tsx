@@ -5,6 +5,7 @@ import { CSSProperties, useRef, useState, MouseEvent, PropsWithChildren } from "
 
 type CardProps = React.HTMLAttributes<HTMLElement> & PropsWithChildren & {
     scale?: number;
+	icon?: React.ReactSVGElement;
 }; 
 
 

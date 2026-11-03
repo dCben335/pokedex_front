@@ -16,7 +16,6 @@ type handleApiFetchProps = {
     notJsonResponse?: boolean;
 }
 
-
 export const handleApiFetch = async({ path, token, method, body, tags, notJsonResponse }: handleApiFetchProps) => {
     return await handleApiFetchErrors(async() => {
         const response = await fetch(`${BASE_API_URL}/${path}`, {
